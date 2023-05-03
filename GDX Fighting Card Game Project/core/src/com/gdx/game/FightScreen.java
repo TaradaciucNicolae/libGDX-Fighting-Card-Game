@@ -2,6 +2,7 @@ package com.gdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class FightScreen implements Screen {
 	private GdxFightingGame game;
 	private Stage stage;
+	Music sound;
 	
 	//Player idle animation test
 	Animation<TextureRegion> playeridle;
@@ -30,6 +32,11 @@ public class FightScreen implements Screen {
 	public FightScreen(GdxFightingGame agame) {
 		// TODO Auto-generated constructor stub
 		game=agame;
+		stage = new Stage();
+		
+		sound = Gdx.audio.newMusic(Gdx.files.internal("ogg//Action 5 (Loop).ogg"));
+		sound.setLooping(true);
+		sound.play();
 		stage = new Stage();
 		
 		final Monster m1=new Monster();
@@ -53,7 +60,8 @@ public class FightScreen implements Screen {
 		TextButton button = new TextButton("attack", GdxFightingGame.gameSkin);
 		table.add(button);
 		table.left().bottom();
-		
+		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//back2.png"))));
+		table.setFillParent(true);
 		stage.addActor(table);
 		
 		button.addListener(new ChangeListener() {
@@ -112,7 +120,7 @@ public class FightScreen implements Screen {
  
     @Override
     public void hide() {
- 
+    	sound.stop();
     }
  
     @Override

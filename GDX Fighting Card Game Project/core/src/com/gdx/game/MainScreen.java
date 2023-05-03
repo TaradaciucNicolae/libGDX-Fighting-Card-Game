@@ -3,7 +3,12 @@ package com.gdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -13,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainScreen implements Screen{
@@ -33,12 +39,29 @@ public class MainScreen implements Screen{
 	private GdxFightingGame game;
 	private Stage stage;
 	
+	Music sound;
+	
+	TextureRegion e;
+	Texture back;
+	private SpriteBatch batch;
+	
 	public MainScreen(GdxFightingGame agame) {
 		game=agame;
 		// TODO Auto-generated constructor stub
 	 
-		// make a stage for your button to go on
+		sound = Gdx.audio.newMusic(Gdx.files.internal("ogg//Action1(Loop).ogg"));
+		sound.setLooping(true);
+		
+		sound.play();
 		stage = new Stage();
+		// make a stage for your button to go on
+		
+		
+		back=new Texture(Gdx.files.internal("background//back1.png"));
+		e=new TextureRegion(back, 0, 0, Gdx.graphics.getWidth()*2, Gdx.graphics.getHeight()*2);
+		batch=new SpriteBatch();
+	
+		
 
 		// load a skin(a collection of styles for objects)
 		// skin is from gdx-skins (https://github.com/czyzby/gdx-skins)
@@ -58,7 +81,7 @@ public class MainScreen implements Screen{
 		// add it to your stage
 
 		table = new Table(skin);
-
+		button.toFront();
 		button3.getLabel().setFontScale(0.5f);
 		nameLabel.setFontScale(2);
 		table.add(nameLabel).height(200).fill();
@@ -76,14 +99,16 @@ public class MainScreen implements Screen{
 		table.row().height(100);
 		table.add(button2).fill();
 		// Row 1, column 0.
-
+		table.setBackground(new TextureRegionDrawable(e));
 		table.center().top();
 		table.setFillParent(true);
 		// adaugare linii ajutatoare pentru a vedea layout-ul
 		table.debug();
+		 
 
 		stage.addActor(table);
 
+		
 		// add a listener to your buttons so it does something when clicked
 		button3.addListener(new ChangeListener() {
 			@Override
@@ -125,6 +150,9 @@ public class MainScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
+        batch.begin();
+      //  batch.draw(e, 0,0 ,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
     }
  
     @Override
@@ -134,21 +162,25 @@ public class MainScreen implements Screen{
  
     @Override
     public void pause() {
- 
+    
     }
  
     @Override
     public void resume() {
- 
+    	
     }
  
     @Override
     public void hide() {
+    
+    	sound.stop();
  
     }
  
     @Override
     public void dispose() {
+    	
    stage.dispose();
+   sound.dispose();
   }
 }

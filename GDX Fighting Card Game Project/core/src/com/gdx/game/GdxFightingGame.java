@@ -25,7 +25,7 @@ public class GdxFightingGame extends Game {
 	  public void create () {
 	    gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
 	    this.setScreen(new MainScreen(this));
-	   
+	    
 	  }
 	 
 	

@@ -20,6 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 public class GdxFightingGame extends Game {
 
 	private Game game;
+	public Player p1;
+	
 	
 	 static public Skin gameSkin;
 	  public void create () {

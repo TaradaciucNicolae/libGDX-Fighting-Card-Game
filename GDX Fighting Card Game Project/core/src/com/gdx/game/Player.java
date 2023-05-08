@@ -2,7 +2,9 @@ package com.gdx.game;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.decorator.Random;
+import com.badlogic.gdx.graphics.Texture;
 
 public class Player {
 	// asta o sa fie stearsa
@@ -11,6 +13,9 @@ public class Player {
 	// acest Integer trebuie modificat si in ListaCards si la IDCarte si la
 	// FolosesteCartea
 
+	public Texture idlesheet;
+	private int armour;
+	public boolean alive=true;
 	/**
 	 * health = Viata curenta a jucatorului (Initializata cu 100)
 	 */
@@ -45,6 +50,7 @@ public class Player {
 			ListaCardsInMana.add(carte);
 		}
 		*/
+		idlesheet=new Texture(Gdx.files.internal("Player//AnimationSheet_Character.png"));
 	}
 
 	/**
@@ -74,7 +80,27 @@ public class Player {
 		return health;
 
 	}
-
+	/**
+	 * 
+	 * @param dmg -dmg-ul luat de player
+	 */
+	public void setHealth(int dmg)
+	{
+		
+		this.health=this.health-dmg;
+		if(this.health<=0)
+			this.alive=false;
+	}
+	
+	public int getArmour()
+	{
+		return this.armour;
+	}
+	
+	public void setArmour(int dmg)
+	{
+		this.armour=this.armour-dmg;
+	}
 	/**
 	 * 
 	 * @return Returneaza numarul de Cards pe care jucatorul le pote utiliza

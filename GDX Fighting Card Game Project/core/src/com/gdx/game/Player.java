@@ -1,0 +1,120 @@
+package com.gdx.game;
+
+import java.util.ArrayList;
+
+import com.badlogic.gdx.ai.btree.decorator.Random;
+
+public class Player {
+	// asta o sa fie stearsa
+	// ArrayList<Integer> ListaCuCards=new ArrayList<>(); // asta se va afla in
+	// clasa Cards si in loc de "Integer" va fi "carte"
+	// acest Integer trebuie modificat si in ListaCards si la IDCarte si la
+	// FolosesteCartea
+
+	/**
+	 * health = Viata curenta a jucatorului (Initializata cu 100)
+	 */
+	private int health = 100;
+
+	/**
+	 * nrCards = Numarul de Cards pe care jucatorul le poate utiliza
+	 */
+	private int nrCards;
+
+	/**
+	 * ListaCardsInMana = Toate Cardsle detinute de jucator in momentul respectiv
+	 */
+	ArrayList<Cards> ListaCardsInMana = new ArrayList<>();
+
+	/**
+	 * Constructorul Player() va da jucatorului un numar random de Cards de joc. (
+	 * Intre 5 si 13 Cards din ListaCuCards)
+	 */
+	Player() {
+		// ListaCuCards.add(1);
+		// ListaCuCards.add(2);
+		// ListaCuCards.add(3); // astea 3 vor fi sterse, acuma le folosim pe post de
+		// Cards
+		/*
+		Cards c = new Cards();
+
+		nrCards = new Random().nextInt(8) + 5;
+
+		for (int i = 0; i <= nrCards; i++) {
+			Cards carte = c.ListaCuCards.get(new Random().nextInt(c.ListaCuCards.size()));
+			ListaCardsInMana.add(carte);
+		}
+		*/
+	}
+
+	/**
+	 * Functie de creare a pachetului initial al jucatorului
+	 * (Intre 5 si 13 Cards din ListaCuCards)
+	 */
+
+	//asta nu merge 
+	
+	/*
+	 * public void CrearePachet()
+	 * 
+	 * { Cards c = new Cards();
+	 * 
+	 * nrCards = new Random().nextInt(8) + 5;
+	 * 
+	 * for (int i = 0; i <= nrCards; i++) { Cards carte = c.ListaCuCards.get(new
+	 * Random().nextInt(c.ListaCuCards.size())); ListaCardsInMana.add(carte); }
+	 * 
+	 * }
+	 */
+	/**
+	 * 
+	 * @return Returneaza viata actuala a jucatorului
+	 */
+	public int getHealth() {
+		return health;
+
+	}
+
+	/**
+	 * 
+	 * @return Returneaza numarul de Cards pe care jucatorul le pote utiliza
+	 */
+	public int getNrCards() {
+		return nrCards;
+	}
+
+	/**
+	 * 
+	 * @param damage = Daunele provocate jucatorului
+	 */
+	public void ReceivesDamages(int damage) {
+		if (health - damage < 0) {
+			health = 0;
+			System.out.println("Ai murit");
+			return;
+
+		}
+		health = health - damage;
+	}
+
+	/**
+	 * 
+	 * @param c este cartea care a fost folosita in timpul luptei.
+	 */
+	public void FolosesteCarte(Cards c) {
+		ListaCardsInMana.remove(c);
+
+	}
+
+	/**
+	 * Functie de afisare a Cardslor ce se afla in posesia jucatorului
+	 */
+	public void AfisarePachetPlayer() {
+		for (int i = 0; i < ListaCardsInMana.size(); i++) {
+			System.out.println(" Cartea nr " + i + " va da " + ListaCardsInMana.get(i).damage + " damage si va oferi "
+					+ ListaCardsInMana.get(i).health + " viata");
+
+		}
+	}
+
+}

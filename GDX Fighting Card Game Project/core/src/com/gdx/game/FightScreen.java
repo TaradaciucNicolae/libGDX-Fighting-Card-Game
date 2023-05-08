@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -77,7 +76,8 @@ public class FightScreen implements Screen {
 		
 		Player p=new Player();
 		//animation
-		idlesheet=game.p1.idlesheet;
+		//idlesheet=game.p1.idlesheet;
+		idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniDreadKnight.png"));
 		TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/9);
 
 		//15 is the number of frames and colums we have
@@ -111,6 +111,8 @@ public class FightScreen implements Screen {
 		
 		table.top().left();
 		table.debug();
+		table2.debug();
+		table3.debug();
 		
 		stage.addActor(table);
 
@@ -227,21 +229,21 @@ public class FightScreen implements Screen {
         //animation
         TextureRegion currentFrame = playeridle.getKeyFrame(stateTime, true);
 		spriteBatch.begin();
-		spriteBatch.draw(currentFrame, 200, 200,100,150); // Draw current frame at (50, 50)
+		spriteBatch.draw(currentFrame, 200, 200,150,150); // Draw current frame at (50, 50)
 		if(numberOfMonsters==1)
 		{
-			spriteBatch.draw(currentFrame, 800, 200,-100,150); // Draw current frame at (50, 50)
+			spriteBatch.draw(currentFrame, 800, 200,-150,150); // Draw current frame at (50, 50)
 		}
 		else if(numberOfMonsters==2)
 		{
-			spriteBatch.draw(currentFrame, 800, 200,-100,150); // Draw current frame at (50, 50)
-			spriteBatch.draw(currentFrame, 1000, 200,-100,150); // Draw current frame at (50, 50)
+			spriteBatch.draw(currentFrame, 800, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw(currentFrame, 1000, 200,-150,150); // Draw current frame at (50, 50)
 		}
 		else
 		{
-			spriteBatch.draw(currentFrame, 800, 200,-100,150); // Draw current frame at (50, 50)
-			spriteBatch.draw(currentFrame, 1000, 200,-100,150); // Draw current frame at (50, 50)
-			spriteBatch.draw(currentFrame, 1200, 200,-100,150); // Draw current frame at (50, 50)
+			spriteBatch.draw(currentFrame, 800, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw(currentFrame, 1000, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw(currentFrame, 1200, 200,-150,150); // Draw current frame at (50, 50)
 		}
 
 		spriteBatch.end();

@@ -62,7 +62,10 @@ public class FightScreen implements Screen {
 		table.left().bottom();
 		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//back2.png"))));
 		table.setFillParent(true);
+		Card card = new Card(5, 3, 7, "MyCard", "CardDescription");
+		table.add(card);
 		stage.addActor(table);
+		stage.addActor(card);
 		
 		button.addListener(new ChangeListener() {
 			@Override

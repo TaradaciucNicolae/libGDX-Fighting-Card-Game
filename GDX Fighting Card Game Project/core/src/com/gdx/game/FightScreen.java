@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -106,13 +107,23 @@ public class FightScreen implements Screen {
 		table3.add().width(1000);
 		table3.add(button).height(200).width(200);
 		
-		
+		Texture texture1 = new Texture(Gdx.files.internal("Cards//Card1.png"));
+		Skin skin1 = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
+		Card card = new Card(5, 3, 7, "MyCard", "CardDescription", texture1, skin1);
+		Card card1 = new Card(5, 3, 7, "MyCard", "CardDescription", texture1, skin1);
+
+		table2.add(card);
+		table2.add(card1);
+		table2.bottom().left();
 		table.add(table3);
 		
 		table.top().left();
 		table.debug();
 		table2.debug();
 		table3.debug();
+		
+		
+		//stage.addActor(card);
 		
 		stage.addActor(table);
 		

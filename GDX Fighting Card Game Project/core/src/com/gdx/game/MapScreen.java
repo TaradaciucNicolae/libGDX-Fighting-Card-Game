@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,6 +21,7 @@ public class MapScreen implements Screen {
 	private Random randomNumber;
 	private Skin skin;
 	private Table table;
+	private int currentrow=1;
 	
 	public MapScreen(GdxFightingGame game) {
 		this.game=game;
@@ -34,16 +36,11 @@ public class MapScreen implements Screen {
 		stage.addActor(table);
 		table.debug();
 		
-		for(int i=0;i<5;i++) {
-			for(int j=0;j<3;j++) {
-				System.out.print(Fields[i][j]);
-				/*if(Buttons[i][j] != null)
-					System.out.print(Buttons[i][j].getText());*/
-			}
-				
-			System.out.println();
-		}
 		
+	}
+	
+	public int CurrentRow() {
+		return currentrow;
 	}
 	
 	public void FieldPopulation() {
@@ -91,6 +88,8 @@ public class MapScreen implements Screen {
 					if(Fields[i][j]==1) {
 						Buttons[i][j]=new TextButton(""+i+j, skin);
 						Buttons[i][j].addListener(change);
+						//linia de mai jos face ca butonul sa nu se poata apasa
+						Buttons[i][j].setTouchable(Touchable.disabled);
 						table.add();
 						table.add(Buttons[i][j]).width(100).height(100);
 						table.add();
@@ -102,6 +101,7 @@ public class MapScreen implements Screen {
 					if(Fields[i][j]==1) {
 						Buttons[i][j]=new TextButton(""+i+j, skin);
 						Buttons[i][j].addListener(change);
+						Buttons[i][j].setTouchable(Touchable.disabled);
 						table.add(Buttons[i][j]).width(100).height(100);
 					}
 					if(j==Fields[0].length-1)
@@ -115,6 +115,11 @@ public class MapScreen implements Screen {
 
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
+			for(int i=0;i<Buttons[0].length;++i) {
+	        	if(Buttons[currentrow][i]!=null)
+	        		Buttons[currentrow][i].setTouchable(Touchable.disabled);
+	        }
+			currentrow++;
 			game.setScreen(new FightScreen(game));
 		}
 		
@@ -130,6 +135,11 @@ public class MapScreen implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        for(int i=0;i<Buttons[0].length;++i) {
+        	if(Buttons[currentrow][i]!=null)
+        		Buttons[currentrow][i].setTouchable(Touchable.enabled);
+        }
         
         stage.act();
         stage.draw();

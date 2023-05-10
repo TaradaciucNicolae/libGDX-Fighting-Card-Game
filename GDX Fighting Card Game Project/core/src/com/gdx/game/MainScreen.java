@@ -47,6 +47,7 @@ public class MainScreen implements Screen{
 	
 	public MainScreen(GdxFightingGame agame) {
 		game=agame;
+		game.map=new MapScreen(game);
 		// TODO Auto-generated constructor stub
 	 
 		sound = Gdx.audio.newMusic(Gdx.files.internal("ogg//Action1(Loop).ogg"));
@@ -115,6 +116,8 @@ public class MainScreen implements Screen{
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("I was clicked");
 				
+				 int numberOfMonsters=(int)Math.floor(Math.random() * (3 - 1 + 1) + 1);
+				System.out.println("number of monster "+numberOfMonsters);
 			}
 		});
 
@@ -129,7 +132,10 @@ public class MainScreen implements Screen{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("babuin se joaca");
+				game.p1=new Player();
+				game.getScreen().dispose();
 				game.setScreen(new FightScreen(game));
+				
 
 			}
 		});

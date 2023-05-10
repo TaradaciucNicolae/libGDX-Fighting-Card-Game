@@ -19,16 +19,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class GdxFightingGame extends Game {
 
-	private Game game;
+	public Player p1;
+	public MapScreen map;
 	
 	 static public Skin gameSkin;
 	  public void create () {
 	    gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
-	    this.setScreen(new MapScreen(this));
+	    this.setScreen(new MainScreen(this));
 	    
 	  }
-	 
-	
+	  
 	@Override
 	public void render() {
 		// clear the screen

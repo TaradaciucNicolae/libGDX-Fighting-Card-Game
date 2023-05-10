@@ -23,6 +23,13 @@ public class MapScreen implements Screen {
 	private Table table;
 	private int currentrow=1;
 	
+	/**
+	 * 
+	 * @param game = GdxFightingGame instance
+	 * @param Fields = Fields that need to be populated on the matrix of Buttons
+	 * @param Buttons = A matrix which contains all of the buttons we have to display on screen
+	 * @param randomNumber = A parameter that we use for generating random numbers
+	 */
 	public MapScreen(GdxFightingGame game) {
 		this.game=game;
 		stage = new Stage();
@@ -38,11 +45,17 @@ public class MapScreen implements Screen {
 		
 		
 	}
-	
+	/**
+	 * 
+	 * @return the current row where we are in the matrix of buttons
+	 */
 	public int CurrentRow() {
 		return currentrow;
 	}
 	
+	/**
+	 * This method is used for choosing which fields to populate and then create buttons with another method.
+	 */
 	public void FieldPopulation() {
 		int numberOfNodes;
 		int previousColumn;
@@ -81,6 +94,9 @@ public class MapScreen implements Screen {
 		TableButtons();
 	}
 	
+	/**
+	 * This method creates and adds buttons to the Buttons matrix.
+	 */
 	public void TableButtons() {
 		for(int i=0;i<Fields.length;++i)
 			for(int j=0;j<Fields[0].length;++j) {
@@ -88,7 +104,6 @@ public class MapScreen implements Screen {
 					if(Fields[i][j]==1) {
 						Buttons[i][j]=new TextButton(""+i+j, skin);
 						Buttons[i][j].addListener(change);
-						//linia de mai jos face ca butonul sa nu se poata apasa
 						Buttons[i][j].setTouchable(Touchable.disabled);
 						table.add();
 						table.add(Buttons[i][j]).width(100).height(100);

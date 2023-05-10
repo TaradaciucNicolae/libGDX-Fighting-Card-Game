@@ -30,6 +30,8 @@ public class Player {
 	 * ListaCardsInMana = Toate Cardsle detinute de jucator in momentul respectiv
 	 */
 	ArrayList<Cards> ListaCardsInMana = new ArrayList<>();
+	ArrayList<Cards> ListaCardsTotal = new ArrayList<>();
+	ArrayList<Cards> ListaDiscarded= new ArrayList<>();
 
 	/**
 	 * Constructorul Player() va da jucatorului un numar random de Cards de joc. (
@@ -38,8 +40,8 @@ public class Player {
 	Player() {
 		// ListaCuCards.add(1);
 		// ListaCuCards.add(2);
-		// ListaCuCards.add(3); // astea 3 vor fi sterse, acuma le folosim pe post de
-		// Cards
+		// ListaCuCards.add(3); // astea 3 vor fi sterse, acuma le folosim pe post de Cards
+		 
 		/*
 		Cards c = new Cards();
 
@@ -60,18 +62,45 @@ public class Player {
 
 	//asta nu merge 
 	
-	/*
-	 * public void CrearePachet()
-	 * 
-	 * { Cards c = new Cards();
-	 * 
-	 * nrCards = new Random().nextInt(8) + 5;
-	 * 
-	 * for (int i = 0; i <= nrCards; i++) { Cards carte = c.ListaCuCards.get(new
-	 * Random().nextInt(c.ListaCuCards.size())); ListaCardsInMana.add(carte); }
-	 * 
-	 * }
-	 */
+	
+	  public void CrearePachet()
+	  
+	  { Cards c = new Cards(); // aici se creaza un pachet de 10 carti random, dar noi vol prestabili cele 10 carti
+	  	int min = 10;
+	  	int max = 10;
+	  
+	  	nrCards = 10; 
+			  // (int) (Math.random()*(max-min+1)+min); // AICI TREBUIE RAFACUTA INEXAREA
+	  
+	  for (int i = 0; i < nrCards; i++) { 
+		  Cards carte = c.ListaCuCards.get((int) (Math.random()*(c.ListaCuCards.size()-1-0+1)+0));
+		  ListaCardsTotal.add(carte);
+		  System.out.println("nr de carti este"+nrCards);
+		  }
+	  
+	  // 5 carti random vor fi atribuite jucatorului in mana si restul 5 vor ramane in pachet
+	  	for (int i = ListaCardsTotal.size()/2; i >0; i--) { // AICI TREBUIE RAFACUTA INEXAREA
+	  		
+	  		ListaCardsInMana.add(ListaCardsTotal.get(i));
+	  		ListaCardsTotal.remove(ListaCardsTotal.get(i));
+	  		
+	  	}
+	  	//ListaCardsTotal.removeAll(ListaCardsInMana);
+	  	
+	  	/*
+	  	System.out.println("carti in mana");
+		for (int i = 0; i < this.ListaCardsInMana.size(); i++) {
+			System.out.println(" Cartea nr " + i + " va da " + this.ListaCardsInMana.get(i).damage + " damage si va oferi "
+					+ this.ListaCardsInMana.get(i).health + " viata");
+		}
+	  	System.out.println("carti in pachet");
+		for (int i = 0; i < this.ListaCardsTotal.size(); i++) {
+			System.out.println(" Cartea nr " + i + " va da " + this.ListaCardsTotal.get(i).damage + " damage si va oferi "
+					+ this.ListaCardsTotal.get(i).health + " viata");
+		}*/
+	  
+	  }
+	 
 	/**
 	 * 
 	 * @return Returneaza viata actuala a jucatorului

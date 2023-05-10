@@ -103,6 +103,8 @@ public class FightScreen implements Screen {
 		table2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
 		table.add(table2).grow();
 		table.row().height(200);
+		Cards c1=new Cards(5, 0, 0);
+		table3.add(c1.table).grow();
 		table3.add().width(1000);
 		table3.add(button).height(200).width(200);
 		

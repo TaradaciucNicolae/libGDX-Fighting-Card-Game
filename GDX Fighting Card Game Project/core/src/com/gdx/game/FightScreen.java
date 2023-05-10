@@ -105,27 +105,31 @@ public class FightScreen implements Screen {
 		table.add(table2).grow();
 		table.row().height(200);
 		table3.add().width(1000);
-		table3.add(button).height(200).width(200);
 		
+		// Card test //
 		Texture texture1 = new Texture(Gdx.files.internal("Cards//card1.png"));
 		Texture texture2 = new Texture(Gdx.files.internal("Cards//card2.png"));
 		Texture texture3 = new Texture(Gdx.files.internal("Cards//card3.png"));
 		Texture texture4 = new Texture(Gdx.files.internal("Cards//card4.png"));
 		Texture texture5 = new Texture(Gdx.files.internal("Cards//card5.png"));
-		Skin skin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
-		Card card1 = new Card(5, 4, 7, "Red", "Attack", texture1, skin);
-		Card card2 = new Card(10, 6, 7, "Blue", "Armor", texture2, skin);
-		Card card3 = new Card(4, 8, 7, "Gray", "Special", texture3, skin);
-		Card card4 = new Card(3, 2, 7, "Green", "Heal", texture4, skin);
-		Card card5 = new Card(1, 7, 7, "Yellow", "Special", texture5, skin);
+		
+		// Card(attack, health, damage, title, description, texture, skin)
+		Card card1 = new Card(15, 4, 7, "Fire", "Attack", texture1);
+		Card card2 = new Card(4, 15, 4, "Water", "Armor", texture2);
+		Card card3 = new Card(9, 9, 6, "Metal", "Special", texture3);
+		Card card4 = new Card(5, 6, 9, "Earth", "Heal", texture4);
+		Card card5 = new Card(8, 7, 8, "Wood", "Special", texture5);
 
+		table2.bottom().left();
 		table2.add(card1);
 		table2.add(card2);
 		table2.add(card3);
 		table2.add(card4);
 		table2.add(card5);
 		
-		table2.bottom().left();
+		// Sfarsit card test //
+		table3.add(button).height(200).width(200);
+	
 		table.add(table3);
 		
 		table.top().left();

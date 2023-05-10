@@ -107,13 +107,24 @@ public class FightScreen implements Screen {
 		table3.add().width(1000);
 		table3.add(button).height(200).width(200);
 		
-		Texture texture1 = new Texture(Gdx.files.internal("Cards//Card1.png"));
-		Skin skin1 = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
-		Card card = new Card(5, 3, 7, "MyCard", "CardDescription", texture1, skin1);
-		Card card1 = new Card(5, 3, 7, "MyCard", "CardDescription", texture1, skin1);
+		Texture texture1 = new Texture(Gdx.files.internal("Cards//card1.png"));
+		Texture texture2 = new Texture(Gdx.files.internal("Cards//card2.png"));
+		Texture texture3 = new Texture(Gdx.files.internal("Cards//card3.png"));
+		Texture texture4 = new Texture(Gdx.files.internal("Cards//card4.png"));
+		Texture texture5 = new Texture(Gdx.files.internal("Cards//card5.png"));
+		Skin skin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
+		Card card1 = new Card(5, 4, 7, "Red", "Attack", texture1, skin);
+		Card card2 = new Card(10, 6, 7, "Blue", "Armor", texture2, skin);
+		Card card3 = new Card(4, 8, 7, "Gray", "Special", texture3, skin);
+		Card card4 = new Card(3, 2, 7, "Green", "Heal", texture4, skin);
+		Card card5 = new Card(1, 7, 7, "Yellow", "Special", texture5, skin);
 
-		table2.add(card);
 		table2.add(card1);
+		table2.add(card2);
+		table2.add(card3);
+		table2.add(card4);
+		table2.add(card5);
+		
 		table2.bottom().left();
 		table.add(table3);
 		
@@ -182,7 +193,6 @@ public class FightScreen implements Screen {
 						Window lose = new Window("Defeat", GdxFightingGame.gameSkin);
 						button.setVisible(false);
 						lose.toFront();
-						
 						
 						
 						lose.add(loseB); //Add a new text button that unpauses the game.

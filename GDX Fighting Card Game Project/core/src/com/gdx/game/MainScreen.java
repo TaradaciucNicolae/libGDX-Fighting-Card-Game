@@ -133,8 +133,9 @@ public class MainScreen implements Screen{
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("babuin se joaca");
 				game.p1=new Player();
+				game.map=new MapScreen(game);
 				game.getScreen().dispose();
-				game.setScreen(new FightScreen(game));
+				game.setScreen(game.map);
 				
 
 			}

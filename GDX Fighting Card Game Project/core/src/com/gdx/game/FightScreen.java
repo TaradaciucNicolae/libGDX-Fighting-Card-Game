@@ -1,6 +1,7 @@
 package com.gdx.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -31,7 +32,7 @@ public class FightScreen implements Screen {
 	
 	
 	private Table TableForCards = new Table();
-	private Table TableForPackAndDiscarded = new Table();
+	private Table TableForPackDiscardedEnd = new Table();
 	ArrayList<ImageButton> ListaButoaneCarti = new ArrayList<>();
 	
 	Table table2=new Table();
@@ -88,7 +89,8 @@ public class FightScreen implements Screen {
 		stage = new Stage();
 		
 		
-		Player p=new Player();
+		final Player p=new Player();
+		p.CrearePachet();
 		//animation
 		//idlesheet=game.p1.idlesheet;
 		idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniDreadKnight.png"));
@@ -115,21 +117,49 @@ public class FightScreen implements Screen {
 		table2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
 		table.add(table2).grow();
 		table.row().height(200);
-		Cards c1=new Cards(5, 0, 0);
-		table3.add(c1.table).grow();
+	//	Cards c1=new Cards(5, 0, 0);
+	//	table3.add(c1.table).grow();
 		
-		table3.add(button).height(200).width(200);
+	
+		TableForPackDiscardedEnd.add(button);
+		
+		//table.add(table3);
+		//1
+		
+		TextButton ButtonPack = new TextButton("Pachet", GdxFightingGame.gameSkin);
+
+		//TableForCards.setFillParent(true);
+		//ButtonPack.setBounds(30, 200, 200, 100);
+		TableForPackDiscardedEnd.add(ButtonPack);
+		//ButtonPack.right();
+	//	stage.addActor(ButtonPack);
+
+		TextButton ButtonDiscarded = new TextButton("Discarded cards", GdxFightingGame.gameSkin);
+
+		//TableForCards.setFillParent(true);
+		//ButtonDiscarded.setBounds(950, 200, 200, 100);
+		TableForPackDiscardedEnd.add(ButtonDiscarded);
+		//stage.addActor(ButtonDiscarded);
+		//ButtonDiscarded.left();
+		//ButtonDiscarded.setBounds(950, 350, 200, 100);
+		TableForPackDiscardedEnd.center();
+		
+		table2.add(TableForPackDiscardedEnd).width(200);
 		
 		
-		table.add(table3);
+		table.add(TableForCards);
 		
+		//1
 		table.top().left();
 		table.debug();
 		table2.debug();
 		table3.debug();
+		TableForPackDiscardedEnd.debug();
 		
 		stage.addActor(table);
 
+		p.AfisarePachetPlayer();
+		AfisareCartiPeEcran(p);
 		
 		button.addListener(new ChangeListener() {
 			@Override
@@ -138,6 +168,82 @@ public class FightScreen implements Screen {
 				AfisareCartiPeEcran(game.p1);
 				m1.SetHealth(30);
 				System.out.println(" monster hp:"+m1.getHealth());
+				
+					System.out.println("tura s-a terminat");
+
+					int nr = p.ListaDiscarded.size();
+					while (nr > 0) {
+						System.out.println(p.ListaDiscarded.size());
+						p.ListaCardsTotal.add(p.ListaDiscarded.get(nr - 1));
+						p.ListaDiscarded.remove(p.ListaDiscarded.get(nr - 1));
+						nr--;
+					}
+					
+					//	System.out.println("vei primi random 1,2 sau 3 carti");
+					//System.out.println("20% sansa de 3 carti, 30% sansa de 2 carti si 50 % sansa de 1 carte");
+					int sansedrop = new Random().nextInt(10) +1;
+					int sansedrop_nr;
+					int card_out_nr;
+					if (sansedrop<=5)
+					{	System.out.println("s-a nimerit sansa la o carte");
+						
+						card_out_nr = new Random().nextInt(p.ListaCardsTotal.size());
+						p.ListaCardsInMana.add(p.ListaCardsTotal.get(card_out_nr));
+						p.ListaCardsTotal.remove(card_out_nr);
+						if(p.ListaCardsTotal.size()==0)
+						{
+							System.out.println("nu mai sunt carti in pachet");
+							AfisareCartiPeEcran(p);
+							return;
+						}
+						AfisareCartiPeEcran(p);
+							
+							
+						
+					}
+					else if(sansedrop>=6 && sansedrop<=8)
+					{
+						System.out.println("s-a nimerit sansa la doua carti");
+						sansedrop_nr=2;
+						while(sansedrop_nr>0)
+						{
+							card_out_nr = new Random().nextInt(p.ListaCardsTotal.size());
+							p.ListaCardsInMana.add(p.ListaCardsTotal.get(card_out_nr));
+							p.ListaCardsTotal.remove(card_out_nr);
+							if(p.ListaCardsTotal.size()==0)
+							{
+								System.out.println("nu mai sunt carti in pachet");
+								AfisareCartiPeEcran(p);
+								return;
+							}
+							sansedrop_nr--;
+							
+						}
+						AfisareCartiPeEcran(p);
+						
+					}
+					else if(sansedrop>=9)
+					{
+						System.out.println("s-a nimerit sansa la trei carti");
+						sansedrop_nr=3;
+						while(sansedrop_nr>0)
+						{
+							card_out_nr = new Random().nextInt(p.ListaCardsTotal.size());
+							p.ListaCardsInMana.add(p.ListaCardsTotal.get(card_out_nr));
+							p.ListaCardsTotal.remove(card_out_nr);
+							if(p.ListaCardsTotal.size()==0)
+							{
+								System.out.println("nu mai sunt carti in pachet");
+								AfisareCartiPeEcran(p);
+								return;
+							}
+							sansedrop_nr--;
+							
+						}
+						AfisareCartiPeEcran(p);
+						
+					}
+					
 				if(!m1.alive)
 				{
 					sound.stop();
@@ -207,6 +313,7 @@ public class FightScreen implements Screen {
 								game.setScreen(new MainScreen(game));
 
 							}
+							
 						});
 						
 						
@@ -225,6 +332,28 @@ public class FightScreen implements Screen {
 				}
 				
 
+			}
+		});
+		
+		ButtonDiscarded.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("Lista Discarded Cards: ");
+				for (int i = 0; i < p.ListaDiscarded.size(); i++) {
+					System.out.println(" Cartea nr " + i + " va da " + p.ListaDiscarded.get(i).damage
+							+ " damage si va oferi " + p.ListaDiscarded.get(i).health + " viata");
+				}
+			}
+		});
+		
+		ButtonPack.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("Carti ramase in pachet: ");
+				for (int i = 0; i < p.ListaCardsTotal.size(); i++) {
+					System.out.println(" Cartea nr " + i + " va da " + p.ListaCardsTotal.get(i).damage
+							+ " damage si va oferi " + p.ListaCardsTotal.get(i).health + " viata");
+				}
 			}
 		});
 		
@@ -271,41 +400,25 @@ public class FightScreen implements Screen {
     }
  
     
-    public void AfisareCartiPeEcran(final Player p) {
+	public void AfisareCartiPeEcran(final Player p) {
 		TableForCards.clear();
 		ListaButoaneCarti.clear();
-		TableForCards.toFront();
-		
 
-		
 		for (int i = 0; i < p.ListaCardsInMana.size(); i++) {
-		//	System.out.println("a intrat in for");
+	
 			final ImageButton ButonAdaugareCarte;
-			//System.out.println("a creat textbutton");
+		
 
 			Texture tex = new Texture(Gdx.files.internal(p.ListaCardsInMana.get(i).PozaCarte));
 			TextureRegion TexReg = new TextureRegion(tex);
 			TextureRegionDrawable TexRegDraw = new TextureRegionDrawable(TexReg);
 
-			// Drawable drawable =new TextureRegionDrawable(new TextureRegion((Texture)
-			// p.ListaCardsInMana.get(i).PozaCarte));
-			// ButonAdaugareCarte = new TextButton("",new
-			// Skin(Gdx.files.internal(p.ListaCardsInMana.get(i).PozaCarte)));
+
 			ButonAdaugareCarte = new ImageButton(TexRegDraw);
-			// ButonAdaugareCarte.setSize(9, 13);
-			// TextButton.TextButtonStyle style = ButonAdaugareCarte.getStyle();
-			// style.m
-		//	System.out.println("a pus parametri in textbuton");
 
-			// TableForCards.add(ButonAdaugareCarte).pad(20).size(20,30);
-			// Cell<ImageButton> cell =
-			// TableForCards.add(ButonAdaugareCarte).uniform().pad(10).size(80,120);
-
-			// ButonAdaugareCarte.setBackground(p.ListaCardsInMana.get(i).PozaCarte);
 			ListaButoaneCarti.add(ButonAdaugareCarte);
-			table3.add(ButonAdaugareCarte); //
-			// TableForCards.invalidate();
-			// ButonAdaugareCarte.add
+			stage.addActor(ButonAdaugareCarte); //
+
 
 			ButonAdaugareCarte.addListener(new InputListener() {
 				public void enter(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer,
@@ -335,27 +448,25 @@ public class FightScreen implements Screen {
 					System.out.println("carte apasata");
 					
 					for (int j = 0; j < ListaButoaneCarti.size(); j++) { 
-						//System.out.println("in for");
+					
 						if (event.getTarget() == ListaButoaneCarti.get(j)) {
-							//System.out.println("in if");
+							
 							p.ListaDiscarded.add(p.ListaCardsInMana.get(j));
-							//System.out.println("inainte de remove");
+				
 							ButonAdaugareCarte.remove();
-							//System.out.println("dupa remove");
+	
 							ListaButoaneCarti.remove(ButonAdaugareCarte);
 							p.FolosesteCarte(p.ListaCardsInMana.get(j)); 
 																			
 							p.AfisarePachetPlayer();
 						}
 
-						// p.AfisarePachetPlayer();
 					}
 
 					TableForCards.clearChildren(); // remove all buttons from the table
 
 					// add the remaining buttons back to the table
 					for (int j = 0; j < ListaButoaneCarti.size(); j++) {
-						//System.out.println("al doilea for");
 						TableForCards.add(ListaButoaneCarti.get(j)).uniform().pad(10).size(80, 150);
 					
 					}
@@ -363,29 +474,13 @@ public class FightScreen implements Screen {
 				}
 			});
 
-			// */
-
-			/*
-			 * ButonAdaugareCarte.addListener(new ClickListener() { // public void
-			 * clicked(InputEvent event, float x, float y) { public void
-			 * clicked(com.badlogic.gdx.scenes.scene2d.InputEvent e, float x, float y) {
-			 * super.clicked(e, x, y); for (int i = 0; i < ListaButoaneCarti.size(); i++) {
-			 * if (e.getTarget() == ListaButoaneCarti.get(i)) { System.out.println("sth"); }
-			 * } }
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * });
-			 */
-			// stage.addActor(ButonAdaugareCarte);
-
 			Gdx.input.setInputProcessor(stage);
 		}
-    }
+
+	
+		Gdx.input.setInputProcessor(stage);
+
+	}
 		
     @Override
     public void resize(int width, int height) {

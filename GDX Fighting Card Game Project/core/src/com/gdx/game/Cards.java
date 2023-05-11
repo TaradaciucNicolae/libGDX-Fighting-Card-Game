@@ -106,6 +106,11 @@ public class Cards {
 		ListaCuCards.add(new Cards(40, 3, "cards/card4.PNG"));
 		ListaCuCards.add(new Cards(50, 15, "cards/card5.PNG"));
 
+		//ListaCuCards.add(new Cards(10, 5, 12));
+		//ListaCuCards.add(new Cards(20, 0, 23));
+		//ListaCuCards.add(new Cards(30, 0, 34));
+		//ListaCuCards.add(new Cards(40, 3, 344));
+		//ListaCuCards.add(new Cards(50, 15, 5));
 	}
 	/**
 	 * Aceasta functie va afisa toate Cardsle existente in acest joc

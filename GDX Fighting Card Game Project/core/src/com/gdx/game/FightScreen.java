@@ -197,7 +197,8 @@ public class FightScreen implements Screen {
 		            System.out.println("I got clicked!");
 		            System.out.println(game.p1.ListaCardsInMana);
 		            game.p1.draw();
-		            h.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()));
+		            h.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
+		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setVisible(true);
 		            System.out.println(game.p1.getNrCards());
 		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(h);
 		            dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table) {
@@ -263,11 +264,9 @@ public class FightScreen implements Screen {
 				System.out.println("s-a activat babuinul"+i);
 				
 		
-				//source.getActor().setVisible(false);
-				game.p1.FolosesteCarte((Cards) source.getActor());
-				System.out.println(h);
-				System.out.println(game.p1.ListaDiscarded);
-				System.out.println(game.p1.ListaCardsInMana);
+				source.getActor().setVisible(false);
+				//game.p1.FolosesteCarte((Cards) payload.getObject());
+				
 				
 				//game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i-1));
 				
@@ -284,6 +283,35 @@ public class FightScreen implements Screen {
 		button.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				
+				System.out.println("cate carti intra la end"+game.p1.getNrCards());
+				
+			
+				for(i=0;i<=game.p1.getNrCards();++i)
+				{
+					
+					if (!game.p1.ListaCardsInMana.get(i).table.isVisible())
+					{
+						System.out.println("cred ca s-a sters");
+					
+						game.p1.FolosesteCarte( game.p1.ListaCardsInMana.get(i));
+					}
+					
+				}
+				for(i=0;i<=game.p1.getNrCards();++i)
+				{
+					
+					if (!game.p1.ListaCardsInMana.get(i).table.isVisible())
+					{
+						System.out.println("cred ca s-a sters");
+					
+						game.p1.FolosesteCarte( game.p1.ListaCardsInMana.get(i));
+					}
+					
+				}
+				System.out.println(game.p1.ListaCardsInMana);
+				System.out.println(game.p1.ListaCardsTotal);
+				System.out.println(game.p1.ListaDiscarded);
 				System.out.println("am atacat");
 				m1.SetHealth(30);
 				System.out.println(" monster hp:"+m1.getHealth());

@@ -69,8 +69,14 @@ public class Player {
 		}
 		else
 		{
-			ListaCardsTotal=ListaDiscarded;
+			ListaDiscarded.forEach((n) -> ListaCardsTotal.add(n));
 			ListaDiscarded.clear();
+			if(!this.ListaCardsTotal.isEmpty()) {
+			Cards c= ListaCardsTotal.get(0);
+			this.nrCards=this.nrCards+1;
+			ListaCardsTotal.remove(0);
+			ListaCardsInMana.add(c);
+			}
 		}
 	}
 	
@@ -195,7 +201,7 @@ public class Player {
 		ListaDiscarded.add(c);
 		ListaCardsInMana.remove(c);
 		nrCards=nrCards-1;
-		System.out.println(c.damage);
+		System.out.println("nr carti"+nrCards);
 
 	}
 

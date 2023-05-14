@@ -5,13 +5,19 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class MapScreen implements Screen {
 	private GdxFightingGame game;
@@ -20,7 +26,9 @@ public class MapScreen implements Screen {
 	private TextButton[][] Buttons;
 	private Random randomNumber;
 	private Skin skin;
+	//private Skin skin2;
 	private Table table;
+	private Table background;
 	private int currentrow=1;
 	
 	/**
@@ -37,8 +45,14 @@ public class MapScreen implements Screen {
 		Buttons=new TextButton[5][3];
 		randomNumber=new Random();
 		skin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
+		//skin2 = new Skin(Gdx.files.internal("neon//skin//neon-ui.json"));
 		table=new Table();
 		table.setFillParent(true);
+		table.toFront();
+		background=new Table();
+		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("Map//MapBackground.jpg"))));
+		background.setFillParent(true);
+		background.toBack();
 		FieldPopulation();
 		stage.addActor(table);
 		table.debug();
@@ -150,15 +164,13 @@ public class MapScreen implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
         for(int i=0;i<Buttons[0].length;++i) {
         	if(Buttons[currentrow][i]!=null)
         		Buttons[currentrow][i].setTouchable(Touchable.enabled);
         }
         
         stage.act();
-        stage.draw();
-		
+        stage.draw();   
 	}
 
 	@Override

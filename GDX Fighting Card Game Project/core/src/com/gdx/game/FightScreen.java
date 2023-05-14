@@ -28,6 +28,8 @@ public class FightScreen implements Screen {
 	
 	//Player idle animation test
 	Animation<TextureRegion> playeridle;
+	//A vector which contains all the idle animation of all the monsters 
+	Animation[] monstersidle= new Animation[3];
 	Texture idlesheet;
 	SpriteBatch spriteBatch;
 	float stateTime;
@@ -88,6 +90,7 @@ public class FightScreen implements Screen {
 		}
 		
 		playeridle=new Animation<TextureRegion>(0.1f,Player_frames);
+		randomMonsterTexture();
 		spriteBatch=new SpriteBatch();
 		stateTime=0f;
 		 //
@@ -189,7 +192,7 @@ public class FightScreen implements Screen {
 							@Override
 							public void changed(ChangeEvent event, Actor actor) {
 								game.getScreen().dispose();
-								game.setScreen(new MainScreen(game));
+								game.setScreen(game.map);
 
 							}
 						});
@@ -215,6 +218,47 @@ public class FightScreen implements Screen {
 		
 		
 	}
+	
+	public void randomMonsterTexture() {
+		
+		for(int i=0;i<3;++i) {
+			switch((int)Math.floor(Math.random() * (3 - 1 + 1) + 1)) {
+			case 1:
+				idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniDreadKnight.png"));
+				TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/9);
+				TextureRegion[] Player_frames= new TextureRegion[2];
+				int index=0;
+				for(int j=0;j<2;++j) {
+					Player_frames[index++]=tmp[3][j];
+				}
+				
+				monstersidle[i]=new Animation<TextureRegion>(0.1f,Player_frames);
+				break;
+				
+			case 2:
+				idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniGhost.png"));
+				TextureRegion[][] tmp1 = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/5);
+				TextureRegion[] Player_frames1= new TextureRegion[4];
+				index=0;
+				for(int j=0;j<4;++j) {
+					Player_frames1[index++]=tmp1[0][j];
+				}
+				monstersidle[i]=new Animation<TextureRegion>(0.1f,Player_frames1);
+				break;
+			case 3:
+				idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniSkeleton.png"));
+				TextureRegion[][] tmp2 = TextureRegion.split(idlesheet,idlesheet.getWidth()/6,idlesheet.getHeight()/6);
+				TextureRegion[] Player_frames2= new TextureRegion[4];
+				index=0;
+				for(int j=0;j<4;++j) {
+					Player_frames2[index++]=tmp2[4][j];
+				}
+				monstersidle[i]=new Animation<TextureRegion>(0.1f,Player_frames2);
+			
+			}
+		}
+	}
+	
 	@Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -235,18 +279,18 @@ public class FightScreen implements Screen {
 		spriteBatch.draw(currentFrame, 200, 200,150,150); // Draw current frame at (50, 50)
 		if(numberOfMonsters==1)
 		{
-			spriteBatch.draw(currentFrame, 800, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw((TextureRegion) monstersidle[0].getKeyFrame(stateTime, true), 800, 200,-150,150); // Draw current frame at (50, 50)
 		}
 		else if(numberOfMonsters==2)
 		{
-			spriteBatch.draw(currentFrame, 800, 200,-150,150); // Draw current frame at (50, 50)
-			spriteBatch.draw(currentFrame, 1000, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw((TextureRegion) monstersidle[0].getKeyFrame(stateTime, true), 800, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw((TextureRegion) monstersidle[1].getKeyFrame(stateTime, true), 1000, 200,-150,150); // Draw current frame at (50, 50)
 		}
 		else
 		{
-			spriteBatch.draw(currentFrame, 800, 200,-150,150); // Draw current frame at (50, 50)
-			spriteBatch.draw(currentFrame, 1000, 200,-150,150); // Draw current frame at (50, 50)
-			spriteBatch.draw(currentFrame, 1200, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw((TextureRegion) monstersidle[0].getKeyFrame(stateTime, true), 800, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw((TextureRegion) monstersidle[1].getKeyFrame(stateTime, true), 1000, 200,-150,150); // Draw current frame at (50, 50)
+			spriteBatch.draw((TextureRegion) monstersidle[2].getKeyFrame(stateTime, true), 1200, 200,-150,150); // Draw current frame at (50, 50)
 		}
 
 		spriteBatch.end();

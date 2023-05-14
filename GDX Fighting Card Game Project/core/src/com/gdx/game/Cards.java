@@ -92,6 +92,10 @@ public class Cards {
 		LoadCards(); // adaugat de nicu
 	}
 
+	public int getArmour()
+	{
+		return armour;
+	}
 	public int getDamage() {
 		return damage;
 	}

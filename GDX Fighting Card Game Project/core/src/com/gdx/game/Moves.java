@@ -8,9 +8,9 @@ public class Moves {
 	
 	public Moves(int dmg,int heal, int armour) {
 		// TODO Auto-generated constructor stub
-		dmg=0;
-		heal=0;
-		armour=0;
+		this.dmg=dmg;
+		this.heal=heal;
+		this.armour=armour;
 	}
 	
 	public void setDmg(int dmg)
@@ -28,17 +28,17 @@ public class Moves {
 		this.armour=armour;
 	}
 	
-	public int getDmg(int dmg)
+	public int getDmg()
 	{
 		return this.dmg;
 	}
 	
-	public int getHeal(int heal)
+	public int getHeal()
 	{
 		return this.heal;
 	}
 	
-	public int getArmour(int armour)
+	public int getArmour()
 	{
 		return this.armour;
 	}

@@ -20,7 +20,8 @@ public class Player {
 	/**
 	 * health = Viata curenta a jucatorului (Initializata cu 100)
 	 */
-	private int health = 100;
+	private int maxHealth = 100;
+	private int health;
 
 	/**
 	 * nrCards = Numarul de Cards pe care jucatorul le poate utiliza
@@ -55,6 +56,7 @@ public class Player {
 		}
 		*/
 		idlesheet=new Texture(Gdx.files.internal("Player//AnimationSheet_Character.png"));
+		health=maxHealth;
 		CrearePachet();
 	}
 	
@@ -88,14 +90,28 @@ public class Player {
 
 	//asta nu merge 
 	
-	
+	public void heal(int heal)
+	{
+		if(this.maxHealth>=this.health+heal)
+		{
+		this.health=this.health+heal;
+		}
+		else
+		{
+			this.health=this.maxHealth;
+		}
+	}
 	  public void CrearePachet()
 	  
-	  { ArrayList<Cards> c =new ArrayList<>();// aici se creaza un pachet de 10 carti random, dar noi vol prestabili cele 10 carti
+	  { ListaCardsInMana.clear();
+	  ListaCardsTotal.clear();
+	  ListaDiscarded.clear();
+	  nrCards=-1;
+		ArrayList<Cards> c =new ArrayList<>();// aici se creaza un pachet de 10 carti random, dar noi vol prestabili cele 10 carti
 	  	int min = 10;
 	  	int max = 10;
 	  
-	 
+	  	
 	  	
 	  	/*for(int i=0;i<=5;++i)
 	  	{

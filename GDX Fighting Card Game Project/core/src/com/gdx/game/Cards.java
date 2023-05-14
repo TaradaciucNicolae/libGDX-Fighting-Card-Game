@@ -120,11 +120,11 @@ public class Cards {
 		ListaCuCards.add(new Cards(40, 3, "cards/card4.PNG"));
 		ListaCuCards.add(new Cards(50, 15, "cards/card5.PNG"));
 		*/
-		ListaCuCards.add(new Cards());
-		ListaCuCards.add(new Cards());
-		ListaCuCards.add(new Cards());
-		ListaCuCards.add(new Cards());
-		ListaCuCards.add(new Cards());
+		ListaCuCards.add(new MetalCard(5,10));
+		ListaCuCards.add(new WaterCard(5));
+		ListaCuCards.add(new FireCard(20));
+		ListaCuCards.add(new WoodCard(15,7));
+		ListaCuCards.add(new EarthCard(20));
 	}
 	
 	

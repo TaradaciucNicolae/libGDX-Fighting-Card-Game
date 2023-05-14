@@ -39,7 +39,8 @@ public class FightScreen implements Screen {
 	Music soundWin;
 	
 	HorizontalGroup h= new HorizontalGroup();
-	DragAndDrop dragAndDrop=new DragAndDrop(); 
+	//DragAndDrop dragAndDrop =new DragAndDrop(); 
+	ArrayList<DragAndDrop> dragAndDrop=new ArrayList<DragAndDrop>();
 	
 	private Table TableForCards = new Table();
 	private Table TableForPackAndDiscarded = new Table();
@@ -136,20 +137,29 @@ public class FightScreen implements Screen {
 		table2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
 		table.add(table2).grow();
 		table.row().height(200);
+
+		
+		//FireCard fc1=new FireCard(10);
+		//table3.add(fc1.table).grow();
+		//table3.add(wc1.table).grow();
+
 		
 		
 		
-		for(int i=0;i<=2;++i)
+		for( i=0;i<=game.p1.getNrCards();++i)
 		{
 		h.addActor(game.p1.ListaCardsInMana.get(i).table);
+		System.out.println(i);
 		game.p1.ListaCardsInMana.get(i).table.setUserObject(h);
+		dragAndDrop.add(new DragAndDrop());
+		
 		
 		h.expand();
 		h.fill();
 		}
 		table3.add(h);
 		
-		for(int i=0;i<=2;++i)
+		for( i=0;i<=2;++i)
 		game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener(){
 		        @Override
 		        public void clicked(InputEvent event, float x, float y) {
@@ -158,6 +168,7 @@ public class FightScreen implements Screen {
 		            game.p1.draw();
 		            h.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
 		            System.out.println(game.p1.getNrCards());
+		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(h);
 		        }
 		    });
 		table3.add(button).height(200).width(200);
@@ -172,36 +183,46 @@ public class FightScreen implements Screen {
 		
 		stage.addActor(table);
 
-		
-		
-		
-		dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(1).table) {
+		for(i=0;i<=game.p1.getNrCards();++i)
+		{
+			System.out.println(i);
+			dragAndDrop.get(i).addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(i).table) {
 			
 			@Override
 			public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
 				// TODO Auto-generated method stub
+				
 				DragAndDrop.Payload payload=new DragAndDrop.Payload();
 				payload.setDragActor(getActor());
 				stage.addActor(getActor());
-				dragAndDrop.setDragActorPosition(getActor().getWidth()/2,- getActor().getHeight()/2);
+				System.out.println(i);
+				dragAndDrop.get(i-1).setDragActorPosition(getActor().getWidth()/2,- getActor().getHeight()/2);
 				
 				return payload;
+				
 				
 				
 			}
 			@Override
 			public void dragStop(InputEvent event, float x, float y, int pointer,DragAndDrop.Payload payload, DragAndDrop.Target target)
 			{
+				for(i=0;i<=game.p1.getNrCards();++i)
 				if (target==null)
 				{
-					((HorizontalGroup)game.p1.ListaCardsInMana.get(1).table.getUserObject()).addActor(game.p1.ListaCardsInMana.get(1).table);
+					
+					System.out.println("I got clicked! bababbababauin"+i);
+					((HorizontalGroup)game.p1.ListaCardsInMana.get(i).table.getUserObject()).addActor(game.p1.ListaCardsInMana.get(i).table);
 				}
 			}
 			
 			
 		} );
+		}
 		
-		dragAndDrop.addTarget(new DragAndDrop.Target(a) {
+		
+
+		for( i=0;i<=game.p1.getNrCards();++i)
+		dragAndDrop.get(i).addTarget(new DragAndDrop.Target(a) {
 			
 			@Override
 			public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x, float y,

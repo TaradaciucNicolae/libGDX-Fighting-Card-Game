@@ -194,6 +194,8 @@ public class Player {
 	public void FolosesteCarte(Cards c) {
 		ListaDiscarded.add(c);
 		ListaCardsInMana.remove(c);
+		nrCards=nrCards-1;
+		System.out.println(c.damage);
 
 	}
 

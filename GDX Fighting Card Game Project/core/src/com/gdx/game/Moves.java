@@ -6,7 +6,7 @@ public class Moves {
 	private int heal;
 	private int armour;
 	
-	public Moves() {
+	public Moves(int dmg,int heal, int armour) {
 		// TODO Auto-generated constructor stub
 		dmg=0;
 		heal=0;

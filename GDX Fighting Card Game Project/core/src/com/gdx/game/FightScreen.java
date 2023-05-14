@@ -39,8 +39,8 @@ public class FightScreen implements Screen {
 	Music soundWin;
 	
 	HorizontalGroup h= new HorizontalGroup();
-	//DragAndDrop dragAndDrop =new DragAndDrop(); 
-	ArrayList<DragAndDrop> dragAndDrop=new ArrayList<DragAndDrop>();
+	DragAndDrop dragAndDrop =new DragAndDrop(); 
+	//ArrayList<DragAndDrop> dragAndDrop=new ArrayList<DragAndDrop>();
 	
 	private Table TableForCards = new Table();
 	private Table TableForPackAndDiscarded = new Table();
@@ -119,8 +119,9 @@ public class FightScreen implements Screen {
 		a=new MyAnimation(playeridle);
 		a.setHeight(100);
 		a.setWidth(100);
-		table2.add().width(200).height(400);
-		table.row();
+		table2.add().width(150).height(300);
+		table2.row();
+		table2.add().width(100);
 		table2.add(a).width(200).height(200);
 		table2.debug();
 		table2.bottom().center();
@@ -151,42 +152,8 @@ public class FightScreen implements Screen {
 		h.addActor(game.p1.ListaCardsInMana.get(i).table);
 		System.out.println(i);
 		game.p1.ListaCardsInMana.get(i).table.setUserObject(h);
-		dragAndDrop.add(new DragAndDrop());
-		
-		
-		h.expand();
-		h.fill();
-		}
-		table3.add(h);
-		
-		for( i=0;i<=2;++i)
-		game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener(){
-		        @Override
-		        public void clicked(InputEvent event, float x, float y) {
-		            System.out.println("I got clicked!");
-		            System.out.println(game.p1.ListaCardsInMana);
-		            game.p1.draw();
-		            h.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
-		            System.out.println(game.p1.getNrCards());
-		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(h);
-		        }
-		    });
-		table3.add(button).height(200).width(200);
-		
-		
-		table.add(table3);
-		
-		table.top().left();
-		table.debug();
-		table2.debug();
-		table3.debug();
-		
-		stage.addActor(table);
-
-		for(i=0;i<=game.p1.getNrCards();++i)
-		{
-			System.out.println(i);
-			dragAndDrop.get(i).addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(i).table) {
+		//dragAndDrop.add(new DragAndDrop());
+		dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(i).table) {
 			
 			@Override
 			public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
@@ -196,7 +163,7 @@ public class FightScreen implements Screen {
 				payload.setDragActor(getActor());
 				stage.addActor(getActor());
 				System.out.println(i);
-				dragAndDrop.get(i-1).setDragActorPosition(getActor().getWidth()/2,- getActor().getHeight()/2);
+				dragAndDrop.setDragActorPosition(getActor().getWidth()/2,- getActor().getHeight()/2);
 				
 				return payload;
 				
@@ -217,18 +184,93 @@ public class FightScreen implements Screen {
 			
 			
 		} );
+		
+		h.expand();
+		h.fill();
 		}
+		table3.add(h);
+		
+		for( i=0;i<=2;++i)
+		game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener(){
+		        @Override
+		        public void clicked(InputEvent event, float x, float y) {
+		            System.out.println("I got clicked!");
+		            System.out.println(game.p1.ListaCardsInMana);
+		            game.p1.draw();
+		            h.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()));
+		            System.out.println(game.p1.getNrCards());
+		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(h);
+		            dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table) {
+		    			
+		    			@Override
+		    			public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
+		    				// TODO Auto-generated method stub
+		    				
+		    				DragAndDrop.Payload payload=new DragAndDrop.Payload();
+		    				payload.setDragActor(getActor());
+		    				stage.addActor(getActor());
+		    				System.out.println(i);
+		    				dragAndDrop.setDragActorPosition(getActor().getWidth()/2,- getActor().getHeight()/2);
+		    				
+		    				return payload;
+		    				
+		    				
+		    				
+		    			}
+		    			@Override
+		    			public void dragStop(InputEvent event, float x, float y, int pointer,DragAndDrop.Payload payload, DragAndDrop.Target target)
+		    			{
+		    				for(i=0;i<=game.p1.getNrCards();++i)
+		    				if (target==null)
+		    				{
+		    					
+		    					System.out.println("I got clicked! bababbababauin"+i);
+		    					((HorizontalGroup)game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.getUserObject()).addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
+		    				}
+		    			}
+		    			
+		    			
+		    		} );
+		        }
+		    });
+		table3.add(button).height(200).width(200);
+		
+		
+		table.add(table3);
+		
+		table.top().left();
+		table.debug();
+		table2.debug();
+		table3.debug();
+		
+		stage.addActor(table);
+
+		//for(i=0;i<=game.p1.getNrCards();++i)
+		//{
+			System.out.println(i);
+			
+		//}
 		
 		
 
 		for( i=0;i<=game.p1.getNrCards();++i)
-		dragAndDrop.get(i).addTarget(new DragAndDrop.Target(a) {
+		dragAndDrop.addTarget(new DragAndDrop.Target(a) {
 			
 			@Override
 			public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x, float y,
 					int pointer) {
 				// TODO Auto-generated method stub
-				System.out.println("s-a activat babuinul");
+				System.out.println("s-a activat babuinul"+i);
+				
+		
+				//source.getActor().setVisible(false);
+				game.p1.FolosesteCarte((Cards) source.getActor());
+				System.out.println(h);
+				System.out.println(game.p1.ListaDiscarded);
+				System.out.println(game.p1.ListaCardsInMana);
+				
+				//game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i-1));
+				
 				
 			}
 			

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.decorator.Random;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.SortedIntList.Iterator;
 
 public class Player {
 	// asta o sa fie stearsa
@@ -24,7 +25,7 @@ public class Player {
 	/**
 	 * nrCards = Numarul de Cards pe care jucatorul le poate utiliza
 	 */
-	private int nrCards;
+	private int nrCards=-1;
 
 	/**
 	 * ListaCardsInMana = Toate Cardsle detinute de jucator in momentul respectiv
@@ -32,7 +33,8 @@ public class Player {
 	ArrayList<Cards> ListaCardsInMana = new ArrayList<>();
 	ArrayList<Cards> ListaCardsTotal = new ArrayList<>();
 	ArrayList<Cards> ListaDiscarded= new ArrayList<>();
-
+	
+	
 	/**
 	 * Constructorul Player() va da jucatorului un numar random de Cards de joc. (
 	 * Intre 5 si 13 Cards din ListaCuCards)
@@ -53,8 +55,26 @@ public class Player {
 		}
 		*/
 		idlesheet=new Texture(Gdx.files.internal("Player//AnimationSheet_Character.png"));
+		CrearePachet();
 	}
-
+	
+	void draw()
+	{
+		if(!this.ListaCardsTotal.isEmpty())
+		{
+		Cards c= ListaCardsTotal.get(0);
+		this.nrCards=this.nrCards+1;
+		ListaCardsTotal.remove(0);
+		ListaCardsInMana.add(c);
+		}
+		else
+		{
+			ListaCardsTotal=ListaDiscarded;
+			ListaDiscarded.clear();
+		}
+	}
+	
+	
 	/**
 	 * Functie de creare a pachetului initial al jucatorului
 	 * (Intre 5 si 13 Cards din ListaCuCards)
@@ -65,22 +85,28 @@ public class Player {
 	
 	  public void CrearePachet()
 	  
-	  { Cards c = new Cards(); // aici se creaza un pachet de 10 carti random, dar noi vol prestabili cele 10 carti
+	  { ArrayList<Cards> c =new ArrayList<>();// aici se creaza un pachet de 10 carti random, dar noi vol prestabili cele 10 carti
 	  	int min = 10;
 	  	int max = 10;
 	  
-	  	nrCards = 10; 
+	 
+	  	
+	  	for(int i=0;i<=5;++i)
+	  	{
+	  		ListaCardsTotal.add(new Cards());
+	  	}
 			  // (int) (Math.random()*(max-min+1)+min); // AICI TREBUIE RAFACUTA INEXAREA
 	  
-	  for (int i = 0; i < nrCards; i++) { 
+	 /* for (int i = 0; i < nrCards; i++) { 
 		  Cards carte = c.ListaCuCards.get((int) (Math.random()*(c.ListaCuCards.size()-1-0+1)+0));
 		  ListaCardsTotal.add(carte);
 		  System.out.println("nr de carti este"+nrCards);
 		  }
-	  
+	  */
+	  	
 	  // 5 carti random vor fi atribuite jucatorului in mana si restul 5 vor ramane in pachet
 	  	for (int i = ListaCardsTotal.size()/2; i >0; i--) { // AICI TREBUIE RAFACUTA INEXAREA
-	  		
+	  		nrCards++;
 	  		ListaCardsInMana.add(ListaCardsTotal.get(i));
 	  		ListaCardsTotal.remove(ListaCardsTotal.get(i));
 	  		
@@ -100,6 +126,8 @@ public class Player {
 		}*/
 	  
 	  }
+	  
+	  
 	 
 	/**
 	 * 
@@ -157,6 +185,7 @@ public class Player {
 	 * @param c este cartea care a fost folosita in timpul luptei.
 	 */
 	public void FolosesteCarte(Cards c) {
+		ListaDiscarded.add(c);
 		ListaCardsInMana.remove(c);
 
 	}

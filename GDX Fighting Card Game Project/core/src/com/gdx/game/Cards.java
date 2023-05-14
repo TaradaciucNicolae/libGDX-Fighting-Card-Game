@@ -8,20 +8,26 @@ import javax.swing.ImageIcon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
 public class Cards {
 
+	private static Skin gameSkin= new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));;
 	int damage;
 	int health; // am schimbat in public ca sa le pot accesa din player
 	int armour;
 	String PozaCarte;
 	Table table;
-	
+
 	
 
 	ArrayList<Cards> ListaCuCards = new ArrayList<>();
@@ -31,8 +37,9 @@ public class Cards {
 	 * Prin intermediul acestui constructor se va crea un nou pachet de Cards.
 	 */
 
-	Cards(int damage,int heal,int armour) { // e ca un fel de " creare pachet"
-
+	Cards() { // e ca un fel de " creare pachet"
+		
+		            
 		// damage = 5 + (int)(Math.random() * ((10 - 5) + 1));
 		// health = 5 +(int)(Math.random() * ((10 - 5) + 1));
 		// System.out.println("Damage card = "+ damage);
@@ -42,20 +49,27 @@ public class Cards {
     	TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/5,idlesheet.getHeight());
     	table=new Table();
         table.setBackground(new TextureRegionDrawable(tmp[0][1]));
-        Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));;
-        this.damage=damage;
-        this.health=heal;
-        this.armour=armour;
+       
+        this.damage=15;
+        this.health=5;
+        this.armour=10;
         Label l1=new Label("5 dmg ",gameSkin);
-    	table.add(new Image(im)).width(70).height(120).right().top();
-    	table.row();
+        table.setWidth(120);
+        table.setHeight(200);
+        table.add().height(10);
+        table.row().height(20);
+    	table.add(new Image(im)).width(80).height(70);
+    	table.row().height(80);
     	table.add(l1).width(60);
+    	
     	table.debug();
     	l1.setFontScale(0.7f);
+    	table.setTouchable(Touchable.enabled);
+    	
     	
     	
         
-		LoadCards(); // adaugat de nicu
+		//LoadCards(); // adaugat de nicu
 	}
 
 	/**
@@ -73,7 +87,7 @@ public class Cards {
 
 	}
 
-	public Cards() {
+	public Cards(Card card) {
 		// TODO Auto-generated constructor stub
 		LoadCards(); // adaugat de nicu
 	}
@@ -100,13 +114,22 @@ public class Cards {
 
 	public void LoadCards() { // adaugat de nicu
 
-		ListaCuCards.add(new Cards(10, 5, "cards/card1.PNG"));
+		/*ListaCuCards.add(new Cards(10, 5, "cards/card1.PNG"));
 		ListaCuCards.add(new Cards(20, 0, "cards/card2.PNG"));
 		ListaCuCards.add(new Cards(30, 0, "cards/card3.PNG"));
 		ListaCuCards.add(new Cards(40, 3, "cards/card4.PNG"));
 		ListaCuCards.add(new Cards(50, 15, "cards/card5.PNG"));
-
+		*/
+		ListaCuCards.add(new Cards());
+		ListaCuCards.add(new Cards());
+		ListaCuCards.add(new Cards());
+		ListaCuCards.add(new Cards());
+		ListaCuCards.add(new Cards());
 	}
+	
+	
+	
+	
 	/**
 	 * Aceasta functie va afisa toate Cardsle existente in acest joc
 	 */

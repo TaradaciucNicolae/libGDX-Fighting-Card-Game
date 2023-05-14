@@ -2,6 +2,8 @@ package com.gdx.game;
 
 import java.util.ArrayList;
 
+import javax.xml.transform.Source;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -11,14 +13,21 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class FightScreen implements Screen {
@@ -29,6 +38,8 @@ public class FightScreen implements Screen {
 	Music soundLose;
 	Music soundWin;
 	
+	HorizontalGroup h= new HorizontalGroup();
+	DragAndDrop dragAndDrop=new DragAndDrop(); 
 	
 	private Table TableForCards = new Table();
 	private Table TableForPackAndDiscarded = new Table();
@@ -37,7 +48,8 @@ public class FightScreen implements Screen {
 	Table table2=new Table();
 	Table table3=new Table();
 	Table table=new Table();
-
+	MyAnimation a;
+	int i;
 	
 	
 	//Player idle animation test
@@ -102,6 +114,15 @@ public class FightScreen implements Screen {
 		}
 		
 		playeridle=new Animation<TextureRegion>(0.1f,Player_frames);
+		
+		a=new MyAnimation(playeridle);
+		a.setHeight(100);
+		a.setWidth(100);
+		table2.add().width(200).height(400);
+		table.row();
+		table2.add(a).width(200).height(200);
+		table2.debug();
+		table2.bottom().center();
 		spriteBatch=new SpriteBatch();
 		stateTime=0f;
 		 //
@@ -115,9 +136,30 @@ public class FightScreen implements Screen {
 		table2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
 		table.add(table2).grow();
 		table.row().height(200);
-		Cards c1=new Cards(5, 0, 0);
-		table3.add(c1.table).grow();
 		
+		
+		
+		for(int i=0;i<=2;++i)
+		{
+		h.addActor(game.p1.ListaCardsInMana.get(i).table);
+		game.p1.ListaCardsInMana.get(i).table.setUserObject(h);
+		
+		h.expand();
+		h.fill();
+		}
+		table3.add(h);
+		
+		for(int i=0;i<=2;++i)
+		game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener(){
+		        @Override
+		        public void clicked(InputEvent event, float x, float y) {
+		            System.out.println("I got clicked!");
+		            System.out.println(game.p1.ListaCardsInMana);
+		            game.p1.draw();
+		            h.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
+		            System.out.println(game.p1.getNrCards());
+		        }
+		    });
 		table3.add(button).height(200).width(200);
 		
 		
@@ -131,11 +173,55 @@ public class FightScreen implements Screen {
 		stage.addActor(table);
 
 		
+		
+		
+		dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(1).table) {
+			
+			@Override
+			public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
+				// TODO Auto-generated method stub
+				DragAndDrop.Payload payload=new DragAndDrop.Payload();
+				payload.setDragActor(getActor());
+				stage.addActor(getActor());
+				dragAndDrop.setDragActorPosition(getActor().getWidth()/2,- getActor().getHeight()/2);
+				
+				return payload;
+				
+				
+			}
+			@Override
+			public void dragStop(InputEvent event, float x, float y, int pointer,DragAndDrop.Payload payload, DragAndDrop.Target target)
+			{
+				if (target==null)
+				{
+					((HorizontalGroup)game.p1.ListaCardsInMana.get(1).table.getUserObject()).addActor(game.p1.ListaCardsInMana.get(1).table);
+				}
+			}
+			
+			
+		} );
+		
+		dragAndDrop.addTarget(new DragAndDrop.Target(a) {
+			
+			@Override
+			public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x, float y,
+					int pointer) {
+				// TODO Auto-generated method stub
+				System.out.println("s-a activat babuinul");
+				
+			}
+			
+			@Override
+			public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
+					float y, int pointer) {
+				// TODO Auto-generated method stub
+				return true;
+			}
+		});
 		button.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("am atacat");
-				AfisareCartiPeEcran(game.p1);
 				m1.SetHealth(30);
 				System.out.println(" monster hp:"+m1.getHealth());
 				if(!m1.alive)
@@ -248,7 +334,7 @@ public class FightScreen implements Screen {
         TextureRegion currentFrame = playeridle.getKeyFrame(stateTime, true);
 		spriteBatch.begin();
 		spriteBatch.draw(currentFrame, 200, 200,150,150); // Draw current frame at (50, 50)
-		if(numberOfMonsters==1)
+		/*if(numberOfMonsters==1)
 		{
 			spriteBatch.draw(currentFrame, 800, 200,-150,150); // Draw current frame at (50, 50)
 		}
@@ -263,129 +349,15 @@ public class FightScreen implements Screen {
 			spriteBatch.draw(currentFrame, 1000, 200,-150,150); // Draw current frame at (50, 50)
 			spriteBatch.draw(currentFrame, 1200, 200,-150,150); // Draw current frame at (50, 50)
 		}
-
+		*/ 
 		spriteBatch.end();
-        //
+        
 		
         
     }
  
     
-    public void AfisareCartiPeEcran(final Player p) {
-		TableForCards.clear();
-		ListaButoaneCarti.clear();
-		TableForCards.toFront();
-		
-
-		
-		for (int i = 0; i < p.ListaCardsInMana.size(); i++) {
-		//	System.out.println("a intrat in for");
-			final ImageButton ButonAdaugareCarte;
-			//System.out.println("a creat textbutton");
-
-			Texture tex = new Texture(Gdx.files.internal(p.ListaCardsInMana.get(i).PozaCarte));
-			TextureRegion TexReg = new TextureRegion(tex);
-			TextureRegionDrawable TexRegDraw = new TextureRegionDrawable(TexReg);
-
-			// Drawable drawable =new TextureRegionDrawable(new TextureRegion((Texture)
-			// p.ListaCardsInMana.get(i).PozaCarte));
-			// ButonAdaugareCarte = new TextButton("",new
-			// Skin(Gdx.files.internal(p.ListaCardsInMana.get(i).PozaCarte)));
-			ButonAdaugareCarte = new ImageButton(TexRegDraw);
-			// ButonAdaugareCarte.setSize(9, 13);
-			// TextButton.TextButtonStyle style = ButonAdaugareCarte.getStyle();
-			// style.m
-		//	System.out.println("a pus parametri in textbuton");
-
-			// TableForCards.add(ButonAdaugareCarte).pad(20).size(20,30);
-			// Cell<ImageButton> cell =
-			// TableForCards.add(ButonAdaugareCarte).uniform().pad(10).size(80,120);
-
-			// ButonAdaugareCarte.setBackground(p.ListaCardsInMana.get(i).PozaCarte);
-			ListaButoaneCarti.add(ButonAdaugareCarte);
-			table3.add(ButonAdaugareCarte); //
-			// TableForCards.invalidate();
-			// ButonAdaugareCarte.add
-
-			ButonAdaugareCarte.addListener(new InputListener() {
-				public void enter(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer,
-						Actor actor) {
-					super.enter(event, x, y, pointer, actor);
-
-					ButonAdaugareCarte.setSize(90, 150);
-
-					stage.draw();
-				}
-
-				public void exit(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer,
-						Actor actor) {
-					super.exit(event, x, y, pointer, actor);
-
-					ButonAdaugareCarte.setSize(80, 150);
-
-				}
-
-			});
-
-			TableForCards.add(ButonAdaugareCarte).uniform().pad(10).size(80, 150);
-
-			ButonAdaugareCarte.addListener(new ChangeListener() {
-				public void changed(ChangeEvent event, Actor actor) {
-
-					System.out.println("carte apasata");
-					
-					for (int j = 0; j < ListaButoaneCarti.size(); j++) { 
-						//System.out.println("in for");
-						if (event.getTarget() == ListaButoaneCarti.get(j)) {
-							//System.out.println("in if");
-							p.ListaDiscarded.add(p.ListaCardsInMana.get(j));
-							//System.out.println("inainte de remove");
-							ButonAdaugareCarte.remove();
-							//System.out.println("dupa remove");
-							ListaButoaneCarti.remove(ButonAdaugareCarte);
-							p.FolosesteCarte(p.ListaCardsInMana.get(j)); 
-																			
-							p.AfisarePachetPlayer();
-						}
-
-						// p.AfisarePachetPlayer();
-					}
-
-					TableForCards.clearChildren(); // remove all buttons from the table
-
-					// add the remaining buttons back to the table
-					for (int j = 0; j < ListaButoaneCarti.size(); j++) {
-						//System.out.println("al doilea for");
-						TableForCards.add(ListaButoaneCarti.get(j)).uniform().pad(10).size(80, 150);
-					
-					}
-
-				}
-			});
-
-			// */
-
-			/*
-			 * ButonAdaugareCarte.addListener(new ClickListener() { // public void
-			 * clicked(InputEvent event, float x, float y) { public void
-			 * clicked(com.badlogic.gdx.scenes.scene2d.InputEvent e, float x, float y) {
-			 * super.clicked(e, x, y); for (int i = 0; i < ListaButoaneCarti.size(); i++) {
-			 * if (e.getTarget() == ListaButoaneCarti.get(i)) { System.out.println("sth"); }
-			 * } }
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * });
-			 */
-			// stage.addActor(ButonAdaugareCarte);
-
-			Gdx.input.setInputProcessor(stage);
-		}
-    }
+   
 		
     @Override
     public void resize(int width, int height) {

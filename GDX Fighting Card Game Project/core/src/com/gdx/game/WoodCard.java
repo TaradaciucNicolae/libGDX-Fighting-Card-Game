@@ -9,7 +9,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * 
+ * @author Ovidiu-Florin Berea
+ * Clasa WoodCard reprezinta cartea de lemn a jocului care poate fi folosita cu scopul de a ataca monstrii si de a da viata jucatorului.
+ *
+ */
+
 public class WoodCard extends Cards {
+	
+	/**
+	 * 
+	 * @param damage - gradul de atac al cartii de lemn
+	 * @param health - nivelul de viata al cartii de lemn
+	 */
 	
 	WoodCard(int damage, int health) {
 		this.table=new Table();

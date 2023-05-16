@@ -9,8 +9,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * 
+ * @author Ovidiu-Florin Berea
+ * Clasa FireCard reprezinta cartea de foc a jocului care poate fi folosita cu scopul de a ataca monstrii.
+ * 
+ */
+
 public class FireCard extends Cards {
 
+	/**
+	 * 
+	 * @param damage - gradul de atac al cartii de foc
+	 */
+	
 	FireCard(int damage) {
 		this.table=new Table();
 		Texture im=new Texture(Gdx.files.internal("cardselement//fire.png"));

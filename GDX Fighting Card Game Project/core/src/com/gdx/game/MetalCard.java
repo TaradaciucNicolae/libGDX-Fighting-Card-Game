@@ -9,7 +9,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * 
+ * @author Ovidiu-Florin Berea
+ * Clasa MetalCard reprezinta cartea de metal a jocului care poate fi folosita cu scopul de a oferi armura si viata jucatorului.
+ *
+ */
+
 public class MetalCard extends Cards {
+	
+	/**
+	 * 
+	 * @param armour - nivelul de armura al cartii de metal
+	 * @param health - nivelul de viata al cartii de metal
+	 */
 	
 	MetalCard(int armour, int health) {
 		this.table=new Table();

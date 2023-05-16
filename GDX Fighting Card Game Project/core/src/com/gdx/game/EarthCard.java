@@ -9,7 +9,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * 
+ * @author Ovidiu-Florin Berea
+ * Clasa EarthCard reprezinta cartea de pamant a jocului care poate fi folosita cu scopul de a oferi viata jucatorului.
+ *
+ */
+
 public class EarthCard extends Cards {
+	
+	/**
+	 * 
+	 * @param health - nivelul de viata al cartii de pamant
+	 */
 	
 	EarthCard(int health) {
 		this.table=new Table();

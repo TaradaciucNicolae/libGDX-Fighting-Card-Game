@@ -31,35 +31,60 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class FightScreen implements Screen {
+	
+	/**
+	 * GdxFightingGame=refrence to our game
+	 * Stage = the stage on which we draw our objects
+	 * 
+	 * sound=music bgm
+	 * soundLose= sound bgm when you lose game
+	 * soundWin=sound bgm when you win the fight
+	 * 
+	 * hand=special elements that handles the hand of cards
+	 * dragAndDrop=drag and drop animation+ implementation
+	 * 
+	 * table=main table that fits the entire screen
+	 * tableTop= table for the actors in the fight
+	 * tableBot= table for actors that deal with the player
+	 * 
+	 * i=counter needed for drag and drop
+	 * 
+	 *
+	 *	
+	 *	
+	 *	
+	 * 
+	 * 
+	 */
 	private GdxFightingGame game;
 	private Stage stage;
-	Music sound;
 	
+	
+	Music sound;
 	Music soundLose;
 	Music soundWin;
 	
-	HorizontalGroup h= new HorizontalGroup();
+	HorizontalGroup hand= new HorizontalGroup();
 	DragAndDrop dragAndDrop =new DragAndDrop(); 
-	//ArrayList<DragAndDrop> dragAndDrop=new ArrayList<DragAndDrop>();
 	
-	private Table TableForCards = new Table();
-	private Table TableForPackAndDiscarded = new Table();
-	ArrayList<ImageButton> ListaButoaneCarti = new ArrayList<>();
-	
-	Table table2=new Table();
-	Table table3=new Table();
+	Table tableTop=new Table();
+	Table tableBot=new Table();
 	Table table=new Table();
-	MyAnimation a;
+
 	int i;
 	
-	
+	/**
+	 * object that help with animations
+	 */
 	//Player idle animation test
 	Animation<TextureRegion> playeridle;
 	Texture idlesheet;
 	SpriteBatch spriteBatch;
 	float stateTime;
 	//
-	
+	/**
+	 * enemies
+	 */
 	int numberOfMonsters;
 	final Monster m1;
 	final Monster m2;
@@ -69,7 +94,9 @@ public class FightScreen implements Screen {
 		// TODO Auto-generated constructor stub
 		game=agame;
 		stage = new Stage();
-		
+		/**
+		 * generate a random number of monsters between 1 and 3
+		 */
 		 numberOfMonsters=(int)Math.floor(Math.random() * (3 - 1 + 1) + 1);
 		 System.out.println("number of monster= "+numberOfMonsters);
 		
@@ -92,12 +119,16 @@ public class FightScreen implements Screen {
 			m3=new Monster();
 		}
 			
-		
+		/**
+		 * setup for sounds , animation and tables
+		 */
 		soundWin = Gdx.audio.newMusic(Gdx.files.internal("ogg//Victory.ogg"));
 		soundLose = Gdx.audio.newMusic(Gdx.files.internal("ogg//Death.ogg"));
 		sound = Gdx.audio.newMusic(Gdx.files.internal("ogg//Action 5 (Loop).ogg"));
 		sound.setLooping(true);
 		sound.play();
+		
+		
 		stage = new Stage();
 		
 		
@@ -115,12 +146,12 @@ public class FightScreen implements Screen {
 		}
 		
 		playeridle=new Animation<TextureRegion>(0.1f,Player_frames);
-		table2.add().width(150).height(300);
-		table2.row();
-		table2.add().width(100);
-		table2.add(m1.animation).width(200).height(200);
-		table2.debug();
-		table2.bottom().center();
+		tableTop.add().width(150).height(300);
+		tableTop.row();
+		tableTop.add().width(100);
+		tableTop.add(m1.animation).width(200).height(200);
+		tableTop.debug();
+		tableTop.bottom().center();
 		spriteBatch=new SpriteBatch();
 		stateTime=0f;
 		 //
@@ -131,8 +162,8 @@ public class FightScreen implements Screen {
 		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_1.png"))));
 		table.setFillParent(true);
 		
-		table2.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
-		table.add(table2).grow();
+		tableTop.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
+		table.add(tableTop).grow();
 		table.row().height(200);
 
 		
@@ -141,14 +172,16 @@ public class FightScreen implements Screen {
 		//table3.add(wc1.table).grow();
 
 		
-		
+		/**
+		 * create paylods for the cards to enable them to be draged and make the cards return to the hand if they are droped outside a valid target
+		 */
 		
 		for( i=0;i<=game.p1.getNrCards();++i)
 		{
-		h.addActor(game.p1.ListaCardsInMana.get(i).table);
+		hand.addActor(game.p1.ListaCardsInMana.get(i).table);
 		System.out.println(i);
-		game.p1.ListaCardsInMana.get(i).table.setUserObject(h);
-		//dragAndDrop.add(new DragAndDrop());
+		game.p1.ListaCardsInMana.get(i).table.setUserObject(hand);
+		
 		dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(i).table) {
 			
 			@Override
@@ -181,10 +214,10 @@ public class FightScreen implements Screen {
 			
 		} );
 		
-		h.expand();
-		h.fill();
+		hand.expand();
+		hand.fill();
 		}
-		table3.add(h);
+		tableBot.add(hand);
 		
 		for( i=0;i<=2;++i)
 		game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener(){
@@ -195,15 +228,15 @@ public class FightScreen implements Screen {
 
 		        }
 		    });
-		table3.add(button).height(200).width(200);
+		tableBot.add(button).height(200).width(200);
 		
 		
-		table.add(table3);
+		table.add(tableBot);
 		
 		table.top().left();
 		table.debug();
-		table2.debug();
-		table3.debug();
+	
+		tableBot.debug();
 		
 		stage.addActor(table);
 
@@ -213,7 +246,9 @@ public class FightScreen implements Screen {
 			
 		//}
 		
-		
+		/**
+		 * creater targets for the cards to be dropped in
+		 */
 
 		for( i=0;i<=game.p1.getNrCards();++i)
 		dragAndDrop.addTarget(new DragAndDrop.Target(m1.animation) {
@@ -232,7 +267,9 @@ public class FightScreen implements Screen {
 						m1.SetHealth(game.p1.ListaCardsInMana.get(i).getDamage());
 						game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
 						game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
-						
+						/**
+						 * if all enemies die create a victory screen
+						 */
 						if(!m1.alive)
 						{
 							sound.stop();
@@ -285,6 +322,10 @@ public class FightScreen implements Screen {
 				return true;
 			}
 		});
+		
+		/**
+		 * end turn button , that puts used cards in the discard pile and makes enemys act
+		 */
 		button.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -319,7 +360,9 @@ public class FightScreen implements Screen {
 					}
 					
 				}
-				
+				/**
+				 * if the player dies create a pop-up screen that raturns you to main menu
+				 */
 					
 					if(!game.p1.alive)
 					{
@@ -356,10 +399,10 @@ public class FightScreen implements Screen {
 				
 				
 		            game.p1.draw();
-		            h.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
+		            hand.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
 		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setVisible(true);
 		            System.out.println(game.p1.getNrCards());
-		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(h);
+		            game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(hand);
 		            dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table) {
 		    			
 		    			@Override

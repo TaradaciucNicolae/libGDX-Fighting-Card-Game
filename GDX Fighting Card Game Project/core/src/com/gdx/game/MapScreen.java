@@ -33,10 +33,10 @@ public class MapScreen implements Screen {
 	
 	/**
 	 * 
-	 * @paramgame = GdxFightingGame instance
-	 * @paramFields = Fields that need to be populated on the matrix of Buttons
-	 * @paramButtons = A matrix which contains all of the buttons we have to display on screen
-	 * @paramrandomNumber = A parameter that we use for generating random numbers
+	 * game = GdxFightingGame instance
+	 * Fields = Fields that need to be populated on the matrix of Buttons
+	 * Buttons = A matrix which contains all of the buttons we have to display on screen
+	 * randomNumber = A parameter that we use for generating random numbers
 	 */
 	public MapScreen(GdxFightingGame game) {
 		this.game=game;

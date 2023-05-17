@@ -33,10 +33,10 @@ public class MapScreen implements Screen {
 	
 	/**
 	 * 
-	 * @param game = GdxFightingGame instance
-	 * @param Fields = Fields that need to be populated on the matrix of Buttons
-	 * @param Buttons = A matrix which contains all of the buttons we have to display on screen
-	 * @param randomNumber = A parameter that we use for generating random numbers
+	 * @paramgame = GdxFightingGame instance
+	 * @paramFields = Fields that need to be populated on the matrix of Buttons
+	 * @paramButtons = A matrix which contains all of the buttons we have to display on screen
+	 * @paramrandomNumber = A parameter that we use for generating random numbers
 	 */
 	public MapScreen(GdxFightingGame game) {
 		this.game=game;
@@ -68,7 +68,7 @@ public class MapScreen implements Screen {
 	}
 	
 	/**
-	 * This method is used for choosing which fields to populate and then create buttons with another method.
+	 * This method is used for choosing which fields to populate and then create buttons using TableButtons method.
 	 */
 	public void FieldPopulation() {
 		int numberOfNodes;
@@ -140,6 +140,9 @@ public class MapScreen implements Screen {
 		table.center();
 	}
 	
+	/**
+	 * This is a listener that sets the buttons to be touchable on the current row and then creates a new FightScreen.
+	 */
 	ChangeListener change=new ChangeListener() {
 
 		@Override

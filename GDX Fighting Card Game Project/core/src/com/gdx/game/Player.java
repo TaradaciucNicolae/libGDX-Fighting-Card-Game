@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.decorator.Random;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
 public class Player {
 	// asta o sa fie stearsa
@@ -151,6 +160,18 @@ public class Player {
 		}
 		health = health - damage;
 	}
+	
+	public void ReceivesHealth(int health) {
+			if (this.health+health >=100)
+			{
+				this.health=100;
+			
+			}
+			else
+			{
+				this.health +=health;
+			}
+	}
 
 	/**
 	 * 
@@ -170,6 +191,88 @@ public class Player {
 					+ ListaCardsInMana.get(i).health + " viata");
 
 		}
+	}
+	public void AfisareCartiPeEcran(final Player p,final Table TableForCards,final ArrayList<ImageButton> ListaButoaneCarti,final Stage stage) {
+		TableForCards.clear();
+		ListaButoaneCarti.clear();
+
+		for (int i = 0; i < p.ListaCardsInMana.size(); i++) {
+	
+			final ImageButton ButonAdaugareCarte;
+		
+
+			Texture tex = new Texture(Gdx.files.internal(p.ListaCardsInMana.get(i).PozaCarte));
+			TextureRegion TexReg = new TextureRegion(tex);
+			TextureRegionDrawable TexRegDraw = new TextureRegionDrawable(TexReg);
+
+
+			ButonAdaugareCarte = new ImageButton(TexRegDraw);
+
+			ListaButoaneCarti.add(ButonAdaugareCarte);
+			stage.addActor(ButonAdaugareCarte); //
+
+
+			ButonAdaugareCarte.addListener(new InputListener() {
+				public void enter(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer,
+						Actor actor) {
+					super.enter(event, x, y, pointer, actor);
+
+					ButonAdaugareCarte.setSize(90, 150);
+
+					stage.draw();
+				}
+
+				public void exit(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer,
+						Actor actor) {
+					super.exit(event, x, y, pointer, actor);
+
+					ButonAdaugareCarte.setSize(80, 150);
+
+				}
+
+			});
+
+			TableForCards.add(ButonAdaugareCarte).uniform().pad(10).size(80, 150);
+
+			ButonAdaugareCarte.addListener(new ChangeListener() {
+				public void changed(ChangeEvent event, Actor actor) {
+
+					System.out.println("carte apasata");
+					
+					for (int j = 0; j < ListaButoaneCarti.size(); j++) { 
+					
+						if (event.getTarget() == ListaButoaneCarti.get(j)) {
+							
+							p.ListaDiscarded.add(p.ListaCardsInMana.get(j));
+				
+							ButonAdaugareCarte.remove();
+	
+							ListaButoaneCarti.remove(ButonAdaugareCarte);
+							p.FolosesteCarte(p.ListaCardsInMana.get(j)); 
+																			
+							p.AfisarePachetPlayer();
+						}
+
+					}
+
+					TableForCards.clearChildren(); // remove all buttons from the table
+
+					// add the remaining buttons back to the table
+					for (int j = 0; j < ListaButoaneCarti.size(); j++) {
+						TableForCards.add(ListaButoaneCarti.get(j)).uniform().pad(10).size(80, 150);
+					//	TableForCards.add(ListaButoaneCarti.get(j));
+					
+					}
+
+				}
+			});
+
+			Gdx.input.setInputProcessor(stage);
+		}
+
+	
+		Gdx.input.setInputProcessor(stage);
+
 	}
 
 }

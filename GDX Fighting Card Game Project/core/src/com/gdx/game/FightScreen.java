@@ -159,13 +159,13 @@ public class FightScreen implements Screen {
 		stage.addActor(table);
 
 		p.AfisarePachetPlayer();
-		AfisareCartiPeEcran(p);
+		p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 		
 		button.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("am atacat");
-				AfisareCartiPeEcran(game.p1);
+				p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 				m1.SetHealth(30);
 				System.out.println(" monster hp:"+m1.getHealth());
 				
@@ -193,10 +193,10 @@ public class FightScreen implements Screen {
 						if(p.ListaCardsTotal.size()==0)
 						{
 							System.out.println("nu mai sunt carti in pachet");
-							AfisareCartiPeEcran(p);
+							p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 							return;
 						}
-						AfisareCartiPeEcran(p);
+						p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 							
 							
 						
@@ -213,13 +213,13 @@ public class FightScreen implements Screen {
 							if(p.ListaCardsTotal.size()==0)
 							{
 								System.out.println("nu mai sunt carti in pachet");
-								AfisareCartiPeEcran(p);
+								p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 								return;
 							}
 							sansedrop_nr--;
 							
 						}
-						AfisareCartiPeEcran(p);
+						p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 						
 					}
 					else if(sansedrop>=9)
@@ -234,13 +234,13 @@ public class FightScreen implements Screen {
 							if(p.ListaCardsTotal.size()==0)
 							{
 								System.out.println("nu mai sunt carti in pachet");
-								AfisareCartiPeEcran(p);
+								p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 								return;
 							}
 							sansedrop_nr--;
 							
 						}
-						AfisareCartiPeEcran(p);
+						p.AfisareCartiPeEcran(p,TableForCards,ListaButoaneCarti,stage);
 						
 					}
 					
@@ -398,7 +398,7 @@ public class FightScreen implements Screen {
 		
         
     }
- 
+ /*
     
 	public void AfisareCartiPeEcran(final Player p) {
 		TableForCards.clear();
@@ -454,6 +454,7 @@ public class FightScreen implements Screen {
 							p.ListaDiscarded.add(p.ListaCardsInMana.get(j));
 				
 							ButonAdaugareCarte.remove();
+ 
 	
 							ListaButoaneCarti.remove(ButonAdaugareCarte);
 							p.FolosesteCarte(p.ListaCardsInMana.get(j)); 
@@ -480,7 +481,7 @@ public class FightScreen implements Screen {
 	
 		Gdx.input.setInputProcessor(stage);
 
-	}
+	}*/
 		
     @Override
     public void resize(int width, int height) {

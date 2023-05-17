@@ -1,6 +1,7 @@
 package com.gdx.game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -8,11 +9,17 @@ import javax.swing.ImageIcon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
 public class Cards {
 
@@ -55,7 +62,7 @@ public class Cards {
     	
     	
         
-		LoadCards(); // adaugat de nicu
+	//	LoadCards(); // adaugat de nicu
 	}
 
 	/**
@@ -67,6 +74,8 @@ public class Cards {
 
 	Cards(int dmg, int viata, String iconita) // adaugat de nicu
 	{
+		
+		
 		this.damage = dmg;
 		this.health = viata;
 		this.PozaCarte = iconita;
@@ -99,14 +108,14 @@ public class Cards {
 	 */
 
 	public void LoadCards() { // adaugat de nicu
-
-		ListaCuCards.add(new Cards(10, 5, "cards/card1.PNG"));
-		ListaCuCards.add(new Cards(20, 0, "cards/card2.PNG"));
-		ListaCuCards.add(new Cards(30, 0, "cards/card3.PNG"));
-		ListaCuCards.add(new Cards(40, 3, "cards/card4.PNG"));
-		ListaCuCards.add(new Cards(50, 15, "cards/card5.PNG"));
-
-		//ListaCuCards.add(new Cards(10, 5, 12));
+///*
+		ListaCuCards.add(new Cards(30, 10, "cards/card1.PNG"));
+		ListaCuCards.add(new Cards(20, 15, "cards/card2.PNG"));
+		ListaCuCards.add(new Cards(10, 15, "cards/card3.PNG"));
+		ListaCuCards.add(new Cards(0, 30, "cards/card4.PNG"));
+		ListaCuCards.add(new Cards(30, 0, "cards/card5.PNG"));
+//*/
+	//	ListaCuCards.add(new Cards(10, 5, 12));
 		//ListaCuCards.add(new Cards(20, 0, 23));
 		//ListaCuCards.add(new Cards(30, 0, 34));
 		//ListaCuCards.add(new Cards(40, 3, 344));
@@ -127,4 +136,7 @@ public class Cards {
 	 * System.out.println(carte1); }
 	 */
 
+	
+	
+	
 }

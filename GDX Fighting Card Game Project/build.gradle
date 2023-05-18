@@ -51,7 +51,12 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-desktop:$gdxControllersVersion"
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
-        
+        testCompile "junit:junit:4.11"
+		testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+		testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
+		testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+		testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+		testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
     }
 }
 
@@ -68,6 +73,12 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        testCompile "junit:junit:4.11"
+	testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+	testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
+	testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+	testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+		testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         
     }
 }

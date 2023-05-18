@@ -1,6 +1,7 @@
 package com.gdx.game;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.decorator.Random;
@@ -71,7 +72,10 @@ public class Player {
 		}
 		else
 		{
-			ListaDiscarded.forEach((n) -> ListaCardsTotal.add(n));
+			for (ListIterator<Cards> iter = ListaDiscarded.listIterator(); iter.hasNext(); ) {
+			    Cards element = iter.next();
+			    ListaCardsTotal.add(element);
+			}
 			ListaDiscarded.clear();
 			if(!this.ListaCardsTotal.isEmpty()) {
 			Cards c= ListaCardsTotal.get(0);

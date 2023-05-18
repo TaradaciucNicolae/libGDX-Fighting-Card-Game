@@ -50,9 +50,9 @@ public class Cards {
     	table=new Table();
         table.setBackground(new TextureRegionDrawable(tmp[0][1]));
        
-        this.damage=15;
-        this.health=5;
-        this.armour=10;
+        this.damage=0;
+        this.health=0;
+        this.armour=0;
         Label l1=new Label("5 dmg ",gameSkin);
         table.setWidth(120);
         table.setHeight(200);

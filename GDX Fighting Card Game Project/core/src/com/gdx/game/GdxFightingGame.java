@@ -21,6 +21,8 @@ public class GdxFightingGame extends Game {
 
 	public Player p1;
 	public MapScreen map;
+	public int score=0;
+	public int currentRoomScore;
 	
 	 static public Skin gameSkin;
 	  public void create () {

@@ -48,13 +48,13 @@ public class FightScreen implements Screen {
 		 numberOfMonsters=(int)Math.floor(Math.random() * (3 - 1 + 1) + 1);
 		 System.out.println("number of monster= "+numberOfMonsters);
 		
-		if(numberOfMonsters==1)
+		if(game.currentRoomScore>=0 && game.currentRoomScore<=200)
 		{
 			m1=new Monster();
 			m2=null;
 			m3=null;
 		}
-		else if(numberOfMonsters==2)
+		else if(game.currentRoomScore>=201 && game.currentRoomScore<=400)
 		{
 			m1=new Monster();
 			m2=new Monster();
@@ -277,11 +277,11 @@ public class FightScreen implements Screen {
         TextureRegion currentFrame = playeridle.getKeyFrame(stateTime, true);
 		spriteBatch.begin();
 		spriteBatch.draw(currentFrame, 200, 200,150,150); // Draw current frame at (50, 50)
-		if(numberOfMonsters==1)
+		if(game.currentRoomScore>=0 && game.currentRoomScore<=200)
 		{
 			spriteBatch.draw((TextureRegion) monstersidle[0].getKeyFrame(stateTime, true), 800, 200,-150,150); // Draw current frame at (50, 50)
 		}
-		else if(numberOfMonsters==2)
+		else if(game.currentRoomScore>=201 && game.currentRoomScore<=400)
 		{
 			spriteBatch.draw((TextureRegion) monstersidle[0].getKeyFrame(stateTime, true), 800, 200,-150,150); // Draw current frame at (50, 50)
 			spriteBatch.draw((TextureRegion) monstersidle[1].getKeyFrame(stateTime, true), 1000, 200,-150,150); // Draw current frame at (50, 50)

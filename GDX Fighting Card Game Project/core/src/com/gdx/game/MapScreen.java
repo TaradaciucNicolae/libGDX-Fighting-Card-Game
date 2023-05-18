@@ -116,7 +116,7 @@ public class MapScreen implements Screen {
 			for(int j=0;j<Fields[0].length;++j) {
 				if(i%2==0) {
 					if(Fields[i][j]==1) {
-						Buttons[i][j]=new TextButton(""+i+j, skin);
+						Buttons[i][j]=new TextButton(""+(randomNumber.nextInt((600-100)+1)+100), skin);
 						Buttons[i][j].addListener(change);
 						Buttons[i][j].setTouchable(Touchable.disabled);
 						table.add();
@@ -128,7 +128,7 @@ public class MapScreen implements Screen {
 				else
 				{
 					if(Fields[i][j]==1) {
-						Buttons[i][j]=new TextButton(""+i+j, skin);
+						Buttons[i][j]=new TextButton(""+(randomNumber.nextInt((600-100)+1)+100), skin);
 						Buttons[i][j].addListener(change);
 						Buttons[i][j].setTouchable(Touchable.disabled);
 						table.add(Buttons[i][j]).width(100).height(100);
@@ -142,6 +142,7 @@ public class MapScreen implements Screen {
 	
 	/**
 	 * This is a listener that sets the buttons to be touchable on the current row and then creates a new FightScreen.
+	 * Also updates the score with the number on the buttons.
 	 */
 	ChangeListener change=new ChangeListener() {
 
@@ -150,6 +151,11 @@ public class MapScreen implements Screen {
 			for(int i=0;i<Buttons[0].length;++i) {
 	        	if(Buttons[currentrow][i]!=null)
 	        		Buttons[currentrow][i].setTouchable(Touchable.disabled);
+	        	if(event.getTarget().equals(Buttons[currentrow][i])) {
+	        		game.currentRoomScore=Integer.parseInt(Buttons[currentrow][i].getText().toString());
+	        		game.score=game.score+game.currentRoomScore;
+	        		System.out.println("Asta e score-ul curent: "+game.score);
+	        	}	
 	        }
 			currentrow++;
 			game.setScreen(new FightScreen(game));

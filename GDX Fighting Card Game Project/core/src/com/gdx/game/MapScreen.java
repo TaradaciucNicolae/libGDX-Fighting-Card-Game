@@ -36,7 +36,7 @@ public class MapScreen implements Screen {
 		Fields=new int[5][3];
 		Buttons=new TextButton[5][3];
 		randomNumber=new Random();
-		skin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
+		skin = new Skin(Gdx.files.internal("craftacular//skin//craftacular-ui.json"));
 		table=new Table();
 		table.setFillParent(true);
 		FieldPopulation();
@@ -105,6 +105,7 @@ public class MapScreen implements Screen {
 						Buttons[i][j]=new TextButton(""+i+j, skin);
 						Buttons[i][j].addListener(change);
 						Buttons[i][j].setTouchable(Touchable.disabled);
+					//	Buttons[i][j].setDisabled(true);
 						table.add();
 						table.add(Buttons[i][j]).width(100).height(100);
 						table.add();

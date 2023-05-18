@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -35,6 +36,7 @@ public class MainScreen implements Screen{
 	private Label addressLabel;
 	private TextField addressText;
 	private Table table;
+	private Table TableForVolume;
 	
 	private GdxFightingGame game;
 	private Stage stage;
@@ -71,17 +73,45 @@ public class MainScreen implements Screen{
 		skin3 = new Skin(Gdx.files.internal("terra-mother//skin//terra-mother-ui.json"));
 		skin4 = new Skin(Gdx.files.internal("rainbow//skin//rainbow-ui.json"));
 		// create your button
-		button = new TextButton("play", skin4);
-		button3 = new TextButton("settings", skin);
-		button2 = new TextButton("exit", skin2);
+		button = new TextButton("Play", skin4);
+		button3 = new TextButton("Settings", skin);
+		button2 = new TextButton("Exit", skin2);
 		Label nameLabel = new Label("Aventura unui babuin", skin4);
 		TextField nameText = new TextField(" ", skin);
 		Label addressLabel = new Label("Address:", skin);
 		TextField addressText = new TextField("", skin);
 
-		// add it to your stage
+
+
+	       
+        Slider volumeSlider = new Slider(0f, 1f, 0.1f, false, new Skin(Gdx.files.internal("neon//skin//neon-ui.json")));
+        volumeSlider.setValue(1f);
+        volumeSlider.addListener(new ChangeListener() {
+        
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                float volume = volumeSlider.getValue();
+	     
+	            sound.setVolume(volume);
+               
+            }
+        });
+        //volumeSlider.setBounds(0, 100, 10, 20);
+        
+    
+        stage.addActor(volumeSlider);
+        stage.setKeyboardFocus(volumeSlider); 
+        Gdx.input.setInputProcessor(stage);
+
+		
+		
 
 		table = new Table(skin);
+		TableForVolume = new Table();
+		TableForVolume.bottom().right().padLeft(10).padBottom(50);
+		TableForVolume.padRight(50);
+		TableForVolume.add(volumeSlider).fill();
+		TableForVolume.setFillParent(true);
 		button.toFront();
 		button3.getLabel().setFontScale(0.5f);
 		nameLabel.setFontScale(2);
@@ -99,6 +129,7 @@ public class MainScreen implements Screen{
 		table.add();
 		table.row().height(100);
 		table.add(button2).fill();
+	//	table.add(volumeSlider).fill();
 		// Row 1, column 0.
 		table.setBackground(new TextureRegionDrawable(e));
 		table.center().top();
@@ -108,6 +139,8 @@ public class MainScreen implements Screen{
 		 
 
 		stage.addActor(table);
+		stage.addActor(TableForVolume);
+
 
 		
 		// add a listener to your buttons so it does something when clicked
@@ -118,6 +151,8 @@ public class MainScreen implements Screen{
 				
 				 int numberOfMonsters=(int)Math.floor(Math.random() * (3 - 1 + 1) + 1);
 				System.out.println("number of monster "+numberOfMonsters);
+				
+				//agame.setScreen(new SettingsScreen(agame));
 			}
 		});
 
@@ -125,6 +160,7 @@ public class MainScreen implements Screen{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("babuin");
+				Gdx.app.exit();
 
 			}
 		});
@@ -140,6 +176,7 @@ public class MainScreen implements Screen{
 
 			}
 		});
+		
 
 		// set the sgae as the input processor so it will respond to clicks etc
 		Gdx.input.setInputProcessor(stage);

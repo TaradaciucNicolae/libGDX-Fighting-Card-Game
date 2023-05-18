@@ -1,5 +1,13 @@
 package com.gdx.game;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public class Monster {
 
 	/**
@@ -12,6 +20,13 @@ public class Monster {
 	private int maxHealth;
 	private int armour;
 	boolean alive;
+	private ArrayList<Moves> moves= new ArrayList<>();
+	MyAnimation animation;
+	Animation<TextureRegion> playeridle;
+	Texture idlesheet;
+	SpriteBatch spriteBatch;
+	float stateTime;
+		
 	
 	/**
 	 * Constructorul care asigneaza:
@@ -27,6 +42,24 @@ public class Monster {
 		System.out.println(damage);
 		armour=0;
 		alive=true;
+		moves.add(new Moves(damage*2,0,0));
+		moves.add(new Moves(0,damage,0));
+		moves.add(new Moves(0,0,damage*2));
+		idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniDreadKnight.png"));
+		TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/9);
+
+		//15 is the number of frames and colums we have
+		TextureRegion[] Player_frames= new TextureRegion[2];
+		int index=0;
+		for(int i=0;i<2;++i) {
+			Player_frames[index++]=tmp[3][i];
+		}
+		playeridle=new Animation<TextureRegion>(0.1f,Player_frames);
+		
+		animation=new MyAnimation(playeridle);
+		
+		
+		
 	}
 	
 	/**
@@ -46,6 +79,13 @@ public class Monster {
 		return damage;
 	}
 	
+	public Moves getMove()
+	{
+		int i=(int)Math.floor(Math.random() * (2 - 0 + 1) + 0);
+		
+		return moves.get(i);
+		
+	}
 	public void heal(int heal)
 	{
 		if(this.maxHealth>=this.health+heal)

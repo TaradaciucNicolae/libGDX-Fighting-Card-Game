@@ -30,7 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class FightScreen implements Screen {
+public class Zone2 implements Screen {
 	
 	/**
 	 * GdxFightingGame=refrence to our game
@@ -90,7 +90,7 @@ public class FightScreen implements Screen {
 	final Monster m2;
 	final Monster m3;
 	
-	public FightScreen(GdxFightingGame agame) {
+	public Zone2(GdxFightingGame agame) {
 		// TODO Auto-generated constructor stub
 		game=agame;
 		stage = new Stage();
@@ -159,10 +159,10 @@ public class FightScreen implements Screen {
 		
 		final TextButton button = new TextButton("End Turn", GdxFightingGame.gameSkin);
 		
-		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_1.png"))));
+		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//Zone2//5.png"))));
 		table.setFillParent(true);
 		
-		tableTop.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
+		tableTop.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//Zone2//0.png"))));		
 		table.add(tableTop).grow();
 		table.row().height(200);
 

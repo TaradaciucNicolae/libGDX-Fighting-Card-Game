@@ -158,7 +158,13 @@ public class MapScreen implements Screen {
 	        	}	
 	        }
 			currentrow++;
-			game.setScreen(new FightScreen(game));
+			switch(game.zone) {
+			case 1:
+				game.setScreen(new FightScreen(game));
+				break;
+			case 2:
+				game.setScreen(new Zone2(game));
+			}
 		}
 		
 	};

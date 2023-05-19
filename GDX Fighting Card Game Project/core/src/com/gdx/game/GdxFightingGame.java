@@ -23,6 +23,7 @@ public class GdxFightingGame extends Game {
 	public MapScreen map;
 	public int score=0;
 	public int currentRoomScore;
+	public int zone=1;
 	
 	 static public Skin gameSkin;
 	  public void create () {

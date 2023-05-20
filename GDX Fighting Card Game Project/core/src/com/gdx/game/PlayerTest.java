@@ -1,11 +1,10 @@
 package com.gdx.game;
 
-import org.junit.Test;
-import org.mockito.Mock;
-import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.fail;
-import org.junit.Before;
-import org.mockito.MockitoAnnotations;
+
+import org.junit.jupiter.api.Test;
+
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 
@@ -13,14 +12,8 @@ import com.badlogic.gdx.Gdx;
 
 class PlayerTest {
 	
-   // @Mock
-    private Files mockFiles;
-    
-    @Before
-    public void setup() {
-    //    MockitoAnnotations.initMocks(this);
-        Gdx.files = mockFiles;
-    }
+  
+
 
 	@Test
 	void testPlayer() {

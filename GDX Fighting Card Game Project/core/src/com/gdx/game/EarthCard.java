@@ -19,7 +19,8 @@ public class EarthCard extends Cards {
     this.table = new Table();
     Texture im = new Texture(Gdx.files.internal("badlogic.jpg"));
     Texture idlesheet = new Texture(Gdx.files.internal("cards//pixelCardAssest.png"));
-    TextureRegion[][] tmp = TextureRegion.split(idlesheet, idlesheet.getWidth() / 5, idlesheet.getHeight());
+    TextureRegion[][] tmp = 
+        TextureRegion.split(idlesheet, idlesheet.getWidth() / 5, idlesheet.getHeight());
     table.setBackground(new TextureRegionDrawable(tmp[0][3]));
     Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
     this.health = health;

@@ -46,7 +46,8 @@ public class Cards {
     // System.out.println("Health card = " + health);
     Texture im = new Texture(Gdx.files.internal("badlogic.jpg"));
     Texture idlesheet = new Texture(Gdx.files.internal("cards//pixelCardAssest.png"));
-    TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/5,idlesheet.getHeight());
+    TextureRegion[][] tmp = 
+        TextureRegion.split(idlesheet, idlesheet.getWidth() / 5, idlesheet.getHeight());
     table = new Table();
     table.setBackground(new TextureRegionDrawable(tmp[0][1]));
 
@@ -76,7 +77,7 @@ public class Cards {
    * @param viata   este viata primita de jucator
    * @param iconita este poza Cardsi de joc
    */
-  Cards(int dmg, int viata, String iconita){
+  Cards(int dmg, int viata, String iconita) {
     this.damage = dmg;
     this.health = viata;
     this.pozaCarte = iconita;
@@ -126,7 +127,8 @@ public class Cards {
    */
   public void afisarePachetComplet() { // adaugat de nicu
     for (int i = 0; i < listaCuCarti.size(); i++) {
-      System.out.println(" Cartea nr " + i + " va da " + listaCuCarti.get(i).damage + " damage si va oferi "
+      System.out.println(" Cartea nr " + i + " va da " 
+          + listaCuCarti.get(i).damage + " damage si va oferi "
           + listaCuCarti.get(i).health + " viata");
     }
   }

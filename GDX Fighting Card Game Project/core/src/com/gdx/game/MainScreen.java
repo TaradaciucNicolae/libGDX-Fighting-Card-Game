@@ -136,8 +136,6 @@ public class MainScreen implements Screen{
 				game.map=new MapScreen(game);
 				game.getScreen().dispose();
 				game.setScreen(game.map);
-				
-
 			}
 		});
 

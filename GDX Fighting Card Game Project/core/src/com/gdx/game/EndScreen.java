@@ -2,6 +2,7 @@ package com.gdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,6 +16,7 @@ public class EndScreen implements Screen {
 	private float backgroundOffsets[]= {0,0,0,0,0};
 	private float backgroundMaxScrollingSpeed;
 	private BitmapFont font;
+	private Music sound;
 	
 	public EndScreen(GdxFightingGame game){
 		this.game=game;
@@ -28,6 +30,9 @@ public class EndScreen implements Screen {
 		backgroundMaxScrollingSpeed=Gdx.graphics.getWidth()/6;
 		batch=new SpriteBatch();
 		font=new BitmapFont(Gdx.files.internal("EndScreen//font//endscreenfont.fnt"));
+		sound = Gdx.audio.newMusic(Gdx.files.internal("ogg//Night Ambient 1.ogg"));
+		sound.setLooping(true);
+		sound.play();
 	}
 	
 	private void drawBackground(float deltaTime) {
@@ -88,7 +93,7 @@ public class EndScreen implements Screen {
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+		sound.stop();
 	}
 
 	@Override

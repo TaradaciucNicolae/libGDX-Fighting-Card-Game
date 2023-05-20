@@ -30,7 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class FightScreen implements Screen {
+public class Zone3 implements Screen {
 	
 	/**
 	 * GdxFightingGame=refrence to our game
@@ -90,7 +90,7 @@ public class FightScreen implements Screen {
 	final Monster m2;
 	final Monster m3;
 	
-	public FightScreen(GdxFightingGame agame) {
+	public Zone3(GdxFightingGame agame) {
 		// TODO Auto-generated constructor stub
 		game=agame;
 		stage = new Stage();
@@ -159,10 +159,10 @@ public class FightScreen implements Screen {
 		
 		final TextButton button = new TextButton("End Turn", GdxFightingGame.gameSkin);
 		
-		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_1.png"))));
+		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//Zone3//7.png"))));
 		table.setFillParent(true);
 		
-		tableTop.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));		
+		tableTop.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//Zone3//0.png"))));		
 		table.add(tableTop).grow();
 		table.row().height(200);
 
@@ -295,10 +295,10 @@ public class FightScreen implements Screen {
 									game.getScreen().dispose();
 									//If we want to use the number of rows of the matrix Buttons the we need a method for it 
 									if(game.map.CurrentRow()==5) {
-										game.zone++;
-										game.map=new MapScreen(game);
+										game.setScreen(new EndScreen(game));
 									}
-									game.setScreen(game.map);
+									else
+										game.setScreen(game.map);
 								}
 							});
 							
@@ -519,3 +519,4 @@ public class FightScreen implements Screen {
     }
 
 }
+

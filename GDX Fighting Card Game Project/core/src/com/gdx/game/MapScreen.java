@@ -29,7 +29,7 @@ public class MapScreen implements Screen {
 	//private Skin skin2;
 	private Table table;
 	private Table background;
-	private int currentrow=1;
+	private int currentrow=0;
 	
 	/**
 	 * 
@@ -164,6 +164,9 @@ public class MapScreen implements Screen {
 				break;
 			case 2:
 				game.setScreen(new Zone2(game));
+				break;
+			case 3:
+				game.setScreen(new Zone3(game));
 			}
 		}
 		

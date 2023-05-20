@@ -296,10 +296,9 @@ public class Zone2 implements Screen {
 									//If we want to use the number of rows of the matrix Buttons the we need a method for it 
 									if(game.map.CurrentRow()==5) {
 										game.zone++;
-										game.setScreen(new MainScreen(game));
+										game.map=new MapScreen(game);
 									}
 									game.setScreen(game.map);
-
 								}
 							});
 							
@@ -390,6 +389,8 @@ public class Zone2 implements Screen {
 							@Override
 							public void changed(ChangeEvent event, Actor actor) {
 								game.getScreen().dispose();
+								game.zone=1;
+								game.score=0;
 								game.setScreen(new MainScreen(game));
 
 							}

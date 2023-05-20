@@ -219,7 +219,7 @@ public class FightScreen implements Screen {
           for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
             if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {
-              m1.SetHealth(game.p1.ListaCardsInMana.get(i).getDamage());
+              m1.setHealth(game.p1.ListaCardsInMana.get(i).getDamage());
               game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
               game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
 

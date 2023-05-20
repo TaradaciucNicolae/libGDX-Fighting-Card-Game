@@ -251,7 +251,7 @@ public class FightScreen implements Screen {
                     game.getScreen().dispose();
                     // If we want to use the number of rows of the matrix Buttons the we need a
                     // method for it
-                    if (game.map.CurrentRow() == 5) {
+                    if (game.map.currentRow() == 5) {
                       game.setScreen(new MainScreen(game));
                     }
                     game.setScreen(game.map);

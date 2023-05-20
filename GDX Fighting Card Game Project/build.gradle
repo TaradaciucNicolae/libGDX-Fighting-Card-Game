@@ -44,8 +44,11 @@ project(":desktop") {
 
 
     dependencies {
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+	
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+      	api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
@@ -69,5 +72,57 @@ project(":core") {
         api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         
+        /// ...
+       
+        
     }
+}
+
+project(":tests") {
+    apply plugin: "java"
+
+    sourceSets.test.java.srcDirs = ["src/"]
+
+    dependencies {
+
+        /**
+         * If you do have some classes to test in os specific code you may want to uncomment
+         * some of these lines.
+         *
+         * BUT: I recommend to create seperate test sub projects for each platform. Trust me :)
+         *
+         */
+
+//        compile project(":android")
+//        compile project(":html")
+//        compile project(":desktop")
+
+
+//        if(System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+//        	compile project(":ios")
+//        }
+		//api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+	//	implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+        implementation project(":core")
+        implementation project(":desktop")
+         
+    
+		
+        implementation "junit:junit:4.+"
+        implementation "org.mockito:mockito-all:1.9.+"
+
+        implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+
+        testImplementation 'junit:junit:4.+'
+        testImplementation "org.mockito:mockito-all:1.9.+"
+       
+       testImplementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        testImplementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        testImplementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    }
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
 }

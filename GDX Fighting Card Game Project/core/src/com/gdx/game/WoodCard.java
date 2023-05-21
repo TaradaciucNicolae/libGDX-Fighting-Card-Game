@@ -30,7 +30,7 @@ public class WoodCard extends Cards {
 		Texture idlesheet=new Texture(Gdx.files.internal("cards//pixelCardAssest.png"));
     	TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/5,idlesheet.getHeight());
 		table.setBackground(new TextureRegionDrawable(tmp[0][4]));
-		Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
+		Skin gameSkin = new Skin(Gdx.files.internal("arcade//skin//arcade-ui.json"));
 		this.damage=damage;
 		this.health=health;
 		Label l1=new Label(this.damage + " dmg",gameSkin);
@@ -38,11 +38,11 @@ public class WoodCard extends Cards {
 		table.add(new Image(im)).width(70).height(120).right().top();
     	table.row();
     	table.add(l1).width(70);
-    	l1.setFontScale(1.1f);
+    	l1.setFontScale(0.7f);
     	table.row();
     	table.add(l2).width(70);
     	//table.debug();
-    	l2.setFontScale(1.1f);
+    	l2.setFontScale(0.7f);
 	}
 
 }

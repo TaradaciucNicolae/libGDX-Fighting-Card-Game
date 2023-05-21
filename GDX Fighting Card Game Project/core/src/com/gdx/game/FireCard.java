@@ -31,14 +31,14 @@ public class FireCard extends Cards {
 		Texture idlesheet=new Texture(Gdx.files.internal("cards//pixelCardAssest.png"));
     	TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/5,idlesheet.getHeight());
 		table.setBackground(new TextureRegionDrawable(tmp[0][1]));
-		Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
+		Skin gameSkin = new Skin(Gdx.files.internal("arcade//skin//arcade-ui.json"));
 		this.damage=damage;
 		Label l1=new Label(this.damage + " dmg",gameSkin);
 		table.add(new Image(im)).width(50).height(120).right().top();
     	table.row();
     	table.add(l1).width(60);
     	//table.debug();
-    	l1.setFontScale(1.1f);
+    	l1.setFontScale(0.7f);
 	}
 }
 

@@ -1,10 +1,8 @@
 package com.gdx.game;
 
 import java.util.ArrayList;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,134 +17,144 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
+/**
+ * Class for cards.
+ *
+ */
 public class Cards {
 
-	private static Skin gameSkin= new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));;
-	int damage;
-	int health; // am schimbat in public ca sa le pot accesa din player
-	int armour;
-	String PozaCarte;
-	Table table;
+  /**
+   * @param gameSkin     - skin-ul interfetei jocului
+   * @param damage       - gradul de atac al cartii
+   * @param health       - nivelul de viata al cartii
+   * @param armour       - nivelul de armura al cartii
+   * @param PozaCarte    - poza unei carti
+   * @param table        - tabelul care contribuie la alcatuirea elementelor
+   *                     cartilor
+   * @param ListaCuCards - lista care contine toate cartile
+   */
 
-	
+  private static Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));;
+  int damage;
+  int health;
+  int armour;
+  String PozaCarte;
+  Table table;
+  ArrayList<Cards> ListaCuCards = new ArrayList<>();
 
-	ArrayList<Cards> ListaCuCards = new ArrayList<>();
+  /**
+   * Constructorul Cards() fara argumente este folosit pentru a crea un nou pachet
+   * de carti prin intermediul celor 5 tipuri de carti mostenite din aceasta
+   * clasa, si anume: FireCard WaterCard EarthCard MetalCard WoodCard
+   */
 
+  Cards() {
+  }
 
-	/*
-	 * Prin intermediul acestui constructor se va crea un nou pachet de Cards.
-	 */
+  /**
+   * 
+   * @param dmg     - gradul de atac dat de carte
+   * @param viata   - viata primita de jucator
+   * @param iconita - poza cartii din joc
+   */
 
-	Cards() { // e ca un fel de " creare pachet"
-		
-		            
-		// damage = 5 + (int)(Math.random() * ((10 - 5) + 1));
-		// health = 5 +(int)(Math.random() * ((10 - 5) + 1));
-		// System.out.println("Damage card = "+ damage);
-		// System.out.println("Health card = " + health);
-		Texture im=new Texture(Gdx.files.internal("badlogic.jpg"));
-		Texture idlesheet=new Texture(Gdx.files.internal("cards//pixelCardAssest.png"));
-    	TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/5,idlesheet.getHeight());
-    	table=new Table();
-        table.setBackground(new TextureRegionDrawable(tmp[0][1]));
-       
-        this.damage=0;
-        this.health=0;
-        this.armour=0;
-        Label l1=new Label("5 dmg ",gameSkin);
-        table.setWidth(120);
-        table.setHeight(200);
-        table.add().height(10);
-        table.row().height(20);
-    	table.add(new Image(im)).width(80).height(70);
-    	table.row().height(80);
-    	table.add(l1).width(60);
-    	
-    	table.debug();
-    	l1.setFontScale(0.7f);
-    	table.setTouchable(Touchable.enabled);
-    	
-    	
-    	
-        
-		//LoadCards(); // adaugat de nicu
-	}
+  Cards(int dmg, int viata, String iconita) {
+    this.damage = dmg;
+    this.health = viata;
+    this.PozaCarte = iconita;
+  }
 
-	/**
-	 * 
-	 * @param dmg     este samage-ul dat de carte
-	 * @param viata   este viata primita de jucator
-	 * @param iconita este poza Cardsi de joc
-	 */
+  /**
+   * 
+   * @param card - cartea care se va incarca in pachet
+   */
 
-	Cards(int dmg, int viata, String iconita) // adaugat de nicu
-	{
-		this.damage = dmg;
-		this.health = viata;
-		this.PozaCarte = iconita;
+  public Cards(Card card) {
+    LoadCards();
+  }
 
-	}
+  /**
+   * Getter
+   * 
+   * @return Numar intreg, armura cartii
+   */
 
-	public Cards(Card card) {
-		// TODO Auto-generated constructor stub
-		LoadCards(); // adaugat de nicu
-	}
+  public int getArmour() {
+    return armour;
+  }
 
-	public int getArmour()
-	{
-		return armour;
-	}
-	public int getDamage() {
-		return damage;
-	}
+  /**
+   * Getter
+   * 
+   * @return Numar intreg, nivelul de atac al cartii
+   */
 
-	public int getHealth() {
-		return health;
-	}
+  public int getDamage() {
+    return damage;
+  }
 
-	public void setDamageCard(int damage) {
-		this.damage = damage;
-	}
+  /**
+   * Getter
+   * 
+   * @return Numar intreg, nivelul de viata al cartii
+   */
 
-	public void setHealthCard(int health) {
-		this.health = health;
-	}
+  public int getHealth() {
+    return health;
+  }
 
-	/**
-	 * Aceasta functie va introduce toate Cardsle din joc, in interiorul unui pachet
-	 */
+  /**
+   * Setter
+   * 
+   * @param armour - Numar intreg, nivelul de armura al cartii
+   */
+  public void setArmourCard(int armour) {
+    this.armour = armour;
+  }
 
-	public void LoadCards() { // adaugat de nicu
+  /**
+   * Setter
+   * 
+   * @param damage - Numar intreg, gradul de atac al cartii
+   */
 
-		/*ListaCuCards.add(new Cards(10, 5, "cards/card1.PNG"));
-		ListaCuCards.add(new Cards(20, 0, "cards/card2.PNG"));
-		ListaCuCards.add(new Cards(30, 0, "cards/card3.PNG"));
-		ListaCuCards.add(new Cards(40, 3, "cards/card4.PNG"));
-		ListaCuCards.add(new Cards(50, 15, "cards/card5.PNG"));
-		*/
-		ListaCuCards.add(new MetalCard(5,10));
-		ListaCuCards.add(new WaterCard(5));
-		ListaCuCards.add(new FireCard(20));
-		ListaCuCards.add(new WoodCard(15,7));
-		ListaCuCards.add(new EarthCard(20));
-	}
-	
-	
-	
-	
-	/**
-	 * Aceasta functie va afisa toate Cardsle existente in acest joc
-	 */
-	public void AfisarePachetComplet() { // adaugat de nicu
-		for (int i = 0; i < ListaCuCards.size(); i++) {
-			System.out.println(" Cartea nr " + i + " va da " + ListaCuCards.get(i).damage + " damage si va oferi "
-					+ ListaCuCards.get(i).health + " viata");
-		}
-	}
+  public void setDamageCard(int damage) {
+    this.damage = damage;
+  }
 
-	/*
-	 * public static void main(String[] args) { Cards carte1 = new Cards();
-	 * System.out.println(carte1); }
-	 */
+  /**
+   * Setter
+   * 
+   * @param health - Numar intreg, nivelul de viata al cartii
+   */
 
+  public void setHealthCard(int health) {
+    this.health = health;
+  }
+
+  /**
+   * Functia LoadCards() are rolul de a crea un pachet cu toate cartile
+   * disponibile din joc.
+   */
+
+  public void LoadCards() {
+
+    ListaCuCards.add(new MetalCard(5, 10));
+    ListaCuCards.add(new WaterCard(5));
+    ListaCuCards.add(new FireCard(20));
+    ListaCuCards.add(new WoodCard(15, 7));
+    ListaCuCards.add(new EarthCard(20));
+  }
+
+  /**
+   * Functia AfisarePachetComplet() are rolul de a afisa toate cartile disponibile
+   * din joc.
+   */
+
+  public void AfisarePachetComplet() {
+    for (int i = 0; i < ListaCuCards.size(); i++) {
+      System.out.println(" Cartea nr " + i + " va da " + ListaCuCards.get(i).damage + " damage si va oferi "
+          + ListaCuCards.get(i).health + " viata");
+    }
+  }
 }

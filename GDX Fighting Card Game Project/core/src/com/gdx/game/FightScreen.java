@@ -227,11 +227,10 @@ public class FightScreen implements Screen {
         }
 
       });
-
       hand.expand();
       hand.fill();
     }
-    tableBot.add(hand);
+    tableBot.add(hand).height(200);
 
     for (i = 0; i <= 2; ++i)
       game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener() {

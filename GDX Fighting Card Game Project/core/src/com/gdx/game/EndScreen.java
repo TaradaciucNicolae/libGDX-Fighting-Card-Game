@@ -47,6 +47,7 @@ public class EndScreen implements Screen {
     batch = new SpriteBatch();
     font = new BitmapFont(Gdx.files.internal("EndScreen//font//endscreenfont.fnt"));
     sound = Gdx.audio.newMusic(Gdx.files.internal("ogg//Night Ambient 1.ogg"));
+    sound.setVolume(game.soundVolume);
     sound.setLooping(true);
     sound.play();
   }

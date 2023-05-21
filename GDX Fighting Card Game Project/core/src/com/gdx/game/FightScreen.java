@@ -122,8 +122,11 @@ public class FightScreen implements Screen {
      * setup for sounds , animation and tables
      */
     soundWin = Gdx.audio.newMusic(Gdx.files.internal("ogg//Victory.ogg"));
+    soundWin.setVolume(game.soundVolume);
     soundLose = Gdx.audio.newMusic(Gdx.files.internal("ogg//Death.ogg"));
+    soundLose.setVolume(game.soundVolume);
     sound = Gdx.audio.newMusic(Gdx.files.internal("ogg//Action 5 (Loop).ogg"));
+    sound.setVolume(game.soundVolume);
     sound.setLooping(true);
     sound.play();
 

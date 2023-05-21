@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class MyAnimation extends Actor{
 		Animation animation;
 	    TextureRegion currentRegion;
+	    int xcoord=800;
 
 	    float time = 0f;
 
@@ -22,11 +23,16 @@ public class MyAnimation extends Actor{
 
 	        currentRegion = (TextureRegion) animation.getKeyFrame(time, true);
 	    }
+	    
+	    void setCoord(int x)
+	    {
+	    	this.xcoord=x;
+	    }
 
 	    @Override
 	    public void draw(Batch batch, float parentAlpha) {
 	        super.draw(batch, parentAlpha);
-	        batch.draw(currentRegion, 800, 200,-150,150);
+	        batch.draw(currentRegion, xcoord, 200,-150,150);
 	    }
 
 }

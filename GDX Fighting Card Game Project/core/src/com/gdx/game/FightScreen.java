@@ -96,7 +96,7 @@ public class FightScreen implements Screen {
      */
     numberOfMonsters = (int) Math.floor(Math.random() * (3 - 1 + 1) + 1);
     System.out.println("number of monster= " + numberOfMonsters);
-    numberOfMonsters=1;
+
     if (numberOfMonsters == 1) {
       m1 = new Monster();
       m2 = null;

@@ -6,12 +6,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -30,6 +32,8 @@ public class MapScreen implements Screen {
 	private Table table;
 	private Table background;
 	private int currentrow=0;
+	private Label score;
+	private Table tableScore;
 	
 	/**
 	 * 
@@ -44,9 +48,10 @@ public class MapScreen implements Screen {
 		Fields=new int[5][3];
 		Buttons=new TextButton[5][3];
 		randomNumber=new Random();
-		skin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
-		//skin2 = new Skin(Gdx.files.internal("neon//skin//neon-ui.json"));
+		skin = new Skin(Gdx.files.internal("craftacular//skin//craftacular-ui.json"));
 		table=new Table();
+		tableScore=new Table();
+		score=new Label("Score: "+game.score, skin);
 		table.setFillParent(true);
 		table.toFront();
 		background=new Table();
@@ -123,6 +128,11 @@ public class MapScreen implements Screen {
 						table.add(Buttons[i][j]).width(100).height(100);
 						table.add();
 						table.row();
+						if(i==4) {
+						  table.row();
+						  table.add(tableScore);
+						  tableScore.add(score).width(100).height(100);
+						}
 					}
 				}
 				else
@@ -154,6 +164,7 @@ public class MapScreen implements Screen {
 	        	if(event.getTarget().equals(Buttons[currentrow][i])) {
 	        		game.currentRoomScore=Integer.parseInt(Buttons[currentrow][i].getText().toString());
 	        		game.score=game.score+game.currentRoomScore;
+	        		score.setText("Score: "+game.score);
 	        		System.out.println("Asta e score-ul curent: "+game.score);
 	        	}	
 	        }
@@ -186,9 +197,8 @@ public class MapScreen implements Screen {
         	if(Buttons[currentrow][i]!=null)
         		Buttons[currentrow][i].setTouchable(Touchable.enabled);
         }
-        
         stage.act();
-        stage.draw();   
+        stage.draw();
 	}
 
 	@Override

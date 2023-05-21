@@ -124,10 +124,10 @@ public class Player {
 	  	*/
 	  	ListaCardsTotal.add(new MetalCard(5,10));
 	  	ListaCardsTotal.add(new WaterCard(5));
-	  	ListaCardsTotal.add(new FireCard(20));
+	  	ListaCardsTotal.add(new FireCard(300));
 	  	ListaCardsTotal.add(new WoodCard(15,7));
 	  	ListaCardsTotal.add(new EarthCard(20));
-	  	ListaCardsTotal.add(new FireCard(20));
+	  	ListaCardsTotal.add(new FireCard(300));
 			  // (int) (Math.random()*(max-min+1)+min); // AICI TREBUIE RAFACUTA INEXAREA
 	  
 	 /* for (int i = 0; i < nrCards; i++) { 

@@ -56,11 +56,88 @@ public class Monster {
 		}
 		playeridle=new Animation<TextureRegion>(0.1f,Player_frames);
 		
-		animation=new MyAnimation(playeridle);
+		randomMonsterTexture();
 		
 		
 		
 	}
+	
+	public void randomMonsterTexture() {
+      
+      for(int i=0;i<3;++i) {
+          switch((int)Math.floor(Math.random() * (6 - 1 + 1) + 1)) {
+          case 1:
+              idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniDreadKnight.png"));
+              TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/9);
+              TextureRegion[] Player_frames= new TextureRegion[2];
+              int index=0;
+              for(int j=0;j<2;++j) {
+                  Player_frames[index++]=tmp[3][j];
+              }
+              
+              playeridle=new Animation<TextureRegion>(0.1f,Player_frames);
+              animation=new MyAnimation(playeridle);
+              break;
+              
+          case 2:
+              idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniGhost.png"));
+              TextureRegion[][] tmp1 = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/5);
+              TextureRegion[] Player_frames1= new TextureRegion[4];
+              index=0;
+              for(int j=0;j<4;++j) {
+                  Player_frames1[index++]=tmp1[0][j];
+              }
+              playeridle=new Animation<TextureRegion>(0.1f,Player_frames1);
+              animation=new MyAnimation(playeridle);
+              break;
+          case 3:
+              idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniSkeleton.png"));
+              TextureRegion[][] tmp2 = TextureRegion.split(idlesheet,idlesheet.getWidth()/6,idlesheet.getHeight()/6);
+              TextureRegion[] Player_frames2= new TextureRegion[4];
+              index=0;
+              for(int j=0;j<4;++j) {
+                  Player_frames2[index++]=tmp2[0][j];
+              }
+              playeridle=new Animation<TextureRegion>(0.1f,Player_frames2);
+              animation=new MyAnimation(playeridle);
+              break;
+          case 4:
+            idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniLich.png"));
+            TextureRegion[][] tmp3 = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/7);
+            TextureRegion[] Player_frames3= new TextureRegion[4];
+            index=0;
+            for(int j=0;j<4;++j) {
+                Player_frames3[index++]=tmp3[0][j];
+            }
+            playeridle=new Animation<TextureRegion>(0.1f,Player_frames3);
+            animation=new MyAnimation(playeridle);
+            break;
+          case 5:
+            idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniReaper.png"));
+            TextureRegion[][] tmp4 = TextureRegion.split(idlesheet,idlesheet.getWidth()/8,idlesheet.getHeight()/5);
+            TextureRegion[] Player_frames4= new TextureRegion[4];
+            index=0;
+            for(int j=0;j<4;++j) {
+                Player_frames4[index++]=tmp4[0][j];
+            }
+            playeridle=new Animation<TextureRegion>(0.1f,Player_frames4);
+            animation=new MyAnimation(playeridle);
+            break;
+          case 6:
+            idlesheet=new Texture(Gdx.files.internal("Without Outline//MiniZombieButcher.png"));
+            TextureRegion[][] tmp5 = TextureRegion.split(idlesheet,idlesheet.getWidth()/12,idlesheet.getHeight()/8);
+            TextureRegion[] Player_frames5= new TextureRegion[4];
+            index=0;
+            for(int j=0;j<4;++j) {
+                Player_frames5[index++]=tmp5[1][j];
+            }
+            playeridle=new Animation<TextureRegion>(0.1f,Player_frames5);
+            animation=new MyAnimation(playeridle);
+            
+          
+          }
+      }
+  }
 	
 	/**
 	 * 

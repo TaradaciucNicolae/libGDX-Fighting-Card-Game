@@ -18,7 +18,7 @@ public class Monster {
 	private int damage;
 	private int health;
 	private int maxHealth;
-	private int armour;
+	 int armour;
 	boolean alive;
 	private ArrayList<Moves> moves= new ArrayList<>();
 	MyAnimation animation;
@@ -200,6 +200,7 @@ public class Monster {
 			health=health+aux;
 			if (health<=0)
 			{
+			  health=0;
 				System.out.println("mort");
 				alive=false;
 			}

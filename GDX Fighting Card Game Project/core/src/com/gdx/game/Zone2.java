@@ -94,7 +94,12 @@ public class Zone2 implements Screen {
     /**
      * generate a random number of monsters between 1 and 3
      */
-    numberOfMonsters = (int) Math.floor(Math.random() * (3 - 1 + 1) + 1);
+    if(game.currentRoomScore>=0 && game.currentRoomScore<=200)
+    numberOfMonsters = 1;
+    else if(game.currentRoomScore>=201 && game.currentRoomScore<=500)
+      numberOfMonsters = 2;
+    else
+      numberOfMonsters = 3;
     System.out.println("number of monster= " + numberOfMonsters);
 
     if (numberOfMonsters == 1) {

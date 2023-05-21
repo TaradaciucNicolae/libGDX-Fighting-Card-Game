@@ -1,5 +1,7 @@
 package com.gdx.game;
 
+import java.awt.Font;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -32,11 +34,11 @@ public class FireCard extends Cards {
 		Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
 		this.damage=damage;
 		Label l1=new Label(this.damage + " dmg",gameSkin);
-		table.add(new Image(im)).width(70).height(120).right().top();
+		table.add(new Image(im)).width(50).height(120).right().top();
     	table.row();
     	table.add(l1).width(60);
-    	table.debug();
-    	//l1.setFontScale(0.7f);
+    	//table.debug();
+    	l1.setFontScale(1.1f);
 	}
 }
 

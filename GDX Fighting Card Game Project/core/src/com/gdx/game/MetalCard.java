@@ -35,14 +35,14 @@ public class MetalCard extends Cards {
 		this.health=health;
 		Label l1=new Label(this.armour + " arm",gameSkin);
 		Label l2=new Label(this.health + " heal",gameSkin);
-		table.add(new Image(im)).width(70).height(120).right().top();
+		table.add(new Image(im)).width(50).height(120).right().top();
     	table.row();
     	table.add(l1).width(60);
+    	l1.setFontScale(1.1f);
     	table.row();
     	table.add(l2).width(60);
-    	table.debug();
-    	//l1.setFontScale(0.7f);
-    	//l2.setFontScale(0.7f);
+    	//table.debug();
+    	l2.setFontScale(1.1f);
 	}
 
 }

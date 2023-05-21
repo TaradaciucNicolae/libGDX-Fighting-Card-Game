@@ -116,7 +116,7 @@ public class FightScreen implements Screen {
 		table.add(table2).grow();
 		table.row().height(200);
 		//Cards c1=new Cards(5, 0, 0);
-		FireCard fc1=new FireCard(10);
+		MetalCard fc1=new MetalCard(10,20);
 		table3.add(fc1.table).grow();
 		//table3.add(wc1.table).grow();
 		

@@ -32,11 +32,11 @@ public class EarthCard extends Cards {
 		Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
 		this.health=health;
 		Label l1=new Label(this.health + " heal",gameSkin);
-		table.add(new Image(im)).width(70).height(120).right().top();
+		table.add(new Image(im)).width(50).height(120).right().top();
     	table.row();
     	table.add(l1).width(60);
-    	table.debug();
-    	//l1.setFontScale(0.7f);
+    	//table.debug();
+    	l1.setFontScale(1.1f);
 	}
 
 }

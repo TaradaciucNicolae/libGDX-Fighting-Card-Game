@@ -2,11 +2,15 @@ package com.gdx.game;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import org.junit.Test;
+
+/**
+ * CardsTest - clasa de teste pentru clasa Cards.
+ * 
+ */
 
 public class CardsTest {
   

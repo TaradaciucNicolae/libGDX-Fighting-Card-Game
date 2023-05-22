@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-
 /**
  * Clasa MainScreen.
  *
@@ -49,7 +48,7 @@ public class MainScreen implements Screen {
   private SpriteBatch batch;
 
   /**
-   * Functie de lansare a mainscreen-ului.
+   * MainScreen constructor.
    */
   public MainScreen(GdxFightingGame agame) {
     game = agame;
@@ -82,7 +81,7 @@ public class MainScreen implements Screen {
     addressLabel = new Label("Address:", skin);
     addressText = new TextField("", skin);
 
-    final Slider volumeSlider = new Slider(0f, 1f, 0.1f, false, 
+    final Slider volumeSlider = new Slider(0f, 1f, 0.1f, false,
         new Skin(Gdx.files.internal("neon//skin//neon-ui.json")));
     volumeSlider.setValue(1f);
     volumeSlider.addListener(new ChangeListener() {
@@ -90,8 +89,7 @@ public class MainScreen implements Screen {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
         float volume = volumeSlider.getValue();
-        game.soundVolume=volume;
-        
+        game.soundVolume = volume;
 
         sound.setVolume(volume);
 
@@ -166,7 +164,7 @@ public class MainScreen implements Screen {
         game.map = new MapScreen(game);
         game.getScreen().dispose();
         game.setScreen(game.map);
-        
+
       }
     });
 

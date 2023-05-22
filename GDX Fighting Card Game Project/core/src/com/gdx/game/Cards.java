@@ -24,14 +24,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 public class Cards {
 
   /**
-   * @param gameSkin     - skin-ul interfetei jocului
-   * @param damage       - gradul de atac al cartii
-   * @param health       - nivelul de viata al cartii
-   * @param armour       - nivelul de armura al cartii
-   * @param PozaCarte    - poza unei carti
-   * @param table        - tabelul care contribuie la alcatuirea elementelor
-   *                     cartilor
-   * @param ListaCuCards - lista care contine toate cartile
+   * @param gameSkin     - skin of game interface
+   * @param damage       - damage dealt by the card
+   * @param health       - amount of health that a card gives
+   * @param armour       - amount of armour that a card gives
+   * @param PozaCarte    - image of a card
+   * @param table        - table used for combining all the cards elements
+   * @param ListaCuCards - a list that contains all the cards
    */
 
   private static Skin gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));;
@@ -43,19 +42,20 @@ public class Cards {
   ArrayList<Cards> ListaCuCards = new ArrayList<>();
 
   /**
-   * Constructorul Cards() fara argumente este folosit pentru a crea un nou pachet
-   * de carti prin intermediul celor 5 tipuri de carti mostenite din aceasta
-   * clasa, si anume: FireCard WaterCard EarthCard MetalCard WoodCard
+   * Cards constructor. Cards() constructor is used for creating a new deck using
+   * the five types of cards extended from this class: FireCard WaterCard
+   * EarthCard MetalCard WoodCard
    */
 
   Cards() {
   }
 
   /**
+   * Cards constructor with arguments.
    * 
-   * @param dmg     - gradul de atac dat de carte
-   * @param viata   - viata primita de jucator
-   * @param iconita - poza cartii din joc
+   * @param dmg     - damage parameter that we want the card to have
+   * @param viata   - health parameter that we want the card to have
+   * @param iconita - the icon we want our card to have
    */
 
   Cards(int dmg, int viata, String iconita) {
@@ -66,7 +66,7 @@ public class Cards {
 
   /**
    * 
-   * @param card - cartea care se va incarca in pachet
+   * @param card - card that is going in the deck
    */
 
   public Cards(Card card) {
@@ -74,9 +74,9 @@ public class Cards {
   }
 
   /**
-   * Getter
+   * Getter.
    * 
-   * @return Numar intreg, armura cartii
+   * @return amount of armour that the card gives
    */
 
   public int getArmour() {
@@ -84,9 +84,9 @@ public class Cards {
   }
 
   /**
-   * Getter
+   * Getter.
    * 
-   * @return Numar intreg, nivelul de atac al cartii
+   * @return amount of damage that the card gives
    */
 
   public int getDamage() {
@@ -94,9 +94,9 @@ public class Cards {
   }
 
   /**
-   * Getter
+   * Getter.
    * 
-   * @return Numar intreg, nivelul de viata al cartii
+   * @return amount of heal that the card gives
    */
 
   public int getHealth() {
@@ -104,18 +104,18 @@ public class Cards {
   }
 
   /**
-   * Setter
+   * Setter.
    * 
-   * @param armour - Numar intreg, nivelul de armura al cartii
+   * @param armour - amount of armour that we want our card to have
    */
   public void setArmourCard(int armour) {
     this.armour = armour;
   }
 
   /**
-   * Setter
+   * Setter.
    * 
-   * @param damage - Numar intreg, gradul de atac al cartii
+   * @param damage - amount of damage that we want our card to have
    */
 
   public void setDamageCard(int damage) {
@@ -123,9 +123,9 @@ public class Cards {
   }
 
   /**
-   * Setter
+   * Setter.
    * 
-   * @param health - Numar intreg, nivelul de viata al cartii
+   * @param health - amount of heal that we want our card to have
    */
 
   public void setHealthCard(int health) {
@@ -133,8 +133,8 @@ public class Cards {
   }
 
   /**
-   * Functia LoadCards() are rolul de a crea un pachet cu toate cartile
-   * disponibile din joc.
+   * LoadCards() method. LoadCards() method is responsible for creating a deck
+   * using all the available cards in the game.
    */
 
   public void LoadCards() {
@@ -147,8 +147,8 @@ public class Cards {
   }
 
   /**
-   * Functia AfisarePachetComplet() are rolul de a afisa toate cartile disponibile
-   * din joc.
+   * AfisarePachetComplet method. AfisarePachetComplet is responsible for
+   * displaying all the available cards.
    */
 
   public void AfisarePachetComplet() {

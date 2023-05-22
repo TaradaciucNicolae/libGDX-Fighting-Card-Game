@@ -10,18 +10,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
- * 
- * @author Ovidiu-Florin Berea
- * Clasa FireCard reprezinta cartea de apa a jocului care poate fi folosita cu scopul de a oferi armura jucatorului.
- *
+ * WaterCard class.
  */
 
 public class WaterCard extends Cards {
 
-	/**
-	 * 
-	 * @param armour - nivelul de armura al cartii de apa
-	 */
+  /**
+   * WaterCard constructor.
+   * 
+   * @param armour - amount of armour the WaterCard gives
+   */
 	
 	WaterCard(int armour) {
 		this.table=new Table();

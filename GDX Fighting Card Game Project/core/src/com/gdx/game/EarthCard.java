@@ -10,33 +10,31 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
- * 
- * @author Ovidiu-Florin Berea
- * Clasa EarthCard reprezinta cartea de pamant a jocului care poate fi folosita cu scopul de a oferi viata jucatorului.
- *
+ * EarthCard class.
  */
 
 public class EarthCard extends Cards {
-	
-	/**
-	 * 
-	 * @param health - nivelul de viata al cartii de pamant
-	 */
-	
-	EarthCard(int health) {
-		this.table=new Table();
-		Texture im=new Texture(Gdx.files.internal("cardselement//earth.png"));
-		Texture idlesheet=new Texture(Gdx.files.internal("cards//pixelCardAssest.png"));
-    	TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/5,idlesheet.getHeight());
-		table.setBackground(new TextureRegionDrawable(tmp[0][3]));
-		Skin gameSkin = new Skin(Gdx.files.internal("arcade//skin//arcade-ui.json"));
-		this.health=health;
-		Label l1=new Label(this.health + " heal",gameSkin);
-		table.add(new Image(im)).width(50).height(120).right().top();
-    	table.row();
-    	table.add(l1).width(60);
-    	//table.debug();
-    	l1.setFontScale(0.7f);
-	}
+
+  /**
+   * EarthCard constructor.
+   * 
+   * @param health - amount of heal the earthCard gives
+   */
+
+  EarthCard(int health) {
+    this.table = new Table();
+    Texture im = new Texture(Gdx.files.internal("cardselement//earth.png"));
+    Texture idlesheet = new Texture(Gdx.files.internal("cards//pixelCardAssest.png"));
+    TextureRegion[][] tmp = TextureRegion.split(idlesheet, idlesheet.getWidth() / 5, idlesheet.getHeight());
+    table.setBackground(new TextureRegionDrawable(tmp[0][3]));
+    Skin gameSkin = new Skin(Gdx.files.internal("arcade//skin//arcade-ui.json"));
+    this.health = health;
+    Label l1 = new Label(this.health + " heal", gameSkin);
+    table.add(new Image(im)).width(50).height(120).right().top();
+    table.row();
+    table.add(l1).width(60);
+    // table.debug();
+    l1.setFontScale(0.7f);
+  }
 
 }

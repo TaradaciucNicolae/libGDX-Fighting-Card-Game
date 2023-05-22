@@ -17,31 +17,38 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
+/**
+ * GdxFightingGame Class.
+ */
 public class GdxFightingGame extends Game {
 
-	public Player p1;
-	public MapScreen map;
-	public int score=0;
-	public int currentRoomScore;
-	public int zone=1;
-	public float soundVolume=1;
-	
-	 static public Skin gameSkin;
-	  public void create () {
-	    gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
-	    this.setScreen(new MainScreen(this));
-	    
-	  }
-	  
-	@Override
-	public void render() {
-		// clear the screen
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	    super.render();
-	}
+  public Player p1;
+  public MapScreen map;
+  public int score = 0;
+  public int currentRoomScore;
+  public int zone = 1;
+  public float soundVolume = 1;
+  public static Skin gameSkin;
 
-	  public void dispose () {
-	  }
+  /**
+   * Create() method.
+   * This method is used for creating the menu screen.
+   */
+  public void create() {
+    gameSkin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
+    this.setScreen(new MainScreen(this));
+
+  }
+
+  @Override
+  public void render() {
+    // clear the screen
+    Gdx.gl.glClearColor(1, 1, 1, 1);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    super.render();
+  }
+
+  public void dispose() {
+  }
 
 }

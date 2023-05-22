@@ -8,245 +8,212 @@ import com.badlogic.gdx.ai.btree.decorator.Random;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.SortedIntList.Iterator;
 
+/**
+ * Player Class.
+ *
+ */
 public class Player {
-	// asta o sa fie stearsa
-	// ArrayList<Integer> ListaCuCards=new ArrayList<>(); // asta se va afla in
-	// clasa Cards si in loc de "Integer" va fi "carte"
-	// acest Integer trebuie modificat si in ListaCards si la IDCarte si la
-	// FolosesteCartea
+  /**
+   * Parameters.
+   * 
+   * @param idlesheet - idle animation texture.
+   * @param armour    - amount of armour the player has.
+   * @param alive     - it tells if the player is alive or not
+   * @param health    - amount of health the player has.
+   * @param nrCards   - amount of cards the player can use.
+   * @param listaCardsInMana - the hand of cards that the player has.
+   * @param listaCardsTotal  - all the cards that the player has in deck.
+   * @param listaDiscarded - all the cards that have been used.
+   *
+   */
 
-	public Texture idlesheet;
-	private int armour;
-	public boolean alive=true;
-	/**
-	 * health = Viata curenta a jucatorului (Initializata cu 100)
-	 */
-	private int maxHealth = 100;
-	private int health;
+  public Texture idlesheet;
+  private int armour;
+  public boolean alive = true;
+  private int maxHealth = 100;
+  private int health;
+  private int nrCards = -1;
+  ArrayList<Cards> ListaCardsInMana = new ArrayList<>();
+  ArrayList<Cards> ListaCardsTotal = new ArrayList<>();
+  ArrayList<Cards> ListaDiscarded = new ArrayList<>();
 
-	/**
-	 * nrCards = Numarul de Cards pe care jucatorul le poate utiliza
-	 */
-	private int nrCards=-1;
+  Player() {
+    idlesheet = new Texture(Gdx.files.internal("Player//AnimationSheet_Character.png"));
+    health = maxHealth;
+    CrearePachet();
+  }
 
-	/**
-	 * ListaCardsInMana = Toate Cardsle detinute de jucator in momentul respectiv
-	 */
-	ArrayList<Cards> ListaCardsInMana = new ArrayList<>();
-	ArrayList<Cards> ListaCardsTotal = new ArrayList<>();
-	ArrayList<Cards> ListaDiscarded= new ArrayList<>();
-	
-	
-	/**
-	 * Constructorul Player() va da jucatorului un numar random de Cards de joc. (
-	 * Intre 5 si 13 Cards din ListaCuCards)
-	 */
-	Player() {
-		// ListaCuCards.add(1);
-		// ListaCuCards.add(2);
-		// ListaCuCards.add(3); // astea 3 vor fi sterse, acuma le folosim pe post de Cards
-		 
-		/*
-		Cards c = new Cards();
+  /**
+   * draw method.
+   * This method is responsible for drawing cards.
+   */
+  void draw() {
+    if (!this.ListaCardsTotal.isEmpty()) {
+      Cards c = ListaCardsTotal.get(0);
+      this.nrCards = this.nrCards + 1;
+      ListaCardsTotal.remove(0);
+      ListaCardsInMana.add(c);
+    } else {
+      for (ListIterator<Cards> iter = ListaDiscarded.listIterator(); iter.hasNext();) {
+        Cards element = iter.next();
+        ListaCardsTotal.add(element);
+      }
+      ListaDiscarded.clear();
+      if (!this.ListaCardsTotal.isEmpty()) {
+        Cards c = ListaCardsTotal.get(0);
+        this.nrCards = this.nrCards + 1;
+        ListaCardsTotal.remove(0);
+        ListaCardsInMana.add(c);
+      }
+    }
+  }
 
-		nrCards = new Random().nextInt(8) + 5;
+  /**
+   * Heal method.
+   * This method is responsible for healing the player.
+   */
+  public void heal(int heal) {
+    if (this.maxHealth >= this.health + heal) {
+      this.health = this.health + heal;
+    } else {
+      this.health = this.maxHealth;
+    }
+  }
 
-		for (int i = 0; i <= nrCards; i++) {
-			Cards carte = c.ListaCuCards.get(new Random().nextInt(c.ListaCuCards.size()));
-			ListaCardsInMana.add(carte);
-		}
-		*/
-		idlesheet=new Texture(Gdx.files.internal("Player//AnimationSheet_Character.png"));
-		health=maxHealth;
-		CrearePachet();
-	}
-	
-	void draw()
-	{
-		if(!this.ListaCardsTotal.isEmpty())
-		{
-		Cards c= ListaCardsTotal.get(0);
-		this.nrCards=this.nrCards+1;
-		ListaCardsTotal.remove(0);
-		ListaCardsInMana.add(c);
-		}
-		else
-		{
-			for (ListIterator<Cards> iter = ListaDiscarded.listIterator(); iter.hasNext(); ) {
-			    Cards element = iter.next();
-			    ListaCardsTotal.add(element);
-			}
-			ListaDiscarded.clear();
-			if(!this.ListaCardsTotal.isEmpty()) {
-			Cards c= ListaCardsTotal.get(0);
-			this.nrCards=this.nrCards+1;
-			ListaCardsTotal.remove(0);
-			ListaCardsInMana.add(c);
-			}
-		}
-	}
-	
-	
-	/**
-	 * Functie de creare a pachetului initial al jucatorului
-	 * (Intre 5 si 13 Cards din ListaCuCards)
-	 */
+  /**
+   * CrearePachet method.
+   * This method is used for creating the deck of cards that 
+   * the player is using throughout the game.
+   */
+  public void CrearePachet()
 
-	//asta nu merge 
-	
-	public void heal(int heal)
-	{
-		if(this.maxHealth>=this.health+heal)
-		{
-		this.health=this.health+heal;
-		}
-		else
-		{
-			this.health=this.maxHealth;
-		}
-	}
-	  public void CrearePachet()
-	  
-	  { ListaCardsInMana.clear();
-	  ListaCardsTotal.clear();
-	  ListaDiscarded.clear();
-	  nrCards=-1;
-		ArrayList<Cards> c =new ArrayList<>();// aici se creaza un pachet de 10 carti random, dar noi vol prestabili cele 10 carti
-	  	int min = 10;
-	  	int max = 10;
-	  
-	  	
-	  	
-	  	/*for(int i=0;i<=5;++i)
-	  	{
-	  		ListaCardsTotal.add(new Cards());
-	  	}
-	  	*/
-	  	ListaCardsTotal.add(new MetalCard(5,10));
-	  	ListaCardsTotal.add(new WaterCard(5));
-	  	ListaCardsTotal.add(new FireCard(300));
-	  	ListaCardsTotal.add(new WoodCard(15,7));
-	  	ListaCardsTotal.add(new EarthCard(20));
-	  	ListaCardsTotal.add(new FireCard(300));
-			  // (int) (Math.random()*(max-min+1)+min); // AICI TREBUIE RAFACUTA INEXAREA
-	  
-	 /* for (int i = 0; i < nrCards; i++) { 
-		  Cards carte = c.ListaCuCards.get((int) (Math.random()*(c.ListaCuCards.size()-1-0+1)+0));
-		  ListaCardsTotal.add(carte);
-		  System.out.println("nr de carti este"+nrCards);
-		  }
-	  */
-	  	
-	  // 5 carti random vor fi atribuite jucatorului in mana si restul 5 vor ramane in pachet
-	  	for (int i = ListaCardsTotal.size()/2; i >0; i--) { // AICI TREBUIE RAFACUTA INEXAREA
-	  		nrCards++;
-	  		ListaCardsInMana.add(ListaCardsTotal.get(i));
-	  		ListaCardsTotal.remove(ListaCardsTotal.get(i));
-	  		
-	  	}
-	  	//ListaCardsTotal.removeAll(ListaCardsInMana);
-	  	
-	  	/*
-	  	System.out.println("carti in mana");
-		for (int i = 0; i < this.ListaCardsInMana.size(); i++) {
-			System.out.println(" Cartea nr " + i + " va da " + this.ListaCardsInMana.get(i).damage + " damage si va oferi "
-					+ this.ListaCardsInMana.get(i).health + " viata");
-		}
-	  	System.out.println("carti in pachet");
-		for (int i = 0; i < this.ListaCardsTotal.size(); i++) {
-			System.out.println(" Cartea nr " + i + " va da " + this.ListaCardsTotal.get(i).damage + " damage si va oferi "
-					+ this.ListaCardsTotal.get(i).health + " viata");
-		}*/
-	  
-	  }
-	  
-	  
-	 
-	/**
-	 * 
-	 * @return Returneaza viata actuala a jucatorului
-	 */
-	public int getHealth() {
-		return health;
+  {
+    ListaCardsInMana.clear();
+    ListaCardsTotal.clear();
+    ListaDiscarded.clear();
+    nrCards = -1;
+    ArrayList<Cards> c = new ArrayList<>();
+    int min = 10;
+    int max = 10;
 
-	}
-	/**
-	 * 
-	 * @param dmg -dmg-ul luat de player
-	 */
-	public void setHealth(int dmg)
-	{
-		
-        if (this.health-dmg < 0) {
-          this.health=0;
-          this.alive=false;
-          return;
-        }
-        else
-        {
-          this.health=this.health-dmg;
-        }
-	}
-	
-	public int getArmour()
-	{
-		return this.armour;
-	}
-	
-	public void setArmour(int dmg)
-	{
-		  if (this.armour-dmg < 0) {
-		    this.armour=0;
-		    return;
-		  }
-		  else
-		  {
-		    this.armour=this.armour-dmg;
-		  }
-	}
-	/**
-	 * 
-	 * @return Returneaza numarul de Cards pe care jucatorul le pote utiliza
-	 */
-	public int getNrCards() {
-		return nrCards;
-	}
+    ListaCardsTotal.add(new MetalCard(5, 10));
+    ListaCardsTotal.add(new WaterCard(5));
+    ListaCardsTotal.add(new FireCard(300));
+    ListaCardsTotal.add(new WoodCard(15, 7));
+    ListaCardsTotal.add(new EarthCard(20));
+    ListaCardsTotal.add(new FireCard(300));
+   
+    for (int i = ListaCardsTotal.size() / 2; i > 0; i--) { // AICI TREBUIE RAFACUTA INEXAREA
+      nrCards++;
+      ListaCardsInMana.add(ListaCardsTotal.get(i));
+      ListaCardsTotal.remove(ListaCardsTotal.get(i));
 
-	/**
-	 * 
-	 * @param damage = Daunele provocate jucatorului
-	 */
-	public void ReceivesDamages(int damage) {
-		if (health - damage < 0) {
-			health = 0;
-			System.out.println("Ai murit");
-			return;
+    }
 
-		}
-		health = health - damage;
-	}
+  }
 
-	/**
-	 * 
-	 * @param c este cartea care a fost folosita in timpul luptei.
-	 */
-	public void FolosesteCarte(Cards c) {
-		ListaDiscarded.add(c);
-		ListaCardsInMana.remove(c);
-		nrCards=nrCards-1;
-		System.out.println("nr carti"+nrCards);
+  /**
+   * Getter for Player's health.
+   * 
+   * @return amount of health that the player has.
+   */
+  public int getHealth() {
+    return health;
 
-	}
+  }
 
-	/**
-	 * Functie de afisare a Cardslor ce se afla in posesia jucatorului
-	 */
-	public void AfisarePachetPlayer() {
-		for (int i = 0; i < ListaCardsInMana.size(); i++) {
-			System.out.println(" Cartea nr " + i + " va da " + ListaCardsInMana.get(i).damage + " damage si va oferi "
-					+ ListaCardsInMana.get(i).health + " viata");
+  /**
+   * Setter for Player's Health.
+   * 
+   * @param dmg - amount of damage the player receives.
+   */
+  public void setHealth(int dmg) {
 
-		}
-	}
+    if (this.health - dmg < 0) {
+      this.health = 0;
+      this.alive = false;
+      return;
+    } else {
+      this.health = this.health - dmg;
+    }
+  }
+
+  /**
+   * Getter for Player's Armour.
+   * 
+   * @return amount of armour that the player has.
+   */
+  public int getArmour() {
+    return this.armour;
+  }
+
+  /**
+   * Setter for Player's armour.
+   * 
+   * @param dmg - amount of damage that the player receives.
+   * 
+   *            This method changes the amount of armour left taking in
+   *            consideration the amount of armour left.
+   */
+  public void setArmour(int dmg) {
+    if (this.armour - dmg < 0) {
+      this.armour = 0;
+      return;
+    } else {
+      this.armour = this.armour - dmg;
+    }
+  }
+
+  /**
+   * Getter for Player's number of cards that can be used.
+   * 
+   * @return the number of cards that the player can use.
+   */
+  public int getNrCards() {
+    return nrCards;
+  }
+
+  /**
+   * ReceivesDamages method.
+   * @param damage - damage that the player receives.
+   */
+  public void ReceivesDamages(int damage) {
+    if (health - damage < 0) {
+      health = 0;
+      System.out.println("Ai murit");
+      return;
+
+    }
+    health = health - damage;
+  }
+
+  /**
+   * FolosesteCarte method.
+   * 
+   * @param c - the card used in battle.
+   * 
+   *          Function to use a certain card.
+   */
+  public void FolosesteCarte(Cards c) {
+    ListaDiscarded.add(c);
+    ListaCardsInMana.remove(c);
+    nrCards = nrCards - 1;
+    System.out.println("nr carti" + nrCards);
+
+  }
+
+  /**
+   * AfisarePachetPlayer method.
+   * This method is used for displaying all of the cards
+   * that are in the player's hands.
+   */
+  public void AfisarePachetPlayer() {
+    for (int i = 0; i < ListaCardsInMana.size(); i++) {
+      System.out.println(" Cartea nr " + i + " va da " + ListaCardsInMana.get(i).damage 
+          + " damage si va oferi "
+          + ListaCardsInMana.get(i).health + " viata");
+
+    }
+  }
 
 }

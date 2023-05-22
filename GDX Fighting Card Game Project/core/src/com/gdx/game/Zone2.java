@@ -30,29 +30,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * Class for the Zone2 Screen.
+ */
 public class Zone2 implements Screen {
 
   /**
-   * GdxFightingGame=refrence to our game Stage = the stage on which we draw our
-   * objects
-   * 
-   * sound=music bgm soundLose= sound bgm when you lose game soundWin=sound bgm
-   * when you win the fight
-   * 
-   * hand=special elements that handles the hand of cards dragAndDrop=drag and
-   * drop animation+ implementation
-   * 
-   * table=main table that fits the entire screen tableTop= table for the actors
-   * in the fight tableBot= table for actors that deal with the player
-   * 
-   * i=counter needed for drag and drop
-   * 
-   *
-   * 
-   * 
-   * 
-   * 
-   * 
+   * @param game      - refrence to our game
+   * @param stage     - used for drawing all the elements
+   * @param sound     - music
+   * @param soundLose - music for the moment when you lose
+   * @param soundwin  - music for the moment when you win
+   * @param i         - counter needed for drag and drop
    */
   private GdxFightingGame game;
   private Stage stage;
@@ -67,36 +56,26 @@ public class Zone2 implements Screen {
   Table tableTop = new Table();
   Table tableBot = new Table();
   Table table = new Table();
-
   int i;
-
-  /**
-   * object that help with animations
-   */
-  // Player idle animation test
   Animation<TextureRegion> playeridle;
   Texture idlesheet;
   SpriteBatch spriteBatch;
   float stateTime;
-  //
-  /**
-   * enemies
-   */
   int numberOfMonsters;
   final Monster m1;
   final Monster m2;
   final Monster m3;
 
+  /**
+   * Zone2 constructor.
+   */
   public Zone2(GdxFightingGame agame) {
     // TODO Auto-generated constructor stub
     game = agame;
     stage = new Stage();
-    /**
-     * generate a random number of monsters between 1 and 3
-     */
-    if(game.currentRoomScore>=0 && game.currentRoomScore<=200)
-    numberOfMonsters = 1;
-    else if(game.currentRoomScore>=201 && game.currentRoomScore<=500)
+    if (game.currentRoomScore >= 0 && game.currentRoomScore <= 200)
+      numberOfMonsters = 1;
+    else if (game.currentRoomScore >= 201 && game.currentRoomScore <= 500)
       numberOfMonsters = 2;
     else
       numberOfMonsters = 3;
@@ -119,9 +98,6 @@ public class Zone2 implements Screen {
       m3.animation.setCoord(1200);
     }
 
-    /**
-     * setup for sounds , animation and tables
-     */
     soundWin = Gdx.audio.newMusic(Gdx.files.internal("ogg//Victory.ogg"));
     soundWin.setVolume(game.soundVolume);
     soundLose = Gdx.audio.newMusic(Gdx.files.internal("ogg//Death.ogg"));
@@ -134,12 +110,8 @@ public class Zone2 implements Screen {
     stage = new Stage();
 
     game.p1.CrearePachet();
-    // animation
-    // idlesheet=game.p1.idlesheet;
     idlesheet = game.p1.idlesheet;
     TextureRegion[][] tmp = TextureRegion.split(idlesheet, idlesheet.getWidth() / 8, idlesheet.getHeight() / 9);
-
-    // 15 is the number of frames and colums we have
     TextureRegion[] Player_frames = new TextureRegion[2];
     int index = 0;
     for (int i = 0; i < 2; ++i) {
@@ -172,28 +144,15 @@ public class Zone2 implements Screen {
     tableTop.bottom().left();
     spriteBatch = new SpriteBatch();
     stateTime = 0f;
-    //
-
+  
     final TextButton button = new TextButton("End Turn", GdxFightingGame.gameSkin);
 
-    table.setBackground(new TextureRegionDrawable(
-        new TextureRegion(new Texture("background//Zone2//5.png"))));
+    table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//Zone2//5.png"))));
     table.setFillParent(true);
 
-    tableTop.setBackground(new TextureRegionDrawable(
-        new TextureRegion(new Texture("background//Zone2//0.png"))));
+    tableTop.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//Zone2//0.png"))));
     table.add(tableTop).grow();
     table.row().height(200);
-
-    // FireCard fc1=new FireCard(10);
-    // table3.add(fc1.table).grow();
-    // table3.add(wc1.table).grow();
-
-    /**
-     * create paylods for the cards to enable them to be draged and make the cards
-     * return to the hand if they are droped outside a valid target
-     */
-
     for (i = 0; i <= game.p1.getNrCards(); ++i) {
       hand.addActor(game.p1.ListaCardsInMana.get(i).table);
       System.out.println(i);
@@ -254,15 +213,7 @@ public class Zone2 implements Screen {
 
     stage.addActor(table);
 
-    // for(i=0;i<=game.p1.getNrCards();++i)
-    // {
     System.out.println(i);
-
-    // }
-
-    /**
-     * creater targets for the cards to be dropped in
-     */
 
     for (i = 0; i <= game.p1.getNrCards(); ++i)
       dragAndDrop.addTarget(new DragAndDrop.Target(m1.animation) {
@@ -283,9 +234,7 @@ public class Zone2 implements Screen {
               System.out.println(m1.getHealth());
               if (!m1.alive)
                 m1.animation.setVisible(false);
-              /**
-               * if all enemies die create a victory screen
-               */
+             
               if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
                   || (!m1.alive && !m2.alive && !m3.alive)) {
                 sound.stop();
@@ -351,9 +300,6 @@ public class Zone2 implements Screen {
                 game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
                 if (!m2.alive)
                   m2.animation.setVisible(false);
-                /**
-                 * if all enemies die create a victory screen
-                 */
                 if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
                     || (!m1.alive && !m2.alive && !m3.alive)) {
                   sound.stop();
@@ -419,9 +365,6 @@ public class Zone2 implements Screen {
                 game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
                 if (!m3.alive)
                   m3.animation.setVisible(false);
-                /**
-                 * if all enemies die create a victory screen
-                 */
                 if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
                     || (!m1.alive && !m2.alive && !m3.alive)) {
                   sound.stop();
@@ -469,10 +412,6 @@ public class Zone2 implements Screen {
           }
         });
 
-    /**
-     * end turn button , that puts used cards in the discard pile and makes enemys
-     * act
-     */
     button.addListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
@@ -504,9 +443,6 @@ public class Zone2 implements Screen {
           }
 
         }
-        /**
-         * if the player dies create a pop-up screen that raturns you to main menu
-         */
 
         if (!game.p1.alive) {
           sound.stop();

@@ -31,29 +31,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * Class for the Fight Screen.
+ */
 public class FightScreen implements Screen {
 
   /**
-   * GdxFightingGame=refrence to our game Stage = the stage on which we draw our
-   * objects
-   * 
-   * sound=music bgm soundLose= sound bgm when you lose game soundWin=sound bgm
-   * when you win the fight
-   * 
-   * hand=special elements that handles the hand of cards dragAndDrop=drag and
-   * drop animation+ implementation
-   * 
-   * table=main table that fits the entire screen tableTop= table for the actors
-   * in the fight tableBot= table for actors that deal with the player
-   * 
-   * i=counter needed for drag and drop
-   * 
-   *
-   * 
-   * 
-   * 
-   * 
-   * 
+   * @param game      - refrence to our game
+   * @param stage     - used for drawing all the elements
+   * @param sound     - music
+   * @param soundLose - music for the moment when you lose
+   * @param soundwin  - music for the moment when you win
+   * @param i         - counter needed for drag and drop
    */
   private GdxFightingGame game;
   private Stage stage;
@@ -72,57 +61,46 @@ public class FightScreen implements Screen {
   int i;
   Moves m;
   ProgressBar playerHpBar;
-  ProgressBar monster1HpBar=null;
-  ProgressBar monster2HpBar=null;
-  ProgressBar monster3HpBar=null;
+  ProgressBar monster1HpBar = null;
+  ProgressBar monster2HpBar = null;
+  ProgressBar monster3HpBar = null;
 
-  /**
-   * object that help with animations
-   */
-  // Player idle animation test
   Animation<TextureRegion> playeridle;
   Texture idlesheet;
   SpriteBatch spriteBatch;
   float stateTime;
-  //
-  /**
-   * enemies
-   */
   int numberOfMonsters;
   final Monster m1;
   final Monster m2;
   final Monster m3;
 
+  /**
+   * FightScreen constructor.
+   */
   public FightScreen(GdxFightingGame agame) {
     // TODO Auto-generated constructor stub
     game = agame;
     stage = new Stage();
-    /**
-     * generate a random number of monsters between 1 and 3
-     */
-    if(game.currentRoomScore>=0 && game.currentRoomScore<=200)
+    if (game.currentRoomScore >= 0 && game.currentRoomScore <= 200)
       numberOfMonsters = 1;
-      else if(game.currentRoomScore>=201 && game.currentRoomScore<=500)
-        numberOfMonsters = 2;
-      else
-        numberOfMonsters = 3;
-    
-    playerHpBar=new ProgressBar(1,100,1,false,game.gameSkin);
+    else if (game.currentRoomScore >= 201 && game.currentRoomScore <= 500)
+      numberOfMonsters = 2;
+    else
+      numberOfMonsters = 3;
+
+    playerHpBar = new ProgressBar(1, 100, 1, false, game.gameSkin);
     playerHpBar.setValue(game.p1.getHealth());
-    
-    
-  tableTop.add().width(150).height(200);
-  tableTop.row();
-  tableTop.add();
-  tableTop.add(playerHpBar);
-  tableTop.add();
 
-
+    tableTop.add().width(150).height(200);
+    tableTop.row();
+    tableTop.add();
+    tableTop.add(playerHpBar);
+    tableTop.add();
 
     if (numberOfMonsters == 1) {
 
       m1 = new Monster();
-      monster1HpBar=new ProgressBar(1,m1.getHealth(),1,false,game.gameSkin);
+      monster1HpBar = new ProgressBar(1, m1.getHealth(), 1, false, game.gameSkin);
       tableTop.add(monster1HpBar);
       monster1HpBar.setValue(m1.getHealth());
       m2 = null;
@@ -130,11 +108,11 @@ public class FightScreen implements Screen {
     } else if (numberOfMonsters == 2) {
 
       m1 = new Monster();
-      monster1HpBar=new ProgressBar(1,m1.getHealth(),1,false,game.gameSkin);
+      monster1HpBar = new ProgressBar(1, m1.getHealth(), 1, false, game.gameSkin);
       tableTop.add(monster1HpBar);
       monster1HpBar.setValue(m1.getHealth());
       m2 = new Monster();
-      monster2HpBar=new ProgressBar(1,m2.getHealth(),1,false,game.gameSkin);
+      monster2HpBar = new ProgressBar(1, m2.getHealth(), 1, false, game.gameSkin);
       tableTop.add(monster2HpBar);
       monster2HpBar.setValue(m2.getHealth());
       m2.animation.setCoord(1000);
@@ -142,24 +120,21 @@ public class FightScreen implements Screen {
     } else {
 
       m1 = new Monster();
-      monster1HpBar=new ProgressBar(1,m1.getHealth(),1,false,game.gameSkin);
+      monster1HpBar = new ProgressBar(1, m1.getHealth(), 1, false, game.gameSkin);
       tableTop.add(monster1HpBar);
       monster1HpBar.setValue(m1.getHealth());
       m2 = new Monster();
-      monster2HpBar=new ProgressBar(1,m2.getHealth(),1,false,game.gameSkin);
+      monster2HpBar = new ProgressBar(1, m2.getHealth(), 1, false, game.gameSkin);
       tableTop.add(monster2HpBar);
       monster2HpBar.setValue(m2.getHealth());
       m2.animation.setCoord(1000);
       m3 = new Monster();
-      monster3HpBar=new ProgressBar(1,m3.getHealth(),1,false,game.gameSkin);
+      monster3HpBar = new ProgressBar(1, m3.getHealth(), 1, false, game.gameSkin);
       tableTop.add(monster3HpBar);
       monster3HpBar.setValue(m3.getHealth());
       m3.animation.setCoord(1200);
     }
 
-    /**
-     * setup for sounds , animation and tables
-     */
     soundWin = Gdx.audio.newMusic(Gdx.files.internal("ogg//Victory.ogg"));
     soundWin.setVolume(game.soundVolume);
     soundLose = Gdx.audio.newMusic(Gdx.files.internal("ogg//Death.ogg"));
@@ -172,8 +147,6 @@ public class FightScreen implements Screen {
     stage = new Stage();
 
     game.p1.CrearePachet();
-    // animation
-    // idlesheet=game.p1.idlesheet;
     idlesheet = game.p1.idlesheet;
     TextureRegion[][] tmp = TextureRegion.split(idlesheet, idlesheet.getWidth() / 8, idlesheet.getHeight() / 9);
 
@@ -183,10 +156,10 @@ public class FightScreen implements Screen {
     for (int i = 0; i < 2; ++i) {
       Player_frames[index++] = tmp[3][i];
     }
-   
+
     playeridle = new Animation<TextureRegion>(0.1f, Player_frames);
     tableTop.add().width(150).height(100);
- 
+
     tableTop.row();
     tableTop.add().width(100);
     tableTop.add().width(200);
@@ -213,8 +186,6 @@ public class FightScreen implements Screen {
     spriteBatch = new SpriteBatch();
     stateTime = 0f;
     //
-    
-    
 
     final TextButton button = new TextButton("End Turn", GdxFightingGame.gameSkin);
 
@@ -226,15 +197,6 @@ public class FightScreen implements Screen {
         new TextureRegion(new Texture("background//oak_woods_v1.0//background//background_layer_2.png"))));
     table.add(tableTop).grow();
     table.row().height(200);
-
-    // FireCard fc1=new FireCard(10);
-    // table3.add(fc1.table).grow();
-    // table3.add(wc1.table).grow();
-
-    /**
-     * create paylods for the cards to enable them to be draged and make the cards
-     * return to the hand if they are droped outside a valid target
-     */
 
     for (i = 0; i <= game.p1.getNrCards(); ++i) {
       hand.addActor(game.p1.ListaCardsInMana.get(i).table);
@@ -295,22 +257,14 @@ public class FightScreen implements Screen {
 
     stage.addActor(table);
 
-    // for(i=0;i<=game.p1.getNrCards();++i)
-    // {
     System.out.println(i);
-
-    // }
-
-    /**
-     * creater targets for the cards to be dropped in
-     */
 
     for (i = 0; i <= game.p1.getNrCards(); ++i)
       dragAndDrop.addTarget(new DragAndDrop.Target(m1.animation) {
 
         @Override
-        public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-            float y, int pointer) {
+        public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+            Payload payload, float x, float y, int pointer) {
           // TODO Auto-generated method stub
           System.out.println("s-a activat babuinul" + i);
           source.getActor().setVisible(false);
@@ -324,13 +278,10 @@ public class FightScreen implements Screen {
               System.out.println(m1.getHealth());
               if (!m1.alive) {
                 m1.animation.setVisible(false);
-               monster1HpBar.setVisible(false); 
+                monster1HpBar.setVisible(false);
               }
               playerHpBar.setValue(game.p1.getHealth());
               monster1HpBar.setValue(m1.getHealth());
-              /**
-               * if all enemies die create a victory screen
-               */
               if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
                   || (!m1.alive && !m2.alive && !m3.alive)) {
                 sound.stop();
@@ -343,7 +294,8 @@ public class FightScreen implements Screen {
 
                 win.add(winB); // Add a new text button that unpauses the game.
                 win.pack(); // Important! Correctly scales the window after adding new elements.
-                float newWidth = 600, newHeight = 500;
+                float newWidth = 600;
+                float newHeight = 500;
                 win.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2,
                     newWidth, newHeight); // Center on screen.
                 stage.addActor(win);
@@ -371,9 +323,8 @@ public class FightScreen implements Screen {
         }
 
         @Override
-        public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-            float y, int pointer) {
-          // TODO Auto-generated method stub
+        public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+            Payload payload, float x, float y, int pointer) {
           return true;
         }
       });
@@ -382,9 +333,8 @@ public class FightScreen implements Screen {
         dragAndDrop.addTarget(new DragAndDrop.Target(m2.animation) {
 
           @Override
-          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
-            // TODO Auto-generated method stub
+          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             System.out.println("s-a activat babuinul" + i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
@@ -394,17 +344,15 @@ public class FightScreen implements Screen {
                 game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
                 game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
                 game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
-                if (!m2.alive)
-                {
+                if (!m2.alive) {
                   m2.animation.setVisible(false);
                   monster2HpBar.setVisible(false);
                 }
                 playerHpBar.setValue(game.p1.getHealth());
                 monster2HpBar.setValue(m2.getHealth());
-                /**
-                 * if all enemies die create a victory screen
-                 */
-                if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
+                // if all enemies die create a victory screen
+                if ((!m1.alive && m2 == null && m3 == null) 
+                    || (!m1.alive && !m2.alive && m3 == null)
                     || (!m1.alive && !m2.alive && !m3.alive)) {
                   sound.stop();
                   soundWin.setLooping(true);
@@ -416,7 +364,8 @@ public class FightScreen implements Screen {
 
                   win.add(winB); // Add a new text button that unpauses the game.
                   win.pack(); // Important! Correctly scales the window after adding new elements.
-                  float newWidth = 600, newHeight = 500;
+                  float newWidth = 600;
+                  float newHeight = 500;
                   win.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2,
                       newWidth, newHeight); // Center on screen.
                   stage.addActor(win);
@@ -444,9 +393,8 @@ public class FightScreen implements Screen {
           }
 
           @Override
-          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
-            // TODO Auto-generated method stub
+          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             return true;
           }
         });
@@ -455,9 +403,8 @@ public class FightScreen implements Screen {
         dragAndDrop.addTarget(new DragAndDrop.Target(m3.animation) {
 
           @Override
-          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
-            // TODO Auto-generated method stub
+          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             System.out.println("s-a activat babuinul" + i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
@@ -473,10 +420,9 @@ public class FightScreen implements Screen {
                 }
                 playerHpBar.setValue(game.p1.getHealth());
                 monster3HpBar.setValue(m3.getHealth());
-                /**
-                 * if all enemies die create a victory screen
-                 */
-                if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
+                // if all enemies die create a victory screen
+                if ((!m1.alive && m2 == null && m3 == null)
+                    || (!m1.alive && !m2.alive && m3 == null)
                     || (!m1.alive && !m2.alive && !m3.alive)) {
                   sound.stop();
                   soundWin.setLooping(true);
@@ -488,7 +434,8 @@ public class FightScreen implements Screen {
 
                   win.add(winB); // Add a new text button that unpauses the game.
                   win.pack(); // Important! Correctly scales the window after adding new elements.
-                  float newWidth = 600, newHeight = 500;
+                  float newWidth = 600;
+                  float newHeight = 500;
                   win.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2,
                       newWidth, newHeight); // Center on screen.
                   stage.addActor(win);
@@ -516,17 +463,13 @@ public class FightScreen implements Screen {
           }
 
           @Override
-          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
+          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             // TODO Auto-generated method stub
             return true;
           }
         });
 
-    /**
-     * end turn button , that puts used cards in the discard pile and makes enemys
-     * act
-     */
     button.addListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
@@ -534,62 +477,59 @@ public class FightScreen implements Screen {
         System.out.println("cate carti intra la end" + game.p1.getNrCards());
         if (numberOfMonsters == 1) {
           m = m1.getMove();
-        game.p1.setHealth(m.getDmg());
-        System.out.println(m.getDmg());
-        System.out.println(m.getArmour());
-        System.out.println(m.getHeal());
-        m1.setArmour(m.getArmour());
-        m1.heal(m.getHeal());
-        monster1HpBar.setValue(m1.getHealth());
-        
-        }
-        else  if (numberOfMonsters == 2) {
-        
-          if(m1.alive) {
-          m = m1.getMove();
           game.p1.setHealth(m.getDmg());
+          System.out.println(m.getDmg());
+          System.out.println(m.getArmour());
+          System.out.println(m.getHeal());
           m1.setArmour(m.getArmour());
           m1.heal(m.getHeal());
+          monster1HpBar.setValue(m1.getHealth());
+
+        } else if (numberOfMonsters == 2) {
+
+          if (m1.alive) {
+            m = m1.getMove();
+            game.p1.setHealth(m.getDmg());
+            m1.setArmour(m.getArmour());
+            m1.heal(m.getHeal());
           }
-          
-          if(m2.alive) {
-         m = m2.getMove();
-        game.p1.setHealth(m.getDmg());      
-        m2.setArmour(m.getArmour());
-        m2.heal(m.getHeal());
+
+          if (m2.alive) {
+            m = m2.getMove();
+            game.p1.setHealth(m.getDmg());
+            m2.setArmour(m.getArmour());
+            m2.heal(m.getHeal());
           }
           monster1HpBar.setValue(m1.getHealth());
           monster2HpBar.setValue(m2.getHealth());
-       
-        }
-        else
-        {
-          if(m1.alive) {
-          m = m1.getMove();
-          game.p1.setHealth(m.getDmg());
-          m1.setArmour(m.getArmour());
-          m1.heal(m.getHeal());
+
+        } else {
+          if (m1.alive) {
+            m = m1.getMove();
+            game.p1.setHealth(m.getDmg());
+            m1.setArmour(m.getArmour());
+            m1.heal(m.getHeal());
           }
-          
-          if(m2.alive) {
-          m = m2.getMove();
-          game.p1.setHealth(m.getDmg());      
-          m2.setArmour(m.getArmour());
-          m2.heal(m.getHeal());
+
+          if (m2.alive) {
+            m = m2.getMove();
+            game.p1.setHealth(m.getDmg());
+            m2.setArmour(m.getArmour());
+            m2.heal(m.getHeal());
           }
-          
-          if(m3.alive) {
-         m = m3.getMove();
-        game.p1.setHealth(m.getDmg());
-        m3.setArmour(m.getArmour());
-        m3.heal(m.getHeal());
+
+          if (m3.alive) {
+            m = m3.getMove();
+            game.p1.setHealth(m.getDmg());
+            m3.setArmour(m.getArmour());
+            m3.heal(m.getHeal());
           }
           monster1HpBar.setValue(m1.getHealth());
           monster2HpBar.setValue(m2.getHealth());
           monster3HpBar.setValue(m3.getHealth());
-        
+
         }
-      
+
         playerHpBar.setValue(game.p1.getHealth());
         for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
@@ -609,10 +549,7 @@ public class FightScreen implements Screen {
           }
 
         }
-        /**
-         * if the player dies create a pop-up screen that raturns you to main menu
-         */
-
+        //if the player dies create a pop-up screen that returns you to main menu
         if (!game.p1.alive) {
           sound.stop();
 
@@ -625,7 +562,8 @@ public class FightScreen implements Screen {
 
           lose.add(loseB); // Add a new text button that unpauses the game.
           lose.pack(); // Important! Correctly scales the window after adding new elements.
-          float newWidth = 600, newHeight = 500;
+          float newWidth = 600;
+          float newHeight = 500;
           lose.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2, newWidth,
               newHeight); // Center on screen.
           stage.addActor(lose);
@@ -740,10 +678,6 @@ public class FightScreen implements Screen {
 
   @Override
   public void dispose() {
-    // animation
-    // SpriteBatches and Textures must always be disposed
-
-    //
     stage.dispose();
   }
 

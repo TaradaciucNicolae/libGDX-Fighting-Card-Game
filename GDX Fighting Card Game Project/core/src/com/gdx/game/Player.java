@@ -177,9 +177,15 @@ public class Player {
 	public void setHealth(int dmg)
 	{
 		
-		this.health=this.health-dmg;
-		if(this.health<=0)
-			this.alive=false;
+        if (this.health-dmg < 0) {
+          this.health=0;
+          this.alive=false;
+          return;
+        }
+        else
+        {
+          this.health=this.health-dmg;
+        }
 	}
 	
 	public int getArmour()
@@ -189,7 +195,14 @@ public class Player {
 	
 	public void setArmour(int dmg)
 	{
-		this.armour=this.armour-dmg;
+		  if (this.armour-dmg < 0) {
+		    this.armour=0;
+		    return;
+		  }
+		  else
+		  {
+		    this.armour=this.armour-dmg;
+		  }
 	}
 	/**
 	 * 

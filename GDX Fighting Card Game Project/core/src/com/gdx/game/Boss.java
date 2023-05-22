@@ -37,6 +37,7 @@ public class Boss {
 	Boss(){
 		health=300;
 		System.out.println(health);
+		maxHealth=400;
 		damage=15;
 		System.out.println(damage);
 		armour=0;

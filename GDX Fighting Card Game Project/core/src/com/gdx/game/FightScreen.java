@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -69,6 +70,11 @@ public class FightScreen implements Screen {
   Table table = new Table();
 
   int i;
+  Moves m;
+  ProgressBar playerHpBar;
+  ProgressBar monster1HpBar=null;
+  ProgressBar monster2HpBar=null;
+  ProgressBar monster3HpBar=null;
 
   /**
    * object that help with animations
@@ -100,21 +106,54 @@ public class FightScreen implements Screen {
         numberOfMonsters = 2;
       else
         numberOfMonsters = 3;
+    
+    playerHpBar=new ProgressBar(1,100,1,false,game.gameSkin);
+    playerHpBar.setValue(game.p1.getHealth());
+    
+    
+  tableTop.add().width(150).height(200);
+  tableTop.row();
+  tableTop.add();
+  tableTop.add(playerHpBar);
+  tableTop.add();
+
+
 
     if (numberOfMonsters == 1) {
+
       m1 = new Monster();
+      monster1HpBar=new ProgressBar(1,m1.getHealth(),1,false,game.gameSkin);
+      tableTop.add(monster1HpBar);
+      monster1HpBar.setValue(m1.getHealth());
       m2 = null;
       m3 = null;
     } else if (numberOfMonsters == 2) {
+
       m1 = new Monster();
+      monster1HpBar=new ProgressBar(1,m1.getHealth(),1,false,game.gameSkin);
+      tableTop.add(monster1HpBar);
+      monster1HpBar.setValue(m1.getHealth());
       m2 = new Monster();
+      monster2HpBar=new ProgressBar(1,m2.getHealth(),1,false,game.gameSkin);
+      tableTop.add(monster2HpBar);
+      monster2HpBar.setValue(m2.getHealth());
       m2.animation.setCoord(1000);
       m3 = null;
     } else {
+
       m1 = new Monster();
+      monster1HpBar=new ProgressBar(1,m1.getHealth(),1,false,game.gameSkin);
+      tableTop.add(monster1HpBar);
+      monster1HpBar.setValue(m1.getHealth());
       m2 = new Monster();
+      monster2HpBar=new ProgressBar(1,m2.getHealth(),1,false,game.gameSkin);
+      tableTop.add(monster2HpBar);
+      monster2HpBar.setValue(m2.getHealth());
       m2.animation.setCoord(1000);
       m3 = new Monster();
+      monster3HpBar=new ProgressBar(1,m3.getHealth(),1,false,game.gameSkin);
+      tableTop.add(monster3HpBar);
+      monster3HpBar.setValue(m3.getHealth());
       m3.animation.setCoord(1200);
     }
 
@@ -144,26 +183,28 @@ public class FightScreen implements Screen {
     for (int i = 0; i < 2; ++i) {
       Player_frames[index++] = tmp[3][i];
     }
-
+   
     playeridle = new Animation<TextureRegion>(0.1f, Player_frames);
-    tableTop.add().width(150).height(300);
+    tableTop.add().width(150).height(100);
+ 
     tableTop.row();
     tableTop.add().width(100);
+    tableTop.add().width(200);
     if (numberOfMonsters == 1) {
-      tableTop.add().width(500);
-      tableTop.add(m1.animation).width(200).height(200);
+      tableTop.add().width(300);
+      tableTop.add(m1.animation).width(200).height(100);
 
     } else if (numberOfMonsters == 2) {
-      tableTop.add().width(500);
-      tableTop.add(m1.animation).width(200).height(200);
-      tableTop.add(m2.animation).width(200).height(200);
+      tableTop.add().width(300);
+      tableTop.add(m1.animation).width(200).height(100);
+      tableTop.add(m2.animation).width(200).height(100);
 
     } else {
-      tableTop.add().width(500);
-      tableTop.add(m1.animation).width(200).height(200);
-      tableTop.add(m2.animation).width(200).height(200);
+      tableTop.add().width(300);
+      tableTop.add(m1.animation).width(200).height(100);
+      tableTop.add(m2.animation).width(200).height(100);
 
-      tableTop.add(m3.animation).width(200).height(200);
+      tableTop.add(m3.animation).width(200).height(100);
 
     }
 
@@ -172,6 +213,8 @@ public class FightScreen implements Screen {
     spriteBatch = new SpriteBatch();
     stateTime = 0f;
     //
+    
+    
 
     final TextButton button = new TextButton("End Turn", GdxFightingGame.gameSkin);
 
@@ -227,11 +270,10 @@ public class FightScreen implements Screen {
         }
 
       });
-
       hand.expand();
       hand.fill();
     }
-    tableBot.add(hand);
+    tableBot.add(hand).height(200);
 
     for (i = 0; i <= 2; ++i)
       game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener() {
@@ -280,8 +322,12 @@ public class FightScreen implements Screen {
               game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
               game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
               System.out.println(m1.getHealth());
-              if (!m1.alive)
+              if (!m1.alive) {
                 m1.animation.setVisible(false);
+               monster1HpBar.setVisible(false); 
+              }
+              playerHpBar.setValue(game.p1.getHealth());
+              monster1HpBar.setValue(m1.getHealth());
               /**
                * if all enemies die create a victory screen
                */
@@ -349,7 +395,12 @@ public class FightScreen implements Screen {
                 game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
                 game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
                 if (!m2.alive)
+                {
                   m2.animation.setVisible(false);
+                  monster2HpBar.setVisible(false);
+                }
+                playerHpBar.setValue(game.p1.getHealth());
+                monster2HpBar.setValue(m2.getHealth());
                 /**
                  * if all enemies die create a victory screen
                  */
@@ -416,8 +467,12 @@ public class FightScreen implements Screen {
                 game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
                 game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
                 game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
-                if (!m3.alive)
+                if (!m3.alive) {
                   m3.animation.setVisible(false);
+                  monster3HpBar.setVisible(false);
+                }
+                playerHpBar.setValue(game.p1.getHealth());
+                monster3HpBar.setValue(m3.getHealth());
                 /**
                  * if all enemies die create a victory screen
                  */
@@ -477,14 +532,65 @@ public class FightScreen implements Screen {
       public void changed(ChangeEvent event, Actor actor) {
 
         System.out.println("cate carti intra la end" + game.p1.getNrCards());
-
-        Moves m = m1.getMove();
+        if (numberOfMonsters == 1) {
+          m = m1.getMove();
         game.p1.setHealth(m.getDmg());
         System.out.println(m.getDmg());
         System.out.println(m.getArmour());
         System.out.println(m.getHeal());
         m1.setArmour(m.getArmour());
         m1.heal(m.getHeal());
+        monster1HpBar.setValue(m1.getHealth());
+        
+        }
+        else  if (numberOfMonsters == 2) {
+        
+          if(m1.alive) {
+          m = m1.getMove();
+          game.p1.setHealth(m.getDmg());
+          m1.setArmour(m.getArmour());
+          m1.heal(m.getHeal());
+          }
+          
+          if(m2.alive) {
+         m = m2.getMove();
+        game.p1.setHealth(m.getDmg());      
+        m2.setArmour(m.getArmour());
+        m2.heal(m.getHeal());
+          }
+          monster1HpBar.setValue(m1.getHealth());
+          monster2HpBar.setValue(m2.getHealth());
+       
+        }
+        else
+        {
+          if(m1.alive) {
+          m = m1.getMove();
+          game.p1.setHealth(m.getDmg());
+          m1.setArmour(m.getArmour());
+          m1.heal(m.getHeal());
+          }
+          
+          if(m2.alive) {
+          m = m2.getMove();
+          game.p1.setHealth(m.getDmg());      
+          m2.setArmour(m.getArmour());
+          m2.heal(m.getHeal());
+          }
+          
+          if(m3.alive) {
+         m = m3.getMove();
+        game.p1.setHealth(m.getDmg());
+        m3.setArmour(m.getArmour());
+        m3.heal(m.getHeal());
+          }
+          monster1HpBar.setValue(m1.getHealth());
+          monster2HpBar.setValue(m2.getHealth());
+          monster3HpBar.setValue(m3.getHealth());
+        
+        }
+      
+        playerHpBar.setValue(game.p1.getHealth());
         for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
           if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {

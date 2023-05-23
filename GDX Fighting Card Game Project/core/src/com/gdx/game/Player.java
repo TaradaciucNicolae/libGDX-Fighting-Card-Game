@@ -33,6 +33,7 @@ public class Player {
   private int maxHealth = 100;
   private int health;
   private int nrCards = -1;
+  int mana=3;
   ArrayList<Cards> ListaCardsInMana = new ArrayList<>();
   ArrayList<Cards> ListaCardsTotal = new ArrayList<>();
   ArrayList<Cards> ListaDiscarded = new ArrayList<>();
@@ -127,15 +128,28 @@ public class Player {
    * 
    * @param dmg - amount of damage the player receives.
    */
-  public void setHealth(int dmg) {
-
-    if (this.health - dmg < 0) {
-      this.health = 0;
-      this.alive = false;
-      return;
-    } else {
-      this.health = this.health - dmg;
-    }
+  public void setHealth(int dmg)
+  {
+      int armourAfterDmg;
+      armourAfterDmg=this.armour-dmg;
+      if(armourAfterDmg>=0)
+      {
+        this.armour=armourAfterDmg;
+        System.out.println("dmg armura"+armourAfterDmg);
+      }
+      else
+      {
+        this.armour=0;
+      this.health=this.health+armourAfterDmg;
+      if(this.health<=0)
+          this.alive=false;
+      }
+  }
+  
+  
+  public void setArmour(int dmg)
+  {
+      this.armour=this.armour+dmg;
   }
 
   /**
@@ -147,22 +161,6 @@ public class Player {
     return this.armour;
   }
 
-  /**
-   * Setter for Player's armour.
-   * 
-   * @param dmg - amount of damage that the player receives.
-   * 
-   *            This method changes the amount of armour left taking in
-   *            consideration the amount of armour left.
-   */
-  public void setArmour(int dmg) {
-    if (this.armour - dmg < 0) {
-      this.armour = 0;
-      return;
-    } else {
-      this.armour = this.armour - dmg;
-    }
-  }
 
   /**
    * Getter for Player's number of cards that can be used.

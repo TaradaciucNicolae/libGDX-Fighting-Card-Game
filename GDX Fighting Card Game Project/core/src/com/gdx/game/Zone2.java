@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -65,6 +66,13 @@ public class Zone2 implements Screen {
   final Monster m1;
   final Monster m2;
   final Monster m3;
+  
+  Moves m;
+  ProgressBar playerHpBar;
+  ProgressBar monster1HpBar = null;
+  ProgressBar monster2HpBar = null;
+  ProgressBar monster3HpBar = null;
+  ArmourVisual armour;
 
   /**
    * Zone2 constructor.
@@ -79,24 +87,62 @@ public class Zone2 implements Screen {
       numberOfMonsters = 2;
     else
       numberOfMonsters = 3;
-    System.out.println("number of monster= " + numberOfMonsters);
+
+    playerHpBar = new ProgressBar(1, 100, 1, false, game.gameSkin);
+    playerHpBar.setValue(game.p1.getHealth());
+
+    armour=new ArmourVisual();
+    tableTop.add().width(125).height(200);
+    tableTop.row();
+    tableTop.add();
+    
+    tableTop.add(playerHpBar);
+    tableTop.add(armour.table).height(50).width(50).fill();
+    tableTop.add();
+
+    
 
     if (numberOfMonsters == 1) {
+
       m1 = new Monster();
+      monster1HpBar = new ProgressBar(1, m1.getHealth(), 1, false, game.gameSkin);
+      tableTop.add(monster1HpBar);
+      monster1HpBar.setValue(m1.getHealth());
+      m1.animation.setCoord(700);
       m2 = null;
       m3 = null;
     } else if (numberOfMonsters == 2) {
+
       m1 = new Monster();
+      monster1HpBar = new ProgressBar(1, m1.getHealth(), 1, false, game.gameSkin);
+      tableTop.add(monster1HpBar);
+      monster1HpBar.setValue(m1.getHealth());
+      m1.animation.setCoord(700);
       m2 = new Monster();
-      m2.animation.setCoord(1000);
+      monster2HpBar = new ProgressBar(1, m2.getHealth(), 1, false, game.gameSkin);
+      tableTop.add(monster2HpBar);
+      monster2HpBar.setValue(m2.getHealth());
+      m2.animation.setCoord(900);
       m3 = null;
     } else {
+
       m1 = new Monster();
+      monster1HpBar = new ProgressBar(1, m1.getHealth(), 1, false, game.gameSkin);
+      tableTop.add(monster1HpBar);
+      monster1HpBar.setValue(m1.getHealth());
+      m1.animation.setCoord(700);
       m2 = new Monster();
-      m2.animation.setCoord(1000);
+      monster2HpBar = new ProgressBar(1, m2.getHealth(), 1, false, game.gameSkin);
+      tableTop.add(monster2HpBar);
+      monster2HpBar.setValue(m2.getHealth());
+      m2.animation.setCoord(900);
       m3 = new Monster();
-      m3.animation.setCoord(1200);
+      monster3HpBar = new ProgressBar(1, m3.getHealth(), 1, false, game.gameSkin);
+      tableTop.add(monster3HpBar);
+      monster3HpBar.setValue(m3.getHealth());
+      m3.animation.setCoord(1100);
     }
+
 
     soundWin = Gdx.audio.newMusic(Gdx.files.internal("ogg//Victory.ogg"));
     soundWin.setVolume(game.soundVolume);
@@ -119,33 +165,42 @@ public class Zone2 implements Screen {
     }
 
     playeridle = new Animation<TextureRegion>(0.1f, Player_frames);
-    tableTop.add().width(150).height(300);
+    tableTop.add().width(100).height(100);
+
     tableTop.row();
     tableTop.add().width(100);
+    tableTop.add().width(200);
+    tableTop.add().width(100);
+    tableTop.add().width(100);
     if (numberOfMonsters == 1) {
-      tableTop.add().width(500);
-      tableTop.add(m1.animation).width(200).height(200);
+    
+      tableTop.add(m1.animation).width(200).height(100);
+      tableTop.add().width(200).height(100);
+      tableTop.add().width(200).height(100);
 
     } else if (numberOfMonsters == 2) {
-      tableTop.add().width(500);
-      tableTop.add(m1.animation).width(200).height(200);
-      tableTop.add(m2.animation).width(200).height(200);
+    
+      tableTop.add(m1.animation).width(200).height(100);
+      tableTop.add(m2.animation).width(200).height(100);
+      tableTop.add().width(200).height(100);
 
     } else {
-      tableTop.add().width(500);
-      tableTop.add(m1.animation).width(200).height(200);
-      tableTop.add(m2.animation).width(200).height(200);
-
-      tableTop.add(m3.animation).width(200).height(200);
+ 
+      tableTop.add(m1.animation).width(200).height(100);
+      tableTop.add(m2.animation).width(200).height(100);
+      tableTop.add(m3.animation).width(200).height(100);
 
     }
-
+    
     tableTop.debug();
     tableTop.bottom().left();
     spriteBatch = new SpriteBatch();
     stateTime = 0f;
-  
+    //
+
     final TextButton button = new TextButton("End Turn", GdxFightingGame.gameSkin);
+    tableTop.add(button).width(150);
+    button.getLabel().setFontScale(0.5f);
 
     table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background//Zone2//5.png"))));
     table.setFillParent(true);
@@ -202,7 +257,7 @@ public class Zone2 implements Screen {
 
         }
       });
-    tableBot.add(button).height(200).width(200);
+
 
     table.add(tableBot);
 
@@ -219,8 +274,8 @@ public class Zone2 implements Screen {
       dragAndDrop.addTarget(new DragAndDrop.Target(m1.animation) {
 
         @Override
-        public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-            float y, int pointer) {
+        public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+            Payload payload, float x, float y, int pointer) {
           // TODO Auto-generated method stub
           System.out.println("s-a activat babuinul" + i);
           source.getActor().setVisible(false);
@@ -232,9 +287,13 @@ public class Zone2 implements Screen {
               game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
               game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
               System.out.println(m1.getHealth());
-              if (!m1.alive)
+              if (!m1.alive) {
                 m1.animation.setVisible(false);
-             
+                monster1HpBar.setVisible(false);
+              }
+              playerHpBar.setValue(game.p1.getHealth());
+              armour.setArmour(game.p1.getArmour());
+              monster1HpBar.setValue(m1.getHealth());
               if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
                   || (!m1.alive && !m2.alive && !m3.alive)) {
                 sound.stop();
@@ -247,7 +306,8 @@ public class Zone2 implements Screen {
 
                 win.add(winB); // Add a new text button that unpauses the game.
                 win.pack(); // Important! Correctly scales the window after adding new elements.
-                float newWidth = 600, newHeight = 500;
+                float newWidth = 600;
+                float newHeight = 500;
                 win.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2,
                     newWidth, newHeight); // Center on screen.
                 stage.addActor(win);
@@ -275,9 +335,8 @@ public class Zone2 implements Screen {
         }
 
         @Override
-        public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-            float y, int pointer) {
-          // TODO Auto-generated method stub
+        public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+            Payload payload, float x, float y, int pointer) {
           return true;
         }
       });
@@ -286,9 +345,8 @@ public class Zone2 implements Screen {
         dragAndDrop.addTarget(new DragAndDrop.Target(m2.animation) {
 
           @Override
-          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
-            // TODO Auto-generated method stub
+          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             System.out.println("s-a activat babuinul" + i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
@@ -298,9 +356,16 @@ public class Zone2 implements Screen {
                 game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
                 game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
                 game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
-                if (!m2.alive)
+                if (!m2.alive) {
                   m2.animation.setVisible(false);
-                if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
+                  monster2HpBar.setVisible(false);
+                }
+                playerHpBar.setValue(game.p1.getHealth());
+                armour.setArmour(game.p1.getArmour());
+                monster2HpBar.setValue(m2.getHealth());
+                // if all enemies die create a victory screen
+                if ((!m1.alive && m2 == null && m3 == null) 
+                    || (!m1.alive && !m2.alive && m3 == null)
                     || (!m1.alive && !m2.alive && !m3.alive)) {
                   sound.stop();
                   soundWin.setLooping(true);
@@ -312,7 +377,8 @@ public class Zone2 implements Screen {
 
                   win.add(winB); // Add a new text button that unpauses the game.
                   win.pack(); // Important! Correctly scales the window after adding new elements.
-                  float newWidth = 600, newHeight = 500;
+                  float newWidth = 600;
+                  float newHeight = 500;
                   win.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2,
                       newWidth, newHeight); // Center on screen.
                   stage.addActor(win);
@@ -340,9 +406,8 @@ public class Zone2 implements Screen {
           }
 
           @Override
-          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
-            // TODO Auto-generated method stub
+          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             return true;
           }
         });
@@ -351,9 +416,8 @@ public class Zone2 implements Screen {
         dragAndDrop.addTarget(new DragAndDrop.Target(m3.animation) {
 
           @Override
-          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
-            // TODO Auto-generated method stub
+          public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             System.out.println("s-a activat babuinul" + i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
@@ -363,9 +427,16 @@ public class Zone2 implements Screen {
                 game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
                 game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
                 game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
-                if (!m3.alive)
+                if (!m3.alive) {
                   m3.animation.setVisible(false);
-                if ((!m1.alive && m2 == null && m3 == null) || (!m1.alive && !m2.alive && m3 == null)
+                  monster3HpBar.setVisible(false);
+                }
+                playerHpBar.setValue(game.p1.getHealth());
+                monster3HpBar.setValue(m3.getHealth());
+                armour.setArmour(game.p1.getArmour());
+                // if all enemies die create a victory screen
+                if ((!m1.alive && m2 == null && m3 == null)
+                    || (!m1.alive && !m2.alive && m3 == null)
                     || (!m1.alive && !m2.alive && !m3.alive)) {
                   sound.stop();
                   soundWin.setLooping(true);
@@ -377,7 +448,8 @@ public class Zone2 implements Screen {
 
                   win.add(winB); // Add a new text button that unpauses the game.
                   win.pack(); // Important! Correctly scales the window after adding new elements.
-                  float newWidth = 600, newHeight = 500;
+                  float newWidth = 600;
+                  float newHeight = 500;
                   win.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2,
                       newWidth, newHeight); // Center on screen.
                   stage.addActor(win);
@@ -405,26 +477,73 @@ public class Zone2 implements Screen {
           }
 
           @Override
-          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, Payload payload, float x,
-              float y, int pointer) {
+          public boolean drag(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
+              Payload payload, float x, float y, int pointer) {
             // TODO Auto-generated method stub
             return true;
           }
         });
-
     button.addListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
 
         System.out.println("cate carti intra la end" + game.p1.getNrCards());
+        if (numberOfMonsters == 1) {
+          m = m1.getMove();
+          game.p1.setHealth(m.getDmg());
+          System.out.println(m.getDmg());
+          System.out.println(m.getArmour());
+          System.out.println(m.getHeal());
+          m1.setArmour(m.getArmour());
+          m1.heal(m.getHeal());
+          monster1HpBar.setValue(m1.getHealth());
 
-        Moves m = m1.getMove();
-        game.p1.setHealth(m.getDmg());
-        System.out.println(m.getDmg());
-        System.out.println(m.getArmour());
-        System.out.println(m.getHeal());
-        m1.setArmour(m.getArmour());
-        m1.heal(m.getHeal());
+        } else if (numberOfMonsters == 2) {
+
+          if (m1.alive) {
+            m = m1.getMove();
+            game.p1.setHealth(m.getDmg());
+            m1.setArmour(m.getArmour());
+            m1.heal(m.getHeal());
+          }
+
+          if (m2.alive) {
+            m = m2.getMove();
+            game.p1.setHealth(m.getDmg());
+            m2.setArmour(m.getArmour());
+            m2.heal(m.getHeal());
+          }
+          monster1HpBar.setValue(m1.getHealth());
+          monster2HpBar.setValue(m2.getHealth());
+
+        } else {
+          if (m1.alive) {
+            m = m1.getMove();
+            game.p1.setHealth(m.getDmg());
+            m1.setArmour(m.getArmour());
+            m1.heal(m.getHeal());
+          }
+
+          if (m2.alive) {
+            m = m2.getMove();
+            game.p1.setHealth(m.getDmg());
+            m2.setArmour(m.getArmour());
+            m2.heal(m.getHeal());
+          }
+
+          if (m3.alive) {
+            m = m3.getMove();
+            game.p1.setHealth(m.getDmg());
+            m3.setArmour(m.getArmour());
+            m3.heal(m.getHeal());
+          }
+          monster1HpBar.setValue(m1.getHealth());
+          monster2HpBar.setValue(m2.getHealth());
+          monster3HpBar.setValue(m3.getHealth());
+
+        }
+        armour.setArmour(game.p1.getArmour());
+        playerHpBar.setValue(game.p1.getHealth());
         for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
           if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {
@@ -443,7 +562,7 @@ public class Zone2 implements Screen {
           }
 
         }
-
+        //if the player dies create a pop-up screen that returns you to main menu
         if (!game.p1.alive) {
           sound.stop();
 
@@ -456,7 +575,8 @@ public class Zone2 implements Screen {
 
           lose.add(loseB); // Add a new text button that unpauses the game.
           lose.pack(); // Important! Correctly scales the window after adding new elements.
-          float newWidth = 600, newHeight = 500;
+          float newWidth = 600;
+          float newHeight = 500;
           lose.setBounds((Gdx.graphics.getWidth() - newWidth) / 2, (Gdx.graphics.getHeight() - newHeight) / 2, newWidth,
               newHeight); // Center on screen.
           stage.addActor(lose);
@@ -513,7 +633,6 @@ public class Zone2 implements Screen {
     });
 
   }
-
   @Override
   public void show() {
     Gdx.input.setInputProcessor(stage);

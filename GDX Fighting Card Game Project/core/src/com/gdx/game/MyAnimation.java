@@ -14,6 +14,7 @@ public class MyAnimation extends Actor {
   TextureRegion currentRegion;
   int xcoord = 800;
   float time = 0f;
+  int faceDirection=-150;
 
   /**
    * MyAnimation constructor.
@@ -31,6 +32,10 @@ public class MyAnimation extends Actor {
 
     currentRegion = (TextureRegion) animation.getKeyFrame(time, true);
   }
+  
+  void setfaceDirection(int x) {
+    this.faceDirection = x;
+  }
 
   /**
    * SetCoord method.
@@ -44,7 +49,7 @@ public class MyAnimation extends Actor {
   @Override
   public void draw(Batch batch, float parentAlpha) {
     super.draw(batch, parentAlpha);
-    batch.draw(currentRegion, xcoord, 200, -150, 150);
+    batch.draw(currentRegion, xcoord, 200, faceDirection, 150);
   }
 
 }

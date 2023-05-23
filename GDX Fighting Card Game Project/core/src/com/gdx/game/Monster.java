@@ -65,6 +65,35 @@ public class Monster {
 
   }
   
+  
+  public void createBoss()
+  {
+    health=300;
+    System.out.println(health);
+    maxHealth=400;
+    damage=15;
+    System.out.println(damage);
+    armour=0;
+    alive=true;
+    moves.add(new Moves(damage*2,0,0));
+    moves.add(new Moves(0,damage,0));
+    moves.add(new Moves(0,0,damage*2));
+    this.idlesheet=new Texture(Gdx.files.internal("Boss//demon-idle.png"));
+    TextureRegion[][] tmp = TextureRegion.split(idlesheet,idlesheet.getWidth()/6,idlesheet.getHeight());
+
+    //15 is the number of frames and colums we have
+    TextureRegion[] Player_frames= new TextureRegion[6];
+    int index=0;
+    for(int i=0;i<6;++i) {
+        Player_frames[index++]=tmp[0][i];
+    }
+    this.playeridle=new Animation<TextureRegion>(0.1f,Player_frames);
+    
+    this.animation=new MyAnimation(playeridle);
+    this.animation.setfaceDirection(150);
+    this.animation.setCoord(700);
+  }
+  
   /**
    * RandomMonsterTexture method. This method is responsible for randomly
    * assignating a texture to the monster.

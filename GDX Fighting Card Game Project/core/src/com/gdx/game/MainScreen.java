@@ -69,12 +69,13 @@ public class MainScreen implements Screen {
     // load a skin(a collection of styles for objects)
     // skin is from gdx-skins (https://github.com/czyzby/gdx-skins)
     skin = new Skin(Gdx.files.internal("glassy//skin//glassy-ui.json"));
-    skin2 = new Skin(Gdx.files.internal("neon//skin//neon-ui.json"));
+    skin2 = new Skin(Gdx.files.internal("craftacular//skin//craftacular-ui.json"));
     skin3 = new Skin(Gdx.files.internal("terra-mother//skin//terra-mother-ui.json"));
     skin4 = new Skin(Gdx.files.internal("rainbow//skin//rainbow-ui.json"));
+   
     // create your button
-    button = new TextButton("Play", skin4);
-    button3 = new TextButton("Settings", skin);
+    button = new TextButton("Play", skin2);
+  //  button3 = new TextButton("Settings", skin);
     button2 = new TextButton("Exit", skin2);
     nameLabel = new Label("Cave of the necromancer", skin4);
     nameText = new TextField(" ", skin);
@@ -103,12 +104,12 @@ public class MainScreen implements Screen {
 
     table = new Table(skin);
     tableForVolume = new Table();
-    tableForVolume.bottom().right().padLeft(10).padBottom(50);
+    tableForVolume.top().right().padLeft(10).padTop(50);
     tableForVolume.padRight(50);
     tableForVolume.add(volumeSlider).fill();
     tableForVolume.setFillParent(true);
     button.toFront();
-    button3.getLabel().setFontScale(0.5f);
+ //   button3.getLabel().setFontScale(0.5f);
     nameLabel.setFontScale(2);
     table.add(nameLabel).height(200).fill();
     table.row().height(50);
@@ -119,10 +120,10 @@ public class MainScreen implements Screen {
     table.add();
     table.row().height(100);
     // Move to next row.
-    table.add(button3).fill();
-    table.row().height(50);
-    table.add();
-    table.row().height(100);
+ //  table.add(button3).fill();
+ //   table.row().height(50);
+ //   table.add();
+ //   table.row().height(100);
     table.add(button2).fill();
     // table.add(volumeSlider).fill();
     // Row 1, column 0.
@@ -136,6 +137,7 @@ public class MainScreen implements Screen {
     stage.addActor(tableForVolume);
 
     // add a listener to your buttons so it does something when clicked
+    /*
     button3.addListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
@@ -146,7 +148,7 @@ public class MainScreen implements Screen {
 
         // agame.setScreen(new SettingsScreen(agame));
       }
-    });
+    });*/
 
     button2.addListener(new ChangeListener() {
       @Override

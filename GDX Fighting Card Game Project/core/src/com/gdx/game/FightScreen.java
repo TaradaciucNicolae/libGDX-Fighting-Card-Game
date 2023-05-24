@@ -92,7 +92,7 @@ public class FightScreen implements Screen {
     playerHpBar = new ProgressBar(1, 100, 1, false, game.gameSkin);
     playerHpBar.setValue(game.p1.getHealth());
 
-    armour=new ArmourVisual();
+    armour=new ArmourVisual(game);
     tableTop.add().width(125).height(200);
     tableTop.row();
     tableTop.add();

@@ -1,17 +1,16 @@
 package com.gdx.game;
 
-import java.util.ArrayList;
-import java.util.ListIterator;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ai.btree.decorator.Random;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.SortedIntList.Iterator;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * Player Class.
  *
  */
+
 public class Player {
   /**
    * Parameters.
@@ -26,7 +25,6 @@ public class Player {
    * @param listaDiscarded - all the cards that have been used.
    *
    */
-
   public Texture idlesheet;
   private int armour;
   public boolean alive = true;
@@ -34,9 +32,9 @@ public class Player {
   private int health;
   private int nrCards = -1;
   int mana=3;
-  ArrayList<Cards> ListaCardsInMana = new ArrayList<>();
-  ArrayList<Cards> ListaCardsTotal = new ArrayList<>();
-  ArrayList<Cards> ListaDiscarded = new ArrayList<>();
+  ArrayList<Cards> listaCardsInMana = new ArrayList<>();
+  ArrayList<Cards> listaCardsTotal = new ArrayList<>();
+  ArrayList<Cards> listaDiscarded = new ArrayList<>();
 
   Player() {
     idlesheet = new Texture(Gdx.files.internal("Player//AnimationSheet_Character.png"));
@@ -49,22 +47,22 @@ public class Player {
    * This method is responsible for drawing cards.
    */
   void draw() {
-    if (!this.ListaCardsTotal.isEmpty()) {
-      Cards c = ListaCardsTotal.get(0);
+    if (!this.listaCardsTotal.isEmpty()) {
+      Cards c = listaCardsTotal.get(0);
       this.nrCards = this.nrCards + 1;
-      ListaCardsTotal.remove(0);
-      ListaCardsInMana.add(c);
+      listaCardsTotal.remove(0);
+      listaCardsInMana.add(c);
     } else {
-      for (ListIterator<Cards> iter = ListaDiscarded.listIterator(); iter.hasNext();) {
+      for (ListIterator<Cards> iter = listaDiscarded.listIterator(); iter.hasNext();) {
         Cards element = iter.next();
-        ListaCardsTotal.add(element);
+        listaCardsTotal.add(element);
       }
-      ListaDiscarded.clear();
-      if (!this.ListaCardsTotal.isEmpty()) {
-        Cards c = ListaCardsTotal.get(0);
+      listaDiscarded.clear();
+      if (!this.listaCardsTotal.isEmpty()) {
+        Cards c = listaCardsTotal.get(0);
         this.nrCards = this.nrCards + 1;
-        ListaCardsTotal.remove(0);
-        ListaCardsInMana.add(c);
+        listaCardsTotal.remove(0);
+        listaCardsInMana.add(c);
       }
     }
   }
@@ -89,25 +87,22 @@ public class Player {
   public void CrearePachet()
 
   {
-    ListaCardsInMana.clear();
-    ListaCardsTotal.clear();
-    ListaDiscarded.clear();
+    listaCardsInMana.clear();
+    listaCardsTotal.clear();
+    listaDiscarded.clear();
     nrCards = -1;
-    ArrayList<Cards> c = new ArrayList<>();
-    int min = 10;
-    int max = 10;
 
-    ListaCardsTotal.add(new MetalCard(5, 10));
-    ListaCardsTotal.add(new WaterCard(5));
-    ListaCardsTotal.add(new FireCard(30));
-    ListaCardsTotal.add(new WoodCard(15, 7));
-    ListaCardsTotal.add(new EarthCard(20));
-    ListaCardsTotal.add(new FireCard(30));
+    listaCardsTotal.add(new MetalCard(5, 10));
+    listaCardsTotal.add(new WaterCard(5));
+    listaCardsTotal.add(new FireCard(30));
+    listaCardsTotal.add(new WoodCard(15, 7));
+    listaCardsTotal.add(new EarthCard(20));
+    listaCardsTotal.add(new FireCard(30));
    
-    for (int i = ListaCardsTotal.size() / 2; i > 0; i--) { // AICI TREBUIE RAFACUTA INEXAREA
+    for (int i = listaCardsTotal.size() / 2; i > 0; i--) { // AICI TREBUIE RAFACUTA INEXAREA
       nrCards++;
-      ListaCardsInMana.add(ListaCardsTotal.get(i));
-      ListaCardsTotal.remove(ListaCardsTotal.get(i));
+      listaCardsInMana.add(listaCardsTotal.get(i));
+      listaCardsTotal.remove(listaCardsTotal.get(i));
 
     }
 
@@ -193,8 +188,8 @@ public class Player {
    *          Function to use a certain card.
    */
   public void FolosesteCarte(Cards c) {
-    ListaDiscarded.add(c);
-    ListaCardsInMana.remove(c);
+    listaDiscarded.add(c);
+    listaCardsInMana.remove(c);
     nrCards = nrCards - 1;
     System.out.println("nr carti" + nrCards);
 
@@ -206,10 +201,10 @@ public class Player {
    * that are in the player's hands.
    */
   public void AfisarePachetPlayer() {
-    for (int i = 0; i < ListaCardsInMana.size(); i++) {
-      System.out.println(" Cartea nr " + i + " va da " + ListaCardsInMana.get(i).damage 
+    for (int i = 0; i < listaCardsInMana.size(); i++) {
+      System.out.println(" Cartea nr " + i + " va da " + listaCardsInMana.get(i).damage 
           + " damage si va oferi "
-          + ListaCardsInMana.get(i).health + " viata");
+          + listaCardsInMana.get(i).health + " viata");
 
     }
   }

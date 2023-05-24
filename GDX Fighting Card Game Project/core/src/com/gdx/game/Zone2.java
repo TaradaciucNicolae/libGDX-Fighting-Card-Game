@@ -209,11 +209,11 @@ public class Zone2 implements Screen {
     table.add(tableTop).grow();
     table.row().height(200);
     for (i = 0; i <= game.p1.getNrCards(); ++i) {
-      hand.addActor(game.p1.ListaCardsInMana.get(i).table);
+      hand.addActor(game.p1.listaCardsInMana.get(i).table);
       System.out.println(i);
-      game.p1.ListaCardsInMana.get(i).table.setUserObject(hand);
+      game.p1.listaCardsInMana.get(i).table.setUserObject(hand);
 
-      dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(i).table) {
+      dragAndDrop.addSource(new DragAndDrop.Source(game.p1.listaCardsInMana.get(i).table) {
 
         @Override
         public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
@@ -236,8 +236,8 @@ public class Zone2 implements Screen {
             if (target == null) {
 
               System.out.println("I got clicked! bababbababauin" + i);
-              ((HorizontalGroup) game.p1.ListaCardsInMana.get(i).table.getUserObject())
-                  .addActor(game.p1.ListaCardsInMana.get(i).table);
+              ((HorizontalGroup) game.p1.listaCardsInMana.get(i).table.getUserObject())
+                  .addActor(game.p1.listaCardsInMana.get(i).table);
             }
         }
 
@@ -249,11 +249,11 @@ public class Zone2 implements Screen {
     tableBot.add(hand).height(200);
 
     for (i = 0; i <= 2; ++i)
-      game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener() {
+      game.p1.listaCardsInMana.get(i).table.addListener(new ClickListener() {
         @Override
         public void clicked(InputEvent event, float x, float y) {
           System.out.println("I got clicked!");
-          System.out.println(game.p1.ListaCardsInMana);
+          System.out.println(game.p1.listaCardsInMana);
 
         }
       });
@@ -281,11 +281,11 @@ public class Zone2 implements Screen {
           source.getActor().setVisible(false);
           for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
-            if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {
-              m1.SetHealth(game.p1.ListaCardsInMana.get(i).getDamage());
-              game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
-              game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
-              game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
+            if (!game.p1.listaCardsInMana.get(i).table.isVisible()) {
+              m1.SetHealth(game.p1.listaCardsInMana.get(i).getDamage());
+              game.p1.setArmour(game.p1.listaCardsInMana.get(i).getArmour());
+              game.p1.heal(game.p1.listaCardsInMana.get(i).getHealth());
+              game.p1.FolosesteCarte(game.p1.listaCardsInMana.get(i));
               System.out.println(m1.getHealth());
               if (!m1.alive) {
                 m1.animation.setVisible(false);
@@ -351,11 +351,11 @@ public class Zone2 implements Screen {
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
-              if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {
-                m2.SetHealth(game.p1.ListaCardsInMana.get(i).getDamage());
-                game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
-                game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
-                game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
+              if (!game.p1.listaCardsInMana.get(i).table.isVisible()) {
+                m2.SetHealth(game.p1.listaCardsInMana.get(i).getDamage());
+                game.p1.setArmour(game.p1.listaCardsInMana.get(i).getArmour());
+                game.p1.heal(game.p1.listaCardsInMana.get(i).getHealth());
+                game.p1.FolosesteCarte(game.p1.listaCardsInMana.get(i));
                 if (!m2.alive) {
                   m2.animation.setVisible(false);
                   monster2HpBar.setVisible(false);
@@ -422,11 +422,11 @@ public class Zone2 implements Screen {
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
-              if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {
-                m3.SetHealth(game.p1.ListaCardsInMana.get(i).getDamage());
-                game.p1.setArmour(game.p1.ListaCardsInMana.get(i).getArmour());
-                game.p1.heal(game.p1.ListaCardsInMana.get(i).getHealth());
-                game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
+              if (!game.p1.listaCardsInMana.get(i).table.isVisible()) {
+                m3.SetHealth(game.p1.listaCardsInMana.get(i).getDamage());
+                game.p1.setArmour(game.p1.listaCardsInMana.get(i).getArmour());
+                game.p1.heal(game.p1.listaCardsInMana.get(i).getHealth());
+                game.p1.FolosesteCarte(game.p1.listaCardsInMana.get(i));
                 if (!m3.alive) {
                   m3.animation.setVisible(false);
                   monster3HpBar.setVisible(false);
@@ -546,19 +546,19 @@ public class Zone2 implements Screen {
         playerHpBar.setValue(game.p1.getHealth());
         for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
-          if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {
+          if (!game.p1.listaCardsInMana.get(i).table.isVisible()) {
             System.out.println("cred ca s-a sters");
 
-            game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
+            game.p1.FolosesteCarte(game.p1.listaCardsInMana.get(i));
           }
 
         }
         for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
-          if (!game.p1.ListaCardsInMana.get(i).table.isVisible()) {
+          if (!game.p1.listaCardsInMana.get(i).table.isVisible()) {
             System.out.println("cred ca s-a sters");
 
-            game.p1.FolosesteCarte(game.p1.ListaCardsInMana.get(i));
+            game.p1.FolosesteCarte(game.p1.listaCardsInMana.get(i));
           }
 
         }
@@ -595,11 +595,11 @@ public class Zone2 implements Screen {
         }
 
         game.p1.draw();
-        hand.addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
-        game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setVisible(true);
+        hand.addActor(game.p1.listaCardsInMana.get(game.p1.getNrCards()).table);
+        game.p1.listaCardsInMana.get(game.p1.getNrCards()).table.setVisible(true);
         System.out.println(game.p1.getNrCards());
-        game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(hand);
-        dragAndDrop.addSource(new DragAndDrop.Source(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table) {
+        game.p1.listaCardsInMana.get(game.p1.getNrCards()).table.setUserObject(hand);
+        dragAndDrop.addSource(new DragAndDrop.Source(game.p1.listaCardsInMana.get(game.p1.getNrCards()).table) {
 
           @Override
           public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
@@ -622,8 +622,8 @@ public class Zone2 implements Screen {
               if (target == null) {
 
                 System.out.println("I got clicked! bababbababauin" + i);
-                ((HorizontalGroup) game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table.getUserObject())
-                    .addActor(game.p1.ListaCardsInMana.get(game.p1.getNrCards()).table);
+                ((HorizontalGroup) game.p1.listaCardsInMana.get(game.p1.getNrCards()).table.getUserObject())
+                    .addActor(game.p1.listaCardsInMana.get(game.p1.getNrCards()).table);
               }
           }
 

@@ -8,20 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 /**
  * MetalCard class.
  */
-
 public class MetalCard extends Cards {
-
   /**
    * MetalCard constructor.
    * 
    * @param health - amount of heal the MetalCard gives
    * @param armour - amount of armour the MetalCard gives
    */
-
   MetalCard(int armour, int health) {
     this.table = new Table();
     Texture im = new Texture(Gdx.files.internal("cardselement//metal.png"));
@@ -39,8 +35,6 @@ public class MetalCard extends Cards {
     l1.setFontScale(0.7f);
     table.row();
     table.add(l2).width(60);
-    // table.debug();
     l2.setFontScale(0.7f);
   }
-
 }

@@ -62,8 +62,8 @@ public class MainScreen implements Screen {
     stage = new Stage();
     // make a stage for your button to go on
 
-    back = new Texture(Gdx.files.internal("background//back1.png"));
-    e = new TextureRegion(back, 0, 0, Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * 2);
+    back = new Texture(Gdx.files.internal("background\\MainScreen\\mainscreen.png"));
+    e = new TextureRegion(back, 0, 0, Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
     batch = new SpriteBatch();
 
     // load a skin(a collection of styles for objects)
@@ -76,7 +76,7 @@ public class MainScreen implements Screen {
     button = new TextButton("Play", skin4);
     button3 = new TextButton("Settings", skin);
     button2 = new TextButton("Exit", skin2);
-    nameLabel = new Label("Aventura unui babuin", skin4);
+    nameLabel = new Label("Cave of the necromancer", skin4);
     nameText = new TextField(" ", skin);
     addressLabel = new Label("Address:", skin);
     addressText = new TextField("", skin);

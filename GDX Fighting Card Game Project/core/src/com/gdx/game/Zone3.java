@@ -342,10 +342,9 @@ public class Zone3 implements Screen {
                     // If we want to use the number of rows of the matrix Buttons the we need a
                     // method for it
                     if (game.map.CurrentRow() == 5) {
-                      game.zone++;
-                      game.map = new MapScreen(game);
-                    }
-                    game.setScreen(game.map);
+                      game.setScreen(new EndScreen(game));
+                    } else
+                      game.setScreen(game.map);
 
                   }
                 });
@@ -413,10 +412,9 @@ public class Zone3 implements Screen {
                       // If we want to use the number of rows of the matrix Buttons the we need a
                       // method for it
                       if (game.map.CurrentRow() == 5) {
-                        game.zone++;
-                        game.map = new MapScreen(game);
-                      }
-                      game.setScreen(game.map);
+                        game.setScreen(new EndScreen(game));
+                      } else
+                        game.setScreen(game.map);
 
                     }
                   });
@@ -484,10 +482,9 @@ public class Zone3 implements Screen {
                       // If we want to use the number of rows of the matrix Buttons the we need a
                       // method for it
                       if (game.map.CurrentRow() == 5) {
-                        game.zone++;
-                        game.map = new MapScreen(game);
-                      }
-                      game.setScreen(game.map);
+                        game.setScreen(new EndScreen(game));
+                      } else
+                        game.setScreen(game.map);
 
                     }
                   });

@@ -243,7 +243,7 @@ public class FightScreen implements Screen {
           for (i = 0; i <= game.p1.getNrCards(); ++i)
             if (target == null) {
 
-              System.out.println("I got clicked! bababbababauin" + i);
+              System.out.println(i);
               ((HorizontalGroup) game.p1.listaCardsInMana.get(i).table.getUserObject())
                   .addActor(game.p1.listaCardsInMana.get(i).table);
             }
@@ -259,7 +259,7 @@ public class FightScreen implements Screen {
       game.p1.listaCardsInMana.get(i).table.addListener(new ClickListener() {
         @Override
         public void clicked(InputEvent event, float x, float y) {
-          System.out.println("I got clicked!");
+          System.out.println("Cartea a fost apasata!");
           System.out.println(game.p1.listaCardsInMana);
 
         }
@@ -285,7 +285,7 @@ public class FightScreen implements Screen {
             Payload payload, float x, float y, int pointer) {
           // TODO Auto-generated method stub
          
-          System.out.println("s-a activat babuinul" + i);
+          System.out.println(i);
           source.getActor().setVisible(false);
           for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
@@ -355,7 +355,7 @@ public class FightScreen implements Screen {
           @Override
           public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
               Payload payload, float x, float y, int pointer) {
-            System.out.println("s-a activat babuinul" + i);
+            System.out.println(i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
@@ -426,7 +426,7 @@ public class FightScreen implements Screen {
           @Override
           public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
               Payload payload, float x, float y, int pointer) {
-            System.out.println("s-a activat babuinul" + i);
+            //System.out.println(i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
@@ -630,7 +630,7 @@ public class FightScreen implements Screen {
             for (i = 0; i <= game.p1.getNrCards(); ++i)
               if (target == null) {
 
-                System.out.println("I got clicked! bababbababauin" + i);
+                //System.out.println(i);
                 ((HorizontalGroup) game.p1.listaCardsInMana.get(game.p1.getNrCards()).table.getUserObject())
                     .addActor(game.p1.listaCardsInMana.get(game.p1.getNrCards()).table);
               }

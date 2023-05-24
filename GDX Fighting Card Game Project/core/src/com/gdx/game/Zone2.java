@@ -277,7 +277,7 @@ public class Zone2 implements Screen {
         public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
             Payload payload, float x, float y, int pointer) {
           // TODO Auto-generated method stub
-          System.out.println("s-a activat babuinul" + i);
+          //System.out.println(i);
           source.getActor().setVisible(false);
           for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
@@ -347,7 +347,7 @@ public class Zone2 implements Screen {
           @Override
           public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
               Payload payload, float x, float y, int pointer) {
-            System.out.println("s-a activat babuinul" + i);
+            //System.out.println(i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
 
@@ -418,7 +418,7 @@ public class Zone2 implements Screen {
           @Override
           public void drop(com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source source, 
               Payload payload, float x, float y, int pointer) {
-            System.out.println("s-a activat babuinul" + i);
+            //System.out.println(i);
             source.getActor().setVisible(false);
             for (i = 0; i <= game.p1.getNrCards(); ++i) {
 

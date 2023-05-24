@@ -47,8 +47,7 @@ public class Cards {
    * EarthCard MetalCard WoodCard
    */
 
-  Cards() {
-  }
+  Cards() {}
 
   /**
    * Cards constructor with arguments.
@@ -62,15 +61,6 @@ public class Cards {
     this.damage = dmg;
     this.health = viata;
     this.PozaCarte = iconita;
-  }
-
-  /**
-   * 
-   * @param card - card that is going in the deck
-   */
-
-  public Cards(Card card) {
-    LoadCards();
   }
 
   /**

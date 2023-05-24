@@ -191,7 +191,7 @@ public class Player {
     listaDiscarded.add(c);
     listaCardsInMana.remove(c);
     nrCards = nrCards - 1;
-    System.out.println("nr carti" + nrCards);
+    System.out.println("Numar carti = " + nrCards);
 
   }
 

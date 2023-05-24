@@ -143,7 +143,7 @@ public class MainScreen implements Screen {
     button2.addListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
-        System.out.println("babuin");
+        //System.out.println("");
         Gdx.app.exit();
 
       }
@@ -151,7 +151,7 @@ public class MainScreen implements Screen {
     button.addListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
-        System.out.println("babuin se joaca");
+        System.out.println("Jocul a inceput");
         game.p1 = new Player();
         game.map = new MapScreen(game);
         game.getScreen().dispose();

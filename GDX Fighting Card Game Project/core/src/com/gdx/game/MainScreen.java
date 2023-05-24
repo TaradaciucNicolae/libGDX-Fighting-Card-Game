@@ -53,7 +53,7 @@ public class MainScreen implements Screen {
     // make a stage for your button to go on
 
     back = new Texture(Gdx.files.internal("background\\MainScreen\\mainscreen.png"));
-    e = new TextureRegion(back, 0, 0, Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
+    e = new TextureRegion(back, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     batch = new SpriteBatch();
 
     // load a skin(a collection of styles for objects)
@@ -65,11 +65,11 @@ public class MainScreen implements Screen {
    
     // create your button
     button = new TextButton("Play", skin2);
-  //  button3 = new TextButton("Settings", skin);
+  //button3 = new TextButton("Settings", skin);
     button2 = new TextButton("Exit", skin2);
     nameLabel = new Label("Cave of the necromancer", skin4);
   //  nameText = new TextField(" ", skin);
-   // addressLabel = new Label("Address:", skin);
+  // addressLabel = new Label("Address:", skin);
   //  addressText = new TextField("", skin);
 
     final Slider volumeSlider = new Slider(0f, 1f, 0.1f, false,
@@ -110,10 +110,10 @@ public class MainScreen implements Screen {
     table.add();
     table.row().height(100);
     // Move to next row.
- //  table.add(button3).fill();
- //   table.row().height(50);
- //   table.add();
- //   table.row().height(100);
+    //  table.add(button3).fill();
+    //   table.row().height(50);
+    //   table.add();
+    //   table.row().height(100);
     table.add(button2).fill();
     // table.add(volumeSlider).fill();
     // Row 1, column 0.

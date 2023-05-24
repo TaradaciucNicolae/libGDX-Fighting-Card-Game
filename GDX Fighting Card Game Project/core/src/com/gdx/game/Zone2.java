@@ -246,7 +246,7 @@ public class Zone2 implements Screen {
       hand.expand();
       hand.fill();
     }
-    tableBot.add(hand);
+    tableBot.add(hand).height(200);
 
     for (i = 0; i <= 2; ++i)
       game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener() {
@@ -650,7 +650,7 @@ public class Zone2 implements Screen {
     // animation
     TextureRegion currentFrame = playeridle.getKeyFrame(stateTime, true);
     spriteBatch.begin();
-    spriteBatch.draw(currentFrame, 200, 200, 150, 150); // Draw current frame at (50, 50)
+    spriteBatch.draw(currentFrame, 165, 200, 150, 150); // Draw current frame at (50, 50)
     /*
      * if(numberOfMonsters==1) { spriteBatch.draw(currentFrame, 800, 200,-150,150);
      * // Draw current frame at (50, 50) } else if(numberOfMonsters==2) {

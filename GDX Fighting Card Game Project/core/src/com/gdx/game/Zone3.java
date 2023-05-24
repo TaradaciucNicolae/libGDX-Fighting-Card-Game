@@ -82,16 +82,9 @@ public class Zone3 implements Screen {
     game = agame;
     stage = new Stage();
     
-    if (game.currentRoomScore >= 0 && game.currentRoomScore <= 200)
-      numberOfMonsters = 1;
-    else if (game.currentRoomScore >= 201 && game.currentRoomScore <= 500)
-      numberOfMonsters = 2;
-    else
-      numberOfMonsters = 3;
-
     playerHpBar = new ProgressBar(1, 100, 1, false, game.gameSkin);
     playerHpBar.setValue(game.p1.getHealth());
-
+    
     armour=new ArmourVisual();
     tableTop.add().width(125).height(200);
     tableTop.row();
@@ -100,6 +93,27 @@ public class Zone3 implements Screen {
     tableTop.add(playerHpBar);
     tableTop.add(armour.table).height(50).width(50).fill();
     tableTop.add();
+    
+    if(game.map.CurrentRow()==5)
+    {
+      m1=new Monster();
+      m1.createBoss();
+      m2=null;
+      m3=null;
+      numberOfMonsters=1;
+      monster1HpBar = new ProgressBar(1, m1.getHealth(), 1, false, game.gameSkin);
+      tableTop.add(monster1HpBar);
+      monster1HpBar.setValue(m1.getHealth());
+      m1.animation.setCoord(565);
+    }
+    else {
+    if (game.currentRoomScore >= 0 && game.currentRoomScore <= 200)
+      numberOfMonsters = 1;
+    else if (game.currentRoomScore >= 201 && game.currentRoomScore <= 500)
+      numberOfMonsters = 2;
+    else
+      numberOfMonsters = 3;
+
 
     
 
@@ -143,7 +157,12 @@ public class Zone3 implements Screen {
       monster3HpBar.setValue(m3.getHealth());
       m3.animation.setCoord(1100);
     }
+    }
+    
 
+
+
+   
     soundWin = Gdx.audio.newMusic(Gdx.files.internal("ogg//Victory.ogg"));
     soundWin.setVolume(game.soundVolume);
     soundLose = Gdx.audio.newMusic(Gdx.files.internal("ogg//Death.ogg"));
@@ -250,7 +269,7 @@ public class Zone3 implements Screen {
       hand.expand();
       hand.fill();
     }
-    tableBot.add(hand);
+    tableBot.add(hand).height(200);
 
     for (i = 0; i <= 2; ++i)
       game.p1.ListaCardsInMana.get(i).table.addListener(new ClickListener() {
@@ -660,7 +679,7 @@ public class Zone3 implements Screen {
     // animation
     TextureRegion currentFrame = playeridle.getKeyFrame(stateTime, true);
     spriteBatch.begin();
-    spriteBatch.draw(currentFrame, 200, 200, 150, 150); // Draw current frame at (50, 50)
+    spriteBatch.draw(currentFrame, 165, 200, 150, 150); // Draw current frame at (50, 50)
     /*
      * if(numberOfMonsters==1) { spriteBatch.draw(currentFrame, 800, 200,-150,150);
      * // Draw current frame at (50, 50) } else if(numberOfMonsters==2) {

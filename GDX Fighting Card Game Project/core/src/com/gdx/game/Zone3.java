@@ -213,7 +213,7 @@ public class Zone3 implements Screen {
 
     }
     
-    tableTop.debug();
+  //  tableTop.debug();
     tableTop.bottom().left();
     spriteBatch = new SpriteBatch();
     stateTime = 0f;
@@ -285,9 +285,9 @@ public class Zone3 implements Screen {
     table.add(tableBot);
 
     table.top().left();
-    table.debug();
+   // table.debug();
 
-    tableBot.debug();
+    //tableBot.debug();
 
     stage.addActor(table);
 

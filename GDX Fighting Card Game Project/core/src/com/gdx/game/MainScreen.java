@@ -131,7 +131,7 @@ public class MainScreen implements Screen {
     table.center().top();
     table.setFillParent(true);
     // adaugare linii ajutatoare pentru a vedea layout-ul
-    table.debug();
+  //  table.debug();
 
     stage.addActor(table);
     stage.addActor(tableForVolume);

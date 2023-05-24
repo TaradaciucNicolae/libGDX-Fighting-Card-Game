@@ -64,7 +64,7 @@ public class MapScreen implements Screen {
     background.toBack();
     FieldPopulation();
     stage.addActor(table);
-    table.debug();
+  //  table.debug();
 
   }
 

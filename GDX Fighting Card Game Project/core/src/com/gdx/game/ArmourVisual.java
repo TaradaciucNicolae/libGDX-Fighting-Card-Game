@@ -13,9 +13,9 @@ Table table;
 private int armour;
 Label l1;
 
-  public ArmourVisual() {
+  public ArmourVisual(GdxFightingGame game) {
     // TODO Auto-generated constructor stub
-    armour=0;
+    armour=game.p1.getArmour();
     this.table=new Table();
     Texture im=new Texture(Gdx.files.internal("cardselement//metal.png"));
     Texture idlesheet=new Texture(Gdx.files.internal("cardselement//metal.png"));

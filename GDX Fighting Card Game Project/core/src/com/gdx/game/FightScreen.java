@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -46,6 +47,7 @@ public class FightScreen implements Screen {
    */
   private GdxFightingGame game;
   private Stage stage;
+  //private Skin skin;
 
   Music sound;
   Music soundLose;
@@ -82,6 +84,7 @@ public class FightScreen implements Screen {
     // TODO Auto-generated constructor stub
     game = agame;
     stage = new Stage();
+    //skin=new Skin(Gdx.files.internal("craftacular\\skin\\craftacular-ui.json"));
     if (game.currentRoomScore >= 0 && game.currentRoomScore <= 200)
       numberOfMonsters = 1;
     else if (game.currentRoomScore >= 201 && game.currentRoomScore <= 500)
@@ -92,7 +95,7 @@ public class FightScreen implements Screen {
     playerHpBar = new ProgressBar(1, 100, 1, false, game.gameSkin);
     playerHpBar.setValue(game.p1.getHealth());
 
-    armour=new ArmourVisual();
+    armour=new ArmourVisual(game);
     tableTop.add().width(125).height(200);
     tableTop.row();
     tableTop.add();

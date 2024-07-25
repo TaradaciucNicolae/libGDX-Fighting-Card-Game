@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.gdx.game","l":"MonsterTest"},{"p":"com.gdx.game","l":"PlayerTest"}];updateSearchResults();

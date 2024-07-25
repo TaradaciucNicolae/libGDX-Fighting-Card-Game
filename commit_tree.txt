@@ -1,0 +1,449 @@
+commit 24cf2239a779a9dcbfaedaf063d6bc0498353181
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Wed May 24 19:18:14 2023 +0300
+
+    Solving Checkstyle errors.
+
+commit b503f71deb18226089f2777c31b8de9bab166aae
+Merge: 356c07f e3a4687
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Wed May 24 19:14:15 2023 +0300
+
+    Merge branch 'GameV1.0' of https://github.com/TaradaciucNicolae/libGDX-Fighting-Card-Game into GameV1.0
+
+commit 356c07f8b18260bd10eddb2b324231d05f76b32d
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Wed May 24 19:13:38 2023 +0300
+
+    Solving Checkstyle Errors
+
+commit e3a468715fff44e60cab263da5d9adb9e807e382
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 24 18:18:31 2023 +0300
+
+    Game title changed.
+
+commit fc70f8ca6a343f3dc858a3351c831eb1c1652abf
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 24 18:13:10 2023 +0300
+
+    Possible new end turn button style.
+
+commit 8a3b313736ebecbb1a1924e42a99ed80756e5d18
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 24 18:06:13 2023 +0300
+
+    Now armour sets correctly through rooms.
+
+commit 77b64cf3801943c15221b1934e722d81e59afbcf
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Wed May 24 17:46:53 2023 +0300
+
+    Removed Debug lines and changed the damage for FireCards.
+
+commit c44d50e336cb89c6be26e197cccf6eb262f2d752
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Wed May 24 17:40:29 2023 +0300
+
+    Removed Settings Btn/Added skins for Btns/ Rrepositioned the Volume Btn
+
+commit 44b4a7d20ea16a09fca296a558932ec916a63435
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 24 17:26:12 2023 +0300
+
+    Assets added for MainScreen
+
+commit b9f9e6c1db5339e0a03b6ab7be3c915b7e044526
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 24 17:25:02 2023 +0300
+
+    New background for mainscreen.
+
+commit ee893976538c3d38c979119006b995ffca4e8762
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 24 16:24:27 2023 +0300
+
+    Start zone and zone3 connection to endscreen fix.
+
+commit f03d6edfa959c8d732fec198c06ab893cd9d14c4
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 24 14:14:52 2023 +0300
+
+    Alex done again
+
+commit dcf722ec97faf05aa83fc2e0cb89b80c971e853f
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 24 01:04:47 2023 +0300
+
+    Alex done
+
+commit de373cf52e6f625abd274ab08e837dcac4b96cda
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Mon May 22 12:42:04 2023 +0300
+
+    JavaDoc and checkstyle on all classes.
+
+commit 7e5c481584fcb5090a2b0dce5b86318ebc497878
+Merge: eab435a 697d0ea
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Mon May 22 10:04:35 2023 +0300
+
+    Merge branch 'GameV1.0' of https://github.com/TaradaciucNicolae/libGDX-Fighting-Card-Game into GameV1.0
+
+commit eab435a2a355b71ef3585df135a8b3c070974c89
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Mon May 22 10:03:34 2023 +0300
+
+    Player Test
+
+commit 697d0ea161d2127b128e0b57bf31a4ca6089b85f
+Merge: b1f08da e18db75
+Author: Gitea <gitea@fake.local>
+Date:   Mon May 22 09:48:33 2023 +0300
+
+    Merge branch 'GameV1.0' of https://github.com/TaradaciucNicolae/libGDX-Fighting-Card-Game into GameV1.0
+
+commit b1f08da8a1d76663bcb0d72455702d0c8831ab1f
+Merge: 123d709 837cbf0
+Author: Gitea <gitea@fake.local>
+Date:   Mon May 22 09:47:42 2023 +0300
+
+    Merge branch 'GameV1.0' of https://github.com/TaradaciucNicolae/libGDX-Fighting-Card-Game into GameV1.0
+
+commit e18db7559529ca14ce2fd12d8af67a5397a5c1e0
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Mon May 22 09:47:26 2023 +0300
+
+    MovesTest and MyAnimationTest
+
+commit 123d709fc8667f08b37ad6122d10a89cf3ea1574
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Mon May 22 09:39:25 2023 +0300
+
+    Cards Test Implement
+
+commit c4894c3177b441867aa5aa5fec789c79cbfc269c
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Mon May 22 09:31:21 2023 +0300
+
+    Cards Test Implement
+
+commit 837cbf07a776ab3f1a957ceb60c510a7a64cba95
+Merge: 9595b1b be7b66b
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Mon May 22 09:12:22 2023 +0300
+
+    Merge branch 'GameV1.0' of https://github.com/TaradaciucNicolae/libGDX-Fighting-Card-Game into GameV1.0
+
+commit be7b66b78215f509a98650701da4f1ec4666e3e8
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Mon May 22 01:11:58 2023 +0300
+
+    hpBars+fight 3 monster
+
+commit 9595b1bb79c6e46952f5a4d8c83e2d53b1b40ae1
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Sun May 21 23:56:29 2023 +0300
+
+    BossTest
+
+commit c4d00a4430c3e6aba39c709ea90fcfddce2b130e
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Sun May 21 23:48:08 2023 +0300
+
+    fix for card fit
+
+commit 38dd3bf83804ffa181b75e7f1df346d2e1a8dc17
+Merge: 9bed698 d523163
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Sun May 21 22:55:50 2023 +0300
+
+    Merge branch 'OvidiuB222' into GameV1.02222
+
+commit 9bed6989f3b2e0da54f890c52561e2779fada20b
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Sun May 21 22:25:48 2023 +0300
+
+    Integrated Nicu , added controled sound from main menu
+
+commit d52316334698fcc552d9c5e603d9206fc21ad51e
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Sun May 21 22:12:37 2023 +0300
+
+    Card Design Update Final
+
+commit 5a34e609ccf6660e89e5e3f4375188e49356ad83
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Sun May 21 21:50:21 2023 +0300
+
+    Number of monsters dependent on room score
+
+commit 05fe1595669e1e8634e85a315c43726fe6dfd636
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Sun May 21 21:41:29 2023 +0300
+
+    added monsters tests
+
+commit 50791dce215d8070f790d33aaaee29655564dcc1
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Sun May 21 21:35:33 2023 +0300
+
+    Integration Junit+ Serban code
+
+commit c6086cc8848c23eb937580d5d79c80d044c1f3ef
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Sun May 21 21:29:45 2023 +0300
+
+    More than one monster added and score in MapScreen
+
+commit 05325c8971070a22a73653b754c294df4ed0aa7a
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Sun May 21 19:55:12 2023 +0300
+
+    JavaDoc for EndScreen
+
+commit 68b3aa969648c5954809380b939041a0afd23a39
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Sun May 21 19:39:19 2023 +0300
+
+    Cards Design Update
+
+commit f8023539593c5ace4dc9110679cc4d5cecadd4f9
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Sat May 20 16:07:29 2023 +0300
+
+    Sound for EndScreen.
+
+commit 3ef5f99e3bcb72aba139bc2d57d6778e5a085e23
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Sat May 20 15:58:24 2023 +0300
+
+    Boss class and sprites added.
+
+commit 00b1248ecf9269ca076e96ef884ad139d148e647
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Sat May 20 14:44:23 2023 +0300
+
+    MapScreen,FightScreen,Zone2,Zone3,EndScreen,new Assets
+
+commit fbeec1c5887d749e4fa6a2197827fece84ab48c4
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Fri May 19 08:42:44 2023 +0300
+
+    Early implementation of a Zone 2. Changed:FightScreen,MapScreen and Game
+
+commit 111461326fca0f2efee5235fda9a21bec34fcf56
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Thu May 18 21:34:11 2023 +0300
+
+    Combining basegame with latest mapscreen updates.
+
+commit 39681f25161c7c93ac0e607e3d01707888c73014
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Thu May 18 21:00:33 2023 +0300
+
+    First version of a score system.
+
+commit 9d9492a3cf9233b59f38882cc3029d01283315fa
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 17 22:31:09 2023 +0300
+
+    MapScreen JavaDoc.
+
+commit e3df42a0b848a10f583d1a9f82fbf70aa17aab85
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 17 22:26:55 2023 +0300
+
+    JavaDoc for MapScreen class.
+
+commit 1232e1f01fb0c5554c096b70963782e816a1e307
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Tue May 16 23:26:35 2023 +0300
+
+    Cards Class Optimization + Image + Documentation + JUnit Test
+    Getters/Setters (fail)
+
+commit d451e05aad0d8cd94e23748857094002c28e6cad
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Tue May 16 17:08:32 2023 +0300
+
+    Cards added element update
+
+commit c587ff6fa0a536193b06f987ccbeb14ba62155c9
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Sun May 14 20:21:05 2023 +0300
+
+    Background map, random monster texture method and base boss class added
+
+commit ac1a0a77d2be100b68a1bf60da5660f33a99e8eb
+Merge: 405ef27 405ef27
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Thu May 11 15:31:29 2023 +0300
+
+    Class card implement
+
+commit 405ef27417378b98f4401b633df286d773dac77a
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Thu May 11 14:12:13 2023 +0300
+
+    fight screen update
+
+commit 152d20de368cff78e64871cc6405228b5fa06e42
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Thu May 11 00:46:03 2023 +0300
+
+    image
+
+commit 00a366931f314c4a70e358c0254b2c70df6ca6ee
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Thu May 11 00:45:52 2023 +0300
+
+    reparat carti
+
+commit a0c4bc4d65168a8157a4eed6ef6204ab6681be17
+Merge: 5c6e82c 7fa415c
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 10 19:01:17 2023 +0300
+
+    Merge branch 'BOvidiu' into Integrate
+
+commit 5c6e82c1750a62b462a3dd61a1177657049a453c
+Merge: e53e1b5 2d6397b
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 10 18:56:59 2023 +0300
+
+    Merge branch 'TNicolae' into Integrate
+
+commit e53e1b5e06fa73904767af80dfc4298e14a136e7
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 10 18:45:10 2023 +0300
+
+    integrate serban
+
+commit 7fa415c6d37aa56015d922637f2bf7f86c31244d
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Wed May 10 17:55:48 2023 +0300
+
+    Card component update v2
+
+commit 9946cb02379590f6cdbe204cde42d8050d88c977
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 10 17:08:08 2023 +0300
+
+    The MapScreen class implementation is done.
+
+commit 17b2509dbcffee46183e3da12aac24cbf86544d0
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed May 10 16:48:46 2023 +0300
+
+    First batch of modifications
+
+commit 1a024aa84f029946653af4b587825da907c3e34b
+Merge: 91d72df 84ba308
+Author: Gitea <gitea@fake.local>
+Date:   Wed May 10 16:25:50 2023 +0300
+
+    Card component v1
+
+commit 91d72dfc435b6a66fad077dc6dedd2c21d979bed
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Wed May 10 00:32:37 2023 +0300
+
+    Card component
+
+commit 2d6397ba6ab23360894044bc5eaa572a9cfeb801
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Wed May 10 00:28:09 2023 +0300
+
+    I created a chance(20 / 30% / 50%) of winning a card after each end turn
+
+commit c63b0c8d1829508f36623f820110e12adfe9fe67
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Tue May 9 23:14:02 2023 +0300
+
+    I added card assets
+
+commit cc5c4e7da9030096fb44d36177ac998f0a7c7b1e
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Tue May 9 23:13:41 2023 +0300
+
+    implementation of pack, discarded cards, end turn and visuals of cards
+
+commit 84ba308167f4e7f6189a566e9a6a49b5976be1fd
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Mon May 8 22:51:04 2023 +0300
+
+    added minimonster pack
+
+commit eb7da4e68496f7ec5a07443d04b4fb730f0fca2a
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Mon May 8 22:12:44 2023 +0300
+
+    MapScreen - almost done
+
+commit b6fbea050ee53e17d3cd6965bdb3623ae5e57d2d
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Mon May 8 20:47:24 2023 +0300
+
+    background assets
+
+commit 11b876dd7320c1d6159bb9eea83fbd203eb1559a
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Mon May 8 20:47:07 2023 +0300
+
+    modificari pentru clasele vechi
+
+commit bce47a4ab260c065020f0f8e87015d14b14210fa
+Merge: ba1beba 836e511
+Author: Gitea <gitea@fake.local>
+Date:   Mon May 8 19:07:04 2023 +0300
+
+    Merge remote-tracking branch 'origin/Alex2' into BOvidiu
+
+commit ba1bebac7ba9f829839dc2308aac39b52c1798e2
+Author: Ovidiu-Florin Berea <ovidiu-florin.berea@student.tuiasi.ro>
+Date:   Mon May 8 19:02:26 2023 +0300
+
+    Pull update
+
+commit 836e5117f6cac49733ef581fa541f2cc0da7aa50
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 3 23:04:07 2023 +0300
+
+    fix
+
+commit 9c927e82aba3ef935e5ad8a03f6df4f00588b097
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 3 22:51:49 2023 +0300
+
+    +music
+
+commit 76df1b7e751eafe29bdaef33e7acb8c345ed961b
+Author: axel_alex <alexandru.munteanu@student.tuiasi.ro>
+Date:   Wed May 3 22:51:27 2023 +0300
+
+    added backgorund music and background images
+
+commit 82d8132435e4c01a25085bcf9a0b390b1de38f07
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Thu Apr 27 14:58:33 2023 +0300
+
+    Animation test
+
+commit d523fedd77676ef06d86f03aeceffbb0ea2b715c
+Author: Vicol Serban-Ilie <serban-ilie.vicol@student.tuiasi.ro>
+Date:   Wed Apr 26 14:59:07 2023 +0300
+
+    Creating new branch based on Alex branch
+
+commit 1554a69a41792043fafc14cf7b6cf7a723b9444e
+Author: TaradaciucNicolae <nicolae.taradaciuc@student.tuiasi.ro>
+Date:   Fri Apr 21 13:08:22 2023 +0300
+
+    GDX Project Creation
+
+commit 72fae93d6a55d12e2f988de9f56be3fa45c55849
+Author: TaradaciucNicolae <126168262+TaradaciucNicolae@users.noreply.github.com>
+Date:   Fri Apr 21 12:39:24 2023 +0300
+
+    Initial commit

@@ -47,3 +47,4 @@ Each run can vary through randomized level elements and different combat situati
 
 This project was created as a practical game development exercise using Java and libGDX, with a focus on turn-based combat, roguelike mechanics, and interactive 2D gameplay.
 
+
